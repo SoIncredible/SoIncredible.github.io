@@ -8,7 +8,7 @@
       <link href="/posts/61a4721e/"/>
       <url>/posts/61a4721e/</url>
       
-        <content type="html"><![CDATA[<p>目录</p><p>解决M1Mac ”无法打开应用，因为Apple无法检查其是否包含恶意软件” 的问题</p><p>在Mac上安装多个版本的Unity，并且为每个版本安装扩展modules</p><p>如何使用Rider创建一个普通的C#工程？它的文件结构是什么？</p><p>什么是namespace？它的作用是什么？</p><img src="/posts/61a4721e/image-20230307142527940.png" class="" title="image-20230307142527940">]]></content>
+        <content type="html"><![CDATA[<h1>本文记录的问题</h1><p><a href="#1">解决M1Mac ”无法打开应用，因为Apple无法检查其是否包含恶意软件” 的问题</a></p><p><a href="#2">在Mac上安装多个版本的Unity，并且为每个版本安装扩展modules</a></p><p>如何使用Rider创建一个普通的C#工程？它的文件结构是什么？</p><p>什么是namespace？它的作用是什么？</p><h1>背景</h1><p>今天是2023年3月7号，我入职的第三天，公司强制使用Unity搭配Rider进行开发，此博客为记录Rider学习记录。</p><p>但是在今天的工作中需到了一些其他的问题，也会在本文中记录。</p><h1><span id = "2">在Mac上安装多个版本的Unity和对应的modules</span></h1><p>公司使用的Unity版本为<code>2021.3.14f1</code>，我自己做项目使用的版本是<code>2021.3.8f1c1</code>，这两个版本在UnityHub中的Installer中都是找不到的，需要去官网的<code>Archive</code>中下载。</p><img src="/posts/61a4721e/image-20230307212335202.png" class="" title="image-20230307212335202"><p>这里是官网的归档，感谢宇哥的小TIPS：版本号中带c1的是在Unity中文官网上下载的，不带c1的是在Unity的英文官网上下载的。这是Unity的<a href="https://unity.com/releases/editor/archive">英文版本归档地址</a>，这是<a href="https://unity.cn/releases/full/2021">中文版本归档地址</a>。</p><p><span id = "1">下载完成之后，在打开<code>pkg</code>包的时候会弹出“<strong>无法打开应用，因为Apple无法检查其是否包含恶意软件</strong>”的问题，解决方法是在终端中输入：</span></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure><p>然后打开<code>设置</code>-&gt;<code>安全性与隐私</code>-&gt;<code>通用</code>，选择任何来源，就可以打开刚才下载的安装包了。</p><img src="/posts/61a4721e/%E6%88%AA%E5%B1%8F2023-03-08%2011.39.29.png" class="" title="截屏2023-03-08 11.39.29"><p>下面是演示如何在Mac上安装多个版本的Unity。Mac系统会将Unity Editor安装在<code>Applications/Unity</code>这个文件目录，如果电脑中没有这个目录则会自动创建。在安装module的时候，必须首先确保<code>Applications/Unity</code>路径存在，然后确保该路径中有要安装的module对应版本的Unity Editor，否则module会安装失败。成功安装的module会放在<code>Applications/Unity/PlaybackEngines</code>目录下。这是整个目录的结构：</p><img src="/posts/61a4721e/image-20230308110717748.png" class="" title="image-20230308110717748"><p>现在我要安装<code>Unity2021.3.14f1</code>和<code>Unity2021.3.8f1c1</code>两个版本的Editor和各自对应的<code>iOS</code>、<code>Android</code>、<code>MacOS</code>、<code>Windows</code>的module。我先安装了<code>2021.3.14f1</code>版本，系统会自动创建<code>Applications/Unity</code>路径，然后我也完成了对应版本module的安装。这时如果继续安装<code>2021.3.8f1c1</code>的话，系统会直接覆盖掉<code>Applications/Unity</code>中<code>2021.3.14f1</code>这个版本的Editor，所以我先把这个文件夹的名字改成了<code>2021.3.8f1c1</code>，然后再安装新版本的Editor，这样系统又会自动创建<code>Applications/Unity</code>这个路径，并在该路径下安装新版本的Editor和module，就不会出现覆盖的问题了。新版本的Editor和module安装完成之后最好将文件夹的名字改成Editor对应的版本号来方便管理，比如<code>2021.3.14f1</code>。如果之后需要给某一个版本安装新的module，需要先把该版本的文件夹名改回<code>Unity</code>，然后再安装module，安装成功之后将文件夹名再改回对应的版本号。现在我的Mac上就有两个版本的UnityEditor了🤤🤤🤤</p><img src="/posts/61a4721e/%E6%88%AA%E5%B1%8F2023-03-08%2011.25.15.png" class="" title="截屏2023-03-08 11.25.15"><p>最后再记录一个小问题：我每个Editor版本都下载了四个module：<code>iOS</code>、<code>Android</code>、<code>Windows</code>、<code>MacOS</code>，前三个安装完成之后都会在<code>PlaybackEngines</code>文件夹中找到对应的文件，唯独MacOS的module安装成功之后不会出现在<code>PlaybackEngines</code>的文件夹里，我认为可能是因为我的电脑本身就是MacOS，换言之，如果我的电脑是Windows，那在<code>Playback Engines</code>这个文件夹下可能就没有Windows相关的module了，这个问题可能与电脑的系统有关。</p><img src="/posts/61a4721e/image-20230308112954910.png" class="" title="image-20230308112954910">]]></content>
       
       
       <categories>
@@ -322,31 +322,6 @@
     
     
     <entry>
-      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
-      <link href="/posts/qwerqwer/"/>
-      <url>/posts/qwerqwer/</url>
-      
-        <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
-      
-      
-      <categories>
-          
-          <category> 技术文档 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>实现基于frp的内网穿透</title>
       <link href="/posts/1408599b/"/>
       <url>/posts/1408599b/</url>
@@ -364,6 +339,31 @@
         <tags>
             
             <tag> 云服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
+      <link href="/posts/qwerqwer/"/>
+      <url>/posts/qwerqwer/</url>
+      
+        <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文档 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
             
         </tags>
       
