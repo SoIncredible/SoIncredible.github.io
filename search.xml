@@ -4,6 +4,89 @@
   
     
     <entry>
+      <title>在Mac和Windows上配置dotNet开发环境</title>
+      <link href="/posts/724ccb4/"/>
+      <url>/posts/724ccb4/</url>
+      
+        <content type="html"><![CDATA[<h1>背景</h1><p>本文主要记录如何配置.NET环境，以及如何创建最简单的C# application。</p><h1>在Mac上配置dotNet开发环境</h1><p>这里是.Net7的<a href="https://download.visualstudio.microsoft.com/download/pr/86bb5988-5fb5-4e22-8f21-de5992e1a689/f8f616f84dc38100a8464c4644a371ce/dotnet-sdk-7.0.201-osx-arm64.pkg">下载地址</a>，打开下载的pkg，按照指引完成安装。在终端中输入<code>dotnet</code>，如果安装成功，会弹出如下内容：</p><img src="/posts/undefined/image-20230310161307972.png" class=""><h1>使用Terminal创建一个最简单的C#命令</h1><p>在终端中输入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dotnet new console -o MyApp -f net7.0</span><br><span class="line">cd MyApp</span><br></pre></td></tr></table></figure><p>上述各命令的解释：</p><ul><li><code>dotnet new conslole</code> 命令用来创建新的console APP</li><li>-<code>o</code>参数会创建名为<code>MyApp</code>的目录，用于存储应用并使用所需文件进行填充</li><li><code>-f</code>参数指示console我们创建的是.NET7的应用程序</li></ul><p>创建的MyApp文件夹中的主文件称为<code>Program..cs</code>，默认情况下，它包含的内容如下：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br></pre></td></tr></table></figure><p>然后在终端中运行<code>dotnet run</code>来运行<code>.NET</code>应用，终端中会输出如下结果：</p><img src="/posts/undefined/%E6%88%AA%E5%B1%8F2023-03-10%2016.41.32.png" class=""><h2 id="使用Rider打开并运行C-项目">使用Rider打开并运行C#项目</h2><p>使用Rider打开并运行C#项目不像使用IDEA打开并运行java代码那样繁琐，直接在Rider中选择<code>File</code>-&gt;<code>Open</code>，选择你使用Terminal创建的C# application打开，就可以在Rider中运行项目了。</p><h1>在Windows上配置dotNet开发环境</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文档 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+            <tag> Rider </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Bubble开发日志2023_03_09</title>
+      <link href="/posts/bf138a1e/"/>
+      <url>/posts/bf138a1e/</url>
+      
+        <content type="html"><![CDATA[<h1>背景</h1><p>今天是2023年3月9号，我入职的第五天，经过了四天的测试熟悉项目，宇哥终于带我开始接手项目开发了！！！</p><img src="/posts/undefined/1.JPG" class=""><p>自己动手写了第一个可以运行的弹窗逻辑，下面记录一下整个流程</p><h1>点击按钮出发弹窗的开发记录</h1><p>先实现一个最简单的逻辑：点击一个按钮，弹出一个弹窗，弹窗上有一个关闭按钮和一个OK按钮，两个按钮的功能都是关闭当前弹窗。</p><img src="/posts/undefined/image-20230309215357519-8370048.png" class=""><p>首先先创建一个弹窗UI的Prefab，Prefab的结构是有讲究的：</p><img src="/posts/undefined/image-20230309215955898.png" class=""><p>这里记录一个问题，图片拉伸的九宫格如何设置？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发日志 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unity </tag>
+            
+            <tag> C# </tag>
+            
+            <tag> Bubble </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在Mac和Windows上配置Java开发环境</title>
+      <link href="/posts/f57878ea/"/>
+      <url>/posts/f57878ea/</url>
+      
+        <content type="html"><![CDATA[<h1>背景</h1><p>本文主要记录了在Mac和Windows上配置Java开发环境，创建并运行最简单的Java程序以及如何将单个java文件导入<code>IntelliJ IDEA</code>中运行</p><h1>Mac上配置JDK</h1><p>Arm架构的Mac和X86架构的Mac安装的JDK是不一样的，这是JDK的<a href="https://www.oracle.com/java/technologies/downloads/#java11-mac">下载地址</a>，我们要选择MacOS下的<code>Arm 64 Compressed Archive</code>进行下载。</p><p>下载完成之后，打开终端并输入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure><p>打开文件后输入以下内容：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 配置JDK11 环境变量 </span><br><span class="line"># JAVA_HOME：JDK安装路径（修改成你自己的）</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11/Contents/Home</span><br><span class="line"># $JAVA_HOME/bin 下面是JDK的各种命令  </span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH:.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>输入<code>source ~/.bash_profile</code>使刚才配置的文件生效，接着输入<code>java -version</code>查看JDK是否安装成功 。到这里还没有结束，如果我们重启终端再输入<code>java -version</code>是会报错的，原因是重启后的终端并没有让<code>.bash_profile</code>配置文件生效，所以我需要在终端中执行<code>vim ~/.zshrc</code>，在最后一行添加<code>source ~/.bash_profile</code>，保存后退出，然后执行<code>source ~/.zshrc</code>，这样就可以让终端每次启动的时候自动将<code>./bash_profile</code>配置文件生效。</p><h1>在Mac上不借助任何IDE运行Java脚本</h1><p><span id = "1">我们现在只会用到两个命令<code>java</code>和<code>javac</code>，我们编写一个<code>hello.java</code>文件，注意文件名要和类名一样：</span></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">hello</span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// main函数的拼写都是小写的，大小写敏感</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;HelloWorld!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后我们在终端中依次执行：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">javac命令会将.java文件编译成class文件</span></span><br><span class="line">javac hello.java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">java命令会运行class文件</span></span><br><span class="line">java hello</span><br></pre></td></tr></table></figure><h1>使用IntelliJ IDEA打开并运行java文件</h1><h2 id="背景">背景</h2><p>我使用记事本或者<code>Sublime</code>等Text Editor编写了一个java文件，我想要在IDEA中运行这个java程序，我该怎么做？</p><h2 id="IntelliJ-IDEA中java项目的文件结构">IntelliJ IDEA中java项目的文件结构</h2><p>我先使用IDEA创建一个非常简单的Java项目，项目的文件目录结构如下：</p><img src="/posts/undefined/image-20230310111924493.png" class=""><ul><li><code>.idea</code>目录和<code>iml</code>文件是IDEA的配置文件，可以隐藏</li><li><code>src</code>目录是代码源文件存放的目录</li><li><code>out</code>是Java程序的输出目录，存放字节码文件</li><li><code>external Libraries</code>是JDK的扩展类库</li></ul><h2 id="使用IDEA运行单个java程序">使用IDEA运行单个java程序</h2><p>想要使用IDEA运行java项目，就需要这个项目能够符合IDEA项目的文件结构，有两种方法可以将单个java文件放入IDEA中运行：</p><p><strong>方法一</strong></p><p>在IDEA中选择<code>File</code>-&gt;<code>Open</code>-&gt;打开java文件所在的文件夹</p><img src="/posts/undefined/%E6%88%AA%E5%B1%8F2023-03-1016.55.36.png" class=""><p>打开文件夹后点击<code>File</code>-&gt;<code>Project Structure</code>，为项目配置<code>jdk</code>和<code>output</code>文件夹，点击Apply，返回项目就可以运行了。</p><img src="/posts/undefined/%E6%88%AA%E5%B1%8F2023-03-1017.15.25.png" class=""><p><strong>方法二</strong></p><p>直接在IDEA中新建项目，选择不勾选添加示例代码。</p><img src="/posts/undefined/%E6%88%AA%E5%B1%8F2023-03-1017.22.02.png" class=""><p>项目打开后将想要运行的java代码拖到src中去，然后就可以运行了。</p><h1>Java:main()函数的一些知识点</h1><p>上文中已经展示了一个<a href="#1">最简单的Java程序</a>，<code>main</code>函数的前面有两个属性：<code>public</code>和<code>static</code>，两个属性是必须要有的，否则Java程序将无法正常运行。</p><h2 id="为什么要static">为什么要static</h2><p>Main方法是Java程序的入口，JVM会查找类中的<code>public static void main(String[] args)</code>，如果找不到该方法就会抛出错误<code>NoSuchMethodError:main</code>终止程序Main方法必须严格遵循它的语法规则，方法签名必须是public static void，参数类型是String类型，在Java1.5以及以后的版本还可以使用可变的参数：<code>public static void main(String ... args)</code>。</p><p>JVM调用main方法的以后不需要创建任何包含这个main方法的实例，如果main方法不声明为静态的，JVM就必须创建main类的实例，因为构造器可以被重载，JVM没办法确定调用的是哪个main方法。静态方法和静态数据加载到内存中就可以直接调用而不需要像实例方法一样创建实例后才可以被调用，如果main方法是静态的，那么它就会被加载到JVM上下文中成为可执行的方法。</p><h2 id="为什么要public">为什么要public</h2><p>Java指定了一些可访问的修饰符，比如private、protected、public，任何方法或者变量都可以声明为public，Java可以从该类之外的地方访问。因为main方法是公共的，JVM就可以轻松的访问和执行它。</p><h3 id="为什么是void">为什么是void</h3><p>因为main返回任何值对程序都没有任何意义，所以设置成void。</p><h1>JDK JVM JRE的区别与联系</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文档 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用Rider和Unity进行游戏开发初探</title>
       <link href="/posts/61a4721e/"/>
       <url>/posts/61a4721e/</url>
@@ -124,9 +207,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> 云服务器 </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -295,31 +378,6 @@
     
     
     <entry>
-      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
-      <link href="/posts/qwerqwer/"/>
-      <url>/posts/qwerqwer/</url>
-      
-        <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
-      
-      
-      <categories>
-          
-          <category> 技术文档 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>从零开始部署个人博客到云服务器</title>
       <link href="/posts/d182d23d/"/>
       <url>/posts/d182d23d/</url>
@@ -339,6 +397,31 @@
             <tag> Hexo博客 </tag>
             
             <tag> 云服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
+      <link href="/posts/qwerqwer/"/>
+      <url>/posts/qwerqwer/</url>
+      
+        <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文档 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
             
         </tags>
       
