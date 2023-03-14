@@ -6,7 +6,7 @@
   <link href="http://soincredible777.com.cn/atom.xml" rel="self"/>
   
   <link href="http://soincredible777.com.cn/"/>
-  <updated>2023-03-13T12:05:41.920Z</updated>
+  <updated>2023-03-14T12:47:50.461Z</updated>
   <id>http://soincredible777.com.cn/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java基础语法</title>
+    <link href="http://soincredible777.com.cn/posts/ea538f2a/"/>
+    <id>http://soincredible777.com.cn/posts/ea538f2a/</id>
+    <published>2023-03-14T11:56:33.000Z</published>
+    <updated>2023-03-14T12:47:50.461Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个Java程序可以认为是一系列对象的集合，而这些对象通过彼此调用的方法来协同工作，下面介绍类、对象、方法、实例变量的概念</p><ul><li><strong>对象</strong>：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等。</li><li><strong>类</strong>：类是一个模板，它描述一类对象的行为和状态。</li><li><strong>方法</strong>：方法就是行为，一个类可以有很多方法。逻辑运算、数据修改以及所有动作都是在方法中完成的。</li><li><strong>实例变量</strong>：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定。</li></ul><h1 id="di-yi-ge-java-cheng-xu">第一个Java程序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="comment">/* 第一个Java程序</span></span><br><span class="line"><span class="comment">     * 它将输出字符串 Hello World</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World&quot;</span>); <span class="comment">// 输出 Hello World</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://www.runoob.com/wp-content/uploads/2013/12/662E827A-FA32-4464-B0BD-40087F429E98.jpg" alt=""></p><p>如何不借助任何IDE运行java程序在<a href="http://soincredible777.com.cn/posts/f57878ea/">这篇博客</a>中已经介绍的十分详细了</p><h1 id="ji-ben-yu-fa">基本语法</h1><p>编写Java程序时，应该注意以下几点：</p><ul><li>大小写敏感：Java是大小写敏感的，这就意味着标识符Hello和hello是不同的。</li><li>类名：对于所有类来说，类名的首字母应该大些。蔬果类名由若干单词组成，那么每个单词的首字母应该大写，例如：MyFirstJavaClass</li><li>方法名：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写，驼峰原则（Camel-Case）。</li><li>源文件名：源文件名必须和类名相同。当保存文件的时候，你应该使用类名作为文件名保存（切记Java是大小写敏感的），文件名的后缀为.<code>java</code>，如果文件名和类名不相同则会导致编译错误</li><li>主方法入口：所有Java程序由<code>public static void main(String[] args)</code>方法开始执行。</li></ul><h1 id="java-biao-shi-fu">Java标识符</h1><p>Java所有的组成部分都需要名字。类名、变量名以及方法名都被称为标识符。</p><p>关于Java标识符，有以下几点需要注意：</p><ul><li>所有的标识符都应该是以字母（A-Z或者a-z）、美元符号（$）或者下划线（_）开始。</li><li>首字符之后可以是字母、美元符号、下划线或数字的任何字符组合。</li><li><a href="#1">关键字</a>不能用作标识符。</li><li>标识符是大小写敏感的。</li><li>合法标识符举例：age、¥salary、_value、__1_value</li><li>非法标识符举例：123abc、- salary</li></ul><h1 id="java-xiu-shi-fu">Java修饰符</h1><p>像其他语言一样，Java可以使用修饰符来修饰类中的方法和属性，主要有两类修饰符：</p><ul><li>访问控制修饰符：<code>default</code>、<code>public</code>、<code>protected</code>、<code>private</code></li><li>非访问控制修饰符：<code>final</code>、<code>abstract</code>、<code>static</code>、<code>synchronized</code></li></ul><h1 id="java-bian-liang">Java变量</h1><p>Java中主要有如下几种类型的变量</p><ul><li>局部变量</li><li>类变量（静态变量）</li><li>成员变量（非静态变量）</li></ul><h1 id="java-shu-zu">Java数组</h1><p>数组是存储在堆上的对象，可以保存多个同类型的变量。在后面的章节中，我们将学会如何声明、构造以及初始化一个数组。</p><h1 id="java-mei-ju">Java枚举</h1><p>Java5.0引入了枚举，枚举限制变量只能是预先设定好的值。使用枚举可以减少代码中的bug。</p><p>例如，我们为果汁店设计一个程序，它将限制果汁为小杯、中杯、大杯。这就意味着它不允许顾客点除了这三种尺寸外的果汁。</p><h2 id="shi-li" id="实例">实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FreshJuice</span> &#123;</span><br><span class="line">   <span class="keyword">enum</span> <span class="title class_">FreshJuiceSize</span>&#123; SMALL, MEDIUM , LARGE &#125;</span><br><span class="line">   FreshJuiceSize size;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FreshJuiceTest</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">      <span class="type">FreshJuice</span> <span class="variable">juice</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FreshJuice</span>();</span><br><span class="line">      juice.size = FreshJuice.FreshJuiceSize.MEDIUM  ;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>**注意：**枚举可以单独声明或者声明在类里面。方法、变量、构造函数也可以在枚举中定义。</p><h1 id="span-id-1-java-guan-jian-zi-span"><span id = "1">Java关键字</span></h1><p>下面列出了Java关键字，这些保留字不能用于常量、变量和任何标识符的名称。</p><table class="reference"><tbody><tr><th>类别</th><th>关键字</th><th>说明</th></tr><tr><td rowspan="4" align="center">访问控制</td><td>private</td><td>私有的</td></tr><tr><td>protected</td><td>受保护的</td></tr><tr><td>public</td><td>公共的</td></tr><tr><td>default </td><td>默认</td></tr><tr><td rowspan="13" align="center">类、方法和变量修饰符</td><td>abstract</td><td>声明抽象</td></tr><tr><td>class</td><td>类</td></tr><tr><td>extends</td><td>扩充,继承</td></tr><tr><td>final</td><td>最终值,不可改变的</td></tr><tr><td>implements</td><td>实现（接口）</td></tr><tr><td>interface</td><td>接口</td></tr><tr><td>native</td><td>本地，原生方法（非 Java 实现）</td></tr><tr><td>new</td><td>新,创建</td></tr><tr><td>static</td><td>静态</td></tr><tr><td>strictfp</td><td>严格,精准</td></tr><tr><td>synchronized</td><td>线程,同步</td></tr><tr><td>transient</td><td>短暂</td></tr><tr><td>volatile</td><td>易失</td></tr><tr><td rowspan="11" align="center">程序控制语句</td><td>break</td><td>跳出循环</td></tr><tr><td>case</td><td>定义一个值以供 switch 选择</td></tr><tr><td>continue</td><td>继续</td></tr>  </tbody></table><table><tbody><tr><td>do</td><td>运行</td></tr><tr><td>else</td><td>否则</td></tr><tr><td>for</td><td>循环</td></tr><tr><td>if</td><td>如果</td></tr><tr><td>instanceof</td><td>实例</td></tr><tr><td>return</td><td>返回</td></tr><tr><td>switch</td><td>根据值选择执行</td></tr><tr><td>while</td><td>循环</td></tr><tr><td rowspan="6" align="center">错误处理</td><td>assert</td><td>断言表达式是否为真</td></tr><tr><td>catch</td><td>捕捉异常</td></tr><tr><td>finally</td><td>有没有异常都执行</td></tr><tr><td>throw</td><td>抛出一个异常对象</td></tr><tr><td>throws</td><td>声明一个异常可能被抛出</td></tr><tr><td>try</td><td>捕获异常</td></tr><tr><td rowspan="2" align="center">包相关</td><td>import</td><td>引入</td></tr><tr><td>package</td><td>包</td></tr><tr><td rowspan="8" align="center">基本类型</td><td>boolean</td><td>布尔型</td></tr><tr><td>byte</td><td>字节型</td></tr><tr><td>char</td><td>字符型</td></tr><tr><td>double</td><td>双精度浮点</td></tr><tr><td>float</td><td>单精度浮点</td></tr><tr><td>int</td><td>整型</td></tr><tr><td>long</td><td>长整型</td></tr><tr><td>short</td><td>短整型</td></tr><table><tbody>  <tr><td rowspan="3" align="center">变量引用</td><td>super</td><td>父类,超类</td></tr><tr><td>this</td><td>本类</td></tr><tr><td>void</td><td>无返回值</td></tr><tr><td rowspan="3" align="center">保留关键字</td><td>goto</td><td>是关键字，但不能使用</td></tr><tr><td>const</td><td>是关键字，但不能使用</td></tr>**注意：**Java的null不是关键字，类似于true和false，它是一个字面常量，不允许作为标识符使用。<h1 id="java-zhu-shi">Java注释</h1><p>类似于C/C++、Java也支持单行以及多行注释，注释中的字符将被Java编译器忽略。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">   <span class="comment">/* 这是第一个Java程序</span></span><br><span class="line"><span class="comment">    * 它将输出 Hello World</span></span><br><span class="line"><span class="comment">    * 这是一个多行注释的示例</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">       <span class="comment">// 这是单行注释的示例</span></span><br><span class="line">       <span class="comment">/* 这个也是单行注释的示例 */</span></span><br><span class="line">       System.out.println(<span class="string">&quot;Hello World&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="java-kong-xing">Java空行</h1><p>空白行或者有注释的行，Java编译器都会忽略掉。</p><h1 id="ji-cheng">继承</h1><p>在Java中，一个类可以由其他派生类派生。如果你要创建一个类，而且已经存在一个类具有你所需要的属性或方法，那么你可以将新建的类继承该类。</p><p>利用继承的方法，可以重用已存在类的方法和属性，而不用重写这些代码。被继承的类称为超类（super class），派生类称为子类（sub class）</p><h1 id="jie-kou">接口</h1><p>在Java中，接口可以理解为对象间通信的协议。接口在继承中扮演着很重要的角色。</p><p>接口只定义派生要用到的方法，但是方法的具体实现完全取决于派生类。</p><h1 id="java-yuan-cheng-xu-yu-bian-yi-xing-cheng-xu-de-qu-bie">Java源程序与编译型程序的区别</h1><p><img src="https://www.runoob.com/wp-content/uploads/2013/12/ZSSDMld.png" alt=""></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;一个Java程序可以认为是一系列对象的集合，而这些对象通过彼此调用的方法来协同工作，下面介绍类、对象、方法、实例变量的概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;对象&lt;/strong&gt;：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品</summary>
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://soincredible777.com.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Java" scheme="http://soincredible777.com.cn/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>IEnumerator与IEnumerable理解与辨析</title>
@@ -508,32 +534,6 @@
     
     
     <category term="Hexo博客" scheme="http://soincredible777.com.cn/tags/Hexo%E5%8D%9A%E5%AE%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Apple原生邮件App管理校园网邮箱账户</title>
-    <link href="http://soincredible777.com.cn/posts/qwerqwer/"/>
-    <id>http://soincredible777.com.cn/posts/qwerqwer/</id>
-    <published>2022-06-26T16:00:00.000Z</published>
-    <updated>2023-03-13T12:01:15.632Z</updated>
-    
-    <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理&lt;/p&gt;
-&lt;p&gt;首先，我们学校的邮箱用的是网易的企业邮箱&lt;/p&gt;
-&lt;p&gt;打开Apple的邮件，选</summary>
-      
-    
-    
-    
-    <category term="技术文档" scheme="http://soincredible777.com.cn/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"/>
-    
-    
-    <category term="随笔" scheme="http://soincredible777.com.cn/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

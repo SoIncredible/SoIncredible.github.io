@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://soincredible777.com.cn/posts/ea538f2a/</loc>
+    
+    <lastmod>2023-03-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://soincredible777.com.cn/posts/d182d23d/</loc>
     
     <lastmod>2023-03-14</lastmod>
@@ -248,20 +257,6 @@
   </url>
   
   <url>
-    <loc>http://soincredible777.com.cn/tags/HTML-CSS-JS/</loc>
-    <lastmod>2023-03-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://soincredible777.com.cn/tags/VSCode/</loc>
-    <lastmod>2023-03-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://soincredible777.com.cn/tags/Hexo%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2023-03-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -270,6 +265,13 @@
   
   <url>
     <loc>http://soincredible777.com.cn/tags/Java/</loc>
+    <lastmod>2023-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://soincredible777.com.cn/tags/VSCode/</loc>
     <lastmod>2023-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -298,6 +300,13 @@
   
   <url>
     <loc>http://soincredible777.com.cn/tags/Rider/</loc>
+    <lastmod>2023-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://soincredible777.com.cn/tags/HTML-CSS-JS/</loc>
     <lastmod>2023-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -355,14 +364,14 @@
   </url>
   
   <url>
-    <loc>http://soincredible777.com.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://soincredible777.com.cn/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</loc>
     <lastmod>2023-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://soincredible777.com.cn/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</loc>
+    <loc>http://soincredible777.com.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
