@@ -6982,7 +6982,7 @@ progress {
 .hello-about {
   margin: 20px auto;
   border-radius: 24px;
-  background: var(--anzhiyu-card-bg);
+  background: #2129bd;
   border: var(--style-border-always);
   box-shadow: var(--anzhiyu-shadow-border);
   position: relative;
@@ -6994,8 +6994,10 @@ progress {
   position: relative;
   height: 315px;
   width: 100%;
-  background: #2128bd;
-  overflow: hidden;
+
+  /*别动*/
+  background: #0a108d;
+  
 }
 
 .shape {
@@ -7005,6 +7007,7 @@ progress {
 }
 
 .shape.shape-1 {
+  /*别动*/
   background: #005ffe;
   width: 650px;
   height: 650px;
@@ -7012,6 +7015,7 @@ progress {
 }
 
 .shape.shape-2 {
+  /*别动*/
   background: #ffe5e3;
   width: 440px;
   height: 440px;
@@ -7019,6 +7023,7 @@ progress {
 }
 
 .shape.shape-3 {
+  /*别动*/
   background: #ffcc57;
   width: 270px;
   height: 270px;
@@ -7034,7 +7039,8 @@ progress {
   align-items: center;
   height: 315px;
   width: 100%;
-  background: #fff;
+  /*别动*/
+  background: #ffffff00;
   mix-blend-mode: screen;
 }
 [data-theme="dark"] .hello-about .content {
@@ -7046,7 +7052,8 @@ progress {
 
 .hello-about h1 {
   font-size: 200px;
-  color: #344ad8d8;
+  /*别动*/
+  color: #fff;
   margin: 0;
   text-align: center;
   font: inherit;
@@ -7078,6 +7085,11 @@ progress {
   z-index: 3;
 }
 
+
+::selection {
+  color: #c00b0b;
+  background: #82c616;
+}
 .site-card-group .site-card .info {
     margin-top: 0;
   }
