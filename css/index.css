@@ -6989,10 +6989,6 @@ progress {
   overflow: hidden;
   user-select: none;
 }
-body {
-  font-family: Montserrat, sans-serif;
-  font-weight: 900;
-}
 
 .shapes {
   position: relative;
@@ -7050,7 +7046,7 @@ body {
 
 .hello-about h1 {
   font-size: 200px;
-  color: #000;
+  color: #344ad8d8;
   margin: 0;
   text-align: center;
   font: inherit;
@@ -7082,10 +7078,6 @@ body {
   z-index: 3;
 }
 
-::selection {
-  color: #fff;
-  background: #2128bd;
-}
 .site-card-group .site-card .info {
     margin-top: 0;
   }
