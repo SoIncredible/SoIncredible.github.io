@@ -1,0 +1,562 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Unity ScrollView学习记录 | 诺倾城丶</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景 在经过两周多与迭代器纠缠不清的拉扯之后，终于理解了迭代器的设计思想，但是把迭代器这种东西是要花费太多功夫了，下面这段时间我想把精力多放在学习Unity组件使用上。 Scroll View ScrollView是实现无限滑动列表的基础，我们先来看看它的结构、以及每个节点上挂在的组件的作用： 1234567891011121314- ScrollView (GameObject)  ├─ Rec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity ScrollView学习记录">
+<meta property="og:url" content="http://soincredible777.com.cn/posts/d5c2d910/index.html">
+<meta property="og:site_name" content="诺倾城丶">
+<meta property="og:description" content="背景 在经过两周多与迭代器纠缠不清的拉扯之后，终于理解了迭代器的设计思想，但是把迭代器这种东西是要花费太多功夫了，下面这段时间我想把精力多放在学习Unity组件使用上。 Scroll View ScrollView是实现无限滑动列表的基础，我们先来看看它的结构、以及每个节点上挂在的组件的作用： 1234567891011121314- ScrollView (GameObject)  ├─ Rec">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-23T02:44:19.000Z">
+<meta property="article:modified_time" content="2023-04-29T06:41:08.347Z">
+<meta property="article:author" content="Eddie Lee">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/heart.png"><link rel="canonical" href="http://soincredible777.com.cn/posts/d5c2d910/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Unity ScrollView学习记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-29 14:41:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu@1.0.4/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu@1.0.4/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="诺倾城丶" type="application/atom+xml">
+</head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/progress_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-paper-full"></use></svg><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">诺倾城丶</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-paper-full"></use></svg><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Unity ScrollView学习记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-23T02:44:19.000Z" title="发表于 2023-04-23 10:44:19">2023-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-29T06:41:08.347Z" title="更新于 2023-04-29 14:41:08">2023-04-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Unity ScrollView学习记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="bei-jing">背景</h1>
+<p>在经过两周多与迭代器纠缠不清的拉扯之后，终于理解了迭代器的设计思想，但是把迭代器这种东西是要花费太多功夫了，下面这段时间我想把精力多放在学习Unity组件使用上。</p>
+<h1 id="scroll-view">Scroll View</h1>
+<p>ScrollView是实现无限滑动列表的基础，我们先来看看它的结构、以及每个节点上挂在的组件的作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- ScrollView (GameObject)</span><br><span class="line">  ├─ RectTransform</span><br><span class="line">  └─ Scroll Rect (Script)</span><br><span class="line">  ├─ Viewport (GameObject)</span><br><span class="line">  │  ├─ RectTransform</span><br><span class="line">  │  └─ Mask + Image (Script+Component)</span><br><span class="line">  │  └─ Content (GameObject)</span><br><span class="line">  │    └─ RectTransform (Inside the content, you will have your items or elements)</span><br><span class="line">  ├─ Scrollbar Horizontal (GameObject) (optional)</span><br><span class="line">  │  ├─ RectTransform</span><br><span class="line">  │  └─ Scrollbar (Script)</span><br><span class="line">  ├─ Scrollbar Vertical (GameObject) (optional)</span><br><span class="line">     ├─ RectTransform</span><br><span class="line">     └─ Scrollbar (Script)</span><br></pre></td></tr></table></figure>
+<p>这里面有两个组件需要我们搞清楚：<code>Scroll Rect</code>和<code>Rect Transform</code></p>
+<h2 id="scroll-rect-zu-jian" id="Scroll-Rect组件">Scroll Rect组件</h2>
+<p>在Unity中，ScrollRect组件用于实现滚动窗口，在这个窗口中，我们可以移动其内容来查看被遮挡的部分。经常搭配UI元素（比如列表、长文本等）使用</p>
+<p>下面是Scroll Rect组件的一些主要属性与功能：</p>
+<ol>
+<li>Content：一个RectTransform，表示滚动区域中的内容。它包含所有需要滚动的子物体。通常还会添加一个LayoutGroup组件（比如水平排列布局组、垂直排列布局组等），以自动定位和调整子物体的位置和大小</li>
+<li>Horizontal和Vertical：分别控制水平滚动和垂直滚动是否启用</li>
+<li>Movement Type：
+<ul>
+<li>Unrestricted：容器可以在任何方向上无限制地滚动。</li>
+<li>Elastic：容器具有弹性边界。当用户停止拖动之后，内容会缓冲返回原始边界内。</li>
+<li>Clamped：不允许将内容拖到容器边界以外</li>
+</ul>
+</li>
+<li>Elasticity：管理了Elastic类型移动时的回弹效果。值越高，回弹速度越快，反之越慢。</li>
+<li>Inertia：如果启动惯性，用户在拖动内容并释放时，内容会按照惯性继续滚动一段时间。</li>
+<li>Deceleration Rate：表示成比例的惯性减速（仅在惯性启用的时候又消失）。值越低，减速的效果越强。</li>
+<li>Scroll Sensitivity：滚动响应的灵敏度。值越大，对拖动的响应越敏感。</li>
+<li>Viewport：可视区域的RectTransform。可以将大小调整为要显示内容的部分区域。如果不设置，会退回外层容器作为Viewport</li>
+<li>Horizontal ScrollBar和Vertical ScrollBar：缩略图栏，可以将Scrollbar组件连接到Scroll Rect组，与滚动内容同步变化。</li>
+<li>Visibility：定义ScrollBar是否一直可见、仅在拖动时可见、或者用户悬停时可见。另外还有不支持此功能的选项AutoHideAndExpandViewport，它不仅可以自动隐藏滚动条，并且在隐藏时会扩大可视界面以填充原本滚动条占据的空间。</li>
+</ol>
+<h2 id="rect-transform" id="RectTransform">RectTransform</h2>
+<p>在 Unity 中，RectTransform（矩形变换）组件是 UI 元素的核心部分。它用于定义 2D 界面元素在屏幕上的位置、大小和方向。RectTransform 专为 Unity 的 UI 系统（UGUI，Unity Graphic User Interface）设计，继承自 Transform 组件。与标准的 Transform 组件相比，RectTransform 提供了针对二维空间的额外功能。</p>
+<p>以下是 RectTransform 的一些关键特性和属性：</p>
+<ol>
+<li><strong>锚定（Anchors）</strong>：锚点用于确定 UI 元素在其父容器中的相对位置。有两种类型的锚点：最小锚点和最大锚点。最小锚点表示左下角的位置，最大锚点表示右上角的位置。通过调整这两个锚点，您可以将 UI 元素固定到父容器的一个角落、边缘或中心。</li>
+<li><strong>轴对齐（Pivot）</strong>：轴心点是旋转和缩放操作的参考点。默认情况下，轴心点位于矩形的中心（0.5, 0.5）。您可以移动轴心点以更改 UI 元素的旋转和缩放方式。</li>
+<li><strong>尺寸（Width and Height）</strong>：这两个属性定义了 UI 元素的宽度和高度。你可以通过直接设置数值或使用 RectTransform 工具在场景视图中进行调整。</li>
+<li><strong>位置（Position）</strong>：还可以设置 RectTransform 的位置属性，以确定 UI 元素在屏幕上的具体位置。位置属性包括 X、Y 和 Z 坐标。</li>
+<li><strong>缩放（Scale）</strong>：与 Transform 组件类似，RectTransform 也有一个表示局部缩放的属性，允许您改变 UI 元素的大小。</li>
+</ol>
+<p>要使用 RectTransform，需要先确保已经导入了 Unity 的 UI 系统。然后，在场景中创建 UI 元素（例如按钮、文本框、图像等），它们将自动带有 RectTransform 组件。通过调整 RectTransform 的各种属性，您可以灵活地布局和设计 UI 界面。</p>
+<p>总之，RectTransform 是 Unity UI 系统的核心组件，用于在场景中定位、旋转、缩放和调整大小。借助 RectTransform，开发者可以轻松设计出响应式和美观的用户界面。</p>
+<p>除了上面这两个组件之外，还有一个组件我们需要了解：<code>Grid Layout Group</code></p>
+<h2 id="grid-layout-group" id="GridLayoutGroup">GridLayoutGroup</h2>
+<p>Grid Layout Group组件是一种UI布局组件，它可以让我们轻松地创建规则的二维网格布局。Grid Layout Group组件可以在其中放置子元素，并根据指定的行列书自动整理排列这些子物体</p>
+<p>使用时，将Grid Layout Group组件附加到某个UI对象，比如Panel或者GameObject。它的主要属性有：</p>
+<ul>
+<li>Padding：它定义了网格内子元素与容器边缘之间的间距，它有四个方向的值：左、右、上、下。通过这些值，可以控制整个网格相对于其夫对象容器的内边距，通过设置这些值，可以控制整个网格相对于其父对象容器的内边距，这样一来我们就可以根据设定完整布局在容器内的留白区域了。</li>
+<li>Cell Size：单元格尺寸决定了子物体的大小</li>
+<li>Spacing：间距用于控制每个单元格之间的横向和纵向距离。</li>
+<li>Start Corner：起始角落，定义从哪个角落开始排列子物体（左上、右上、左下、右下）</li>
+<li>StartAxis：起始轴，确定网格的填充顺序是先填充行还是先填充列。</li>
+<li>Child Alignment：子物体对齐方式，设置子元素在网格内的对齐方式。</li>
+<li>Constraint：约束，可选择无约束、固定列数或者固定行数，在此情况下会自动调整它们的数量或者高度/宽度以满足限制条件。</li>
+</ul>
+<h2 id="ru-he-yin-cang-diao-scroll-bar" id="如何隐藏掉ScrollBar">如何隐藏掉ScrollBar</h2>
+<p>我们可以通过调整ScrollBar Visibility属性来将ScrollBar隐藏掉，但是给出的选项中是没有将ScrollBar一直隐藏掉的功能，我们需要通过其他的方式实现：</p>
+<p>将ScrollBar的透明度设置为0，选中包含ScrollBar组件的GameObject，在Inspector窗口找到Image组件。展开<code>Color</code>属性并将Alpha设置为0。这将使ScrollBar变为透明，看起来像是消失了一样，但是仍然具有交互的功能。不过要注意的是我们要确保将所有跟ScrollBar相关的图片、颜色、子物体都设置成透明。</p>
+<p>到此还没有结束，因为虽然ScrollBar现在看上去已经透明了，但是ScrollBar占据的空间还在那，所以效果上就像是少了什么东西一样，我们需要修改ScrollRect组件中的ScrollBar的Spacing的值。个人测试将值修改为-20可以达到理想的展示效果。</p>
+<h1 id="ru-he-zi-ji-shi-xian-yi-ge-scroll-view">如何自己实现一个Scroll View？</h1>
+<p>为什么会有这个环节？</p>
+<p>因为我们要尽可能地了解底层，然后避免对于Unity通用组件的依赖。</p>
+<h1 id="ru-he-shi-xian-wu-xian-hua-dong-lie-biao">如何实现无限滑动列表？</h1>
+<p>首先滑动列表的原理就是用固定的一组Prefab来表示更大的一组东西，我们称我们要展示的这些东西叫做<code>Item</code>，我们用一个<code>ItemList</code>的List来存放它们，</p>
+<p>我们来看一下具体的场景：</p>
+<img src="/posts/undefined/image-20230425093946102.png" class="">
+<p>当头部的这个Item完全出了我的可视区域，或者说headIndex后面的第二个Item移动到可视区域的顶部边界的时候 ，上面的Item已经看不到了，我们就可以将它转移到我们Item List的末尾去</p>
+<p>放图2</p>
+<p>当头部的这个Item恰好在可视区域的顶部边界的时候，头部Item上面没有Item了，就需要将ItemList尾部的Item插入到头部，</p>
+<p>放图3</p>
+<p>所以说，当头部的Item处在可视区域顶部边界之间的时候，是不会发生Item位置的变化的，只有到达了顶部或者底部的边界的时候，才会发生变化。</p>
+<img src="/posts/undefined/image-20230424165422902.png" class="">
+<p>接下来我们先对于整个过程有一个感性的认知：</p>
+<img src="/posts/undefined/image-20230424174050893.png" class="">
+<p>在我们向上滑动，底部出现新的Item的时候，会出现这种情况：</p>
+<p>最顶部的一个Item会逐渐移出我们的可视区域的顶部，当顶部的Item被完全移出可视区域之后，它就没有必要存在了，我们应该将它移动到我们List的末尾，让它在下面进行显示。</p>
+<p>在我们向下滑动，在可视区域的顶部要出现新的Item的时候，由于现在最顶部展示的已经是List头部的Item了，再往前是没有Item供我们展示的，但是这个时候List尾部的Item已经在我们可视区域的下方了，我们可以把它移动到我们ItemList的顶部，让它作为新的Item显示出来，因此我们的实现思路其实很简单，就是我们要判断出上面我们所说的两种情况，然后分别在这两种情况内去做处理就可以了，可视问题是我们该如何去判断Item的位置和可视区域的位置呢？</p>
+<p>这里我们需要了解一个属性的含义了：<code>anchoredPosition</code>，这个属性表示当前UI元素相对于其锚点的位置（二维向量）。它基于父级UI元素的矩形边界以及自身的锚点设定来计算相对坐标。注意锚点是不会随着</p>
+<h1 id="dai-ma-zai-zhe">代码在这</h1>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> Newtonsoft.Json.Converters;</span><br><span class="line"><span class="keyword">using</span> Unity.VisualScripting;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyScrollView</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> RectTransform content;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> ScrollRect scrollRect;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> GridLayoutGroup gridLayoutGroup;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> GameObject prefab;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> bufferCount;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> totalCount;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">SerializeField</span>]<span class="keyword">private</span> <span class="built_in">int</span> headIndex;</span><br><span class="line">    [<span class="meta">SerializeField</span>]<span class="keyword">private</span> <span class="built_in">int</span> tailIndex;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;GameObject&gt; Items;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Vector2 firstItemAnchoredPos;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        SetContentLength();</span><br><span class="line">        SetGridLayoutGroupDefault();</span><br><span class="line">        <span class="comment">// 给初始化一下</span></span><br><span class="line">        SetFirstItemAnchoredPosition();</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 实例化Item</span></span><br><span class="line">        <span class="comment">// 第一次初始化的时候我们时不需要关心它的位置的，因为它会自动帮助我们调整好</span></span><br><span class="line">        Items = <span class="keyword">new</span> List&lt;GameObject&gt;(totalCount);</span><br><span class="line">        headIndex = <span class="number">0</span>;</span><br><span class="line">        tailIndex = bufferCount - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; bufferCount; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            GameObject tempGameobject = Instantiate(prefab, content);</span><br><span class="line">            Items.Add(tempGameobject);</span><br><span class="line">            SetShow(tempGameobject, i+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        scrollRect.onValueChanged.AddListener(OnScroll);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetFirstItemAnchoredPosition</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        firstItemAnchoredPos = <span class="keyword">new</span> Vector2(</span><br><span class="line">            gridLayoutGroup.padding.left + gridLayoutGroup.cellSize.x / <span class="number">2</span>,</span><br><span class="line">            - gridLayoutGroup.padding.top - gridLayoutGroup.cellSize.y / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetGridLayoutGroupDefault</span>()</span></span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="comment">// 给GridLayoutGroup进行初始化</span></span><br><span class="line">        gridLayoutGroup.startCorner = GridLayoutGroup.Corner.UpperLeft;</span><br><span class="line">        gridLayoutGroup.startAxis = GridLayoutGroup.Axis.Vertical;</span><br><span class="line">        gridLayoutGroup.childAlignment = TextAnchor.UpperLeft;</span><br><span class="line">        gridLayoutGroup.constraint = GridLayoutGroup.Constraint.Flexible;</span><br><span class="line">        gridLayoutGroup.constraintCount = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnScroll</span>(<span class="params">Vector2 v</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 向上滑动</span></span><br><span class="line">        <span class="keyword">while</span> (content.anchoredPosition.y &gt;= gridLayoutGroup.padding.top + (headIndex + <span class="number">1</span>) * (gridLayoutGroup.spacing.y + gridLayoutGroup.cellSize.y) &amp;&amp; tailIndex != totalCount - <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            GameObject tempGameObj = Items[<span class="number">0</span>];</span><br><span class="line">            Items.Remove(tempGameObj);</span><br><span class="line">            </span><br><span class="line">           </span><br><span class="line">            headIndex++;</span><br><span class="line">            tailIndex++;</span><br><span class="line">            SetPos(tempGameObj,tailIndex);</span><br><span class="line">            SetShow(tempGameObj,tailIndex+<span class="number">1</span>);</span><br><span class="line">            Items.Add(tempGameObj);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 向下滑动</span></span><br><span class="line">        <span class="keyword">while</span> (content.anchoredPosition.y &lt;= gridLayoutGroup.padding.top + headIndex * (gridLayoutGroup.spacing.y + gridLayoutGroup.cellSize.y) &amp;&amp; headIndex != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            GameObject temGamObj = Items[bufferCount - <span class="number">1</span>];</span><br><span class="line">            Items.Remove(temGamObj);</span><br><span class="line">            headIndex--;</span><br><span class="line">            tailIndex--;</span><br><span class="line">            SetPos(temGamObj,headIndex);</span><br><span class="line">            SetShow(temGamObj, headIndex + <span class="number">1</span>);</span><br><span class="line">            Items.Insert(<span class="number">0</span>,temGamObj);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetPos</span>(<span class="params">GameObject obj ,<span class="built_in">int</span> index</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        obj.GetComponent&lt;RectTransform&gt;().anchoredPosition = <span class="keyword">new</span> Vector2(</span><br><span class="line">            firstItemAnchoredPos.x,</span><br><span class="line">            firstItemAnchoredPos.y - index * (gridLayoutGroup.spacing.y + gridLayoutGroup.cellSize.y));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetShow</span>(<span class="params">GameObject obj, <span class="built_in">int</span> index</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        obj.name = index.ToString();</span><br><span class="line">        obj.GetComponentInChildren&lt;Text&gt;().text = index.ToString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetContentLength</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        content.sizeDelta = <span class="keyword">new</span> Vector2(</span><br><span class="line">            gridLayoutGroup.cellSize.x,gridLayoutGroup.padding.top + gridLayoutGroup.padding.bottom + gridLayoutGroup.cellSize.y * totalCount + gridLayoutGroup.spacing.y * (totalCount <span class="number">-1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其实是有很多实现滑动列表的方案，哪种方案是最完美的？</p>
+<ul>
+<li>不依托其他的组件？</li>
+<li>通用性？</li>
+<li>…</li>
+</ul>
+<p>问了宇哥，宇哥说要依情况而定，按照需求设计最合适的滑动列表，不愧是宇哥👍</p>
+<p>唉，本来今天刚一来还因为自己成功实现了滑动列表而沾沾自喜，结果和侯大师对了一下之后发现自己写的滑动列表实在是一言难尽，所以原计划今天要看DOTWEEN插件的，但是看这个情况应该是要把DOTWEEN插件延后到下周五一的时候看了😢</p>
+<p>如果我们想要实现一个所谓的完美的无限滑动列表，那么我们最好的选择就是不要依赖任何Unity提供的现成的组件，因为有了Unity组件的加持，我们可以不去关心某项功能是怎么实现的，现在有了对卓越的追求时候，很多我们依赖的组件是需要我们搞清楚我们需要这个组件里面的哪些属性的，我们只需要自己把这些属性写出来，省去那些不去要的属性，那么我们项目的性能就能得到一个很大的飞跃。</p>
+<p>下一步的工作就是了解：</p>
+<p>1.要实现一个滑动列表所依赖的最最基础的属性有哪些？</p>
+<p>2.需要实现哪些方法才能实现滑动列表</p>
+<p>3.可以去GitHub上看一看无限滑动列表的案例</p>
+<h1 id="guan-yu-rect-transform-he-transform">关于RectTransform和Transform</h1>
+<p>Unity中所有在场景中的物体肯定都会有这两个组件的其中一个，因为场景中的物体都需要一些数据表明自己的位置，而物体的位置信息就由这两个组件表明：</p>
+<ol>
+<li><code>Transform Component</code>：三维空间中任何游戏物体都会拥有一个Transform组件。Transform组件负责记录物体的位置<code>position</code>、旋转<code>rotation</code>和缩放<code>scale</code>。这些属性是基于父物体的坐标系来描述的。Transform表示的坐标主要用于3D场景物体</li>
+<li><code>RectTranform Component</code>：RectTransform组件用于UI元素比如<code>Text</code>、<code>Image</code>、<code>Button</code>等，它<strong>继承自</strong>Transform组件，在二维环境下（在<code>Canvas</code>内）描述UI元素的位置和尺寸。RectTransform包含了对齐/锚点设置<code>Anchors</code>、尺寸<code>Width and Height</code>以及<code>anchoredPosition</code>等属性。创建2D UI的时候，RectTransform提供了更多适应屏幕变化和布局的便利。</li>
+</ol>
+<p>总的来说，表示场景中物体坐标的两个核心组件分别是<code>Transform</code>（一般对象，主要针对3D）和<code>RectTransform</code>（UI对象，针对UI布局）。其他与坐标相关的功能多数时候会涉及操作这两个组件。</p>
+<p>在Unity中，对于UI元素来讲，使用rectTransform而非Transform组件是至关重要的。使用Transform组件处理UI元素可能导致以下问题：</p>
+<ol>
+<li>布局缩放和适应性：RectTransform组件针对二维UI设计，其锚点、pivot和布局设定可以更好地适应不同屏幕尺寸或者方向。而使用Transform组件设计UI布局的时候无法保证良好的自适应性。</li>
+<li>UI层级丢失：所有UI元素都需要位于Canvas内，并且由Canvas渲染。将UI元素转换为普通物体试图使用Transform组件时，可能会导致UI层级结构的丢失，从而造成渲染问题。</li>
+<li>位置、尺寸与交互问题：Rect Transform独有众多属性（比如锚点、宽度、高度等），很难在Transform组件上实现。使用Transform组件处理UI布局将无法确保正确的位置、尺寸与屏幕交互。</li>
+</ol>
+<p>但是在Unity中，我们可以将2D的UI元素放置于3D空间中，并且产生立体的效果，我们可以通过World SpaceCanvas来完成，这个原理也比较简单，使用World Space Canvas的时候，UI元素会被视作一个在三维空间中存在的平面。这意味着它们可以与其他3D物体共享相同的坐标空间，并且有明确的深度关系。因此，尽管UI元素本身仍然是2D的，但是通过将它们放在World Space里的Canvas上，那些元素在三维空间中便拥有了虚拟的XYZ坐标。</p>
+<p>使用World Space Canvas，UI元素会变成场景的一部分，而不再是位于屏幕覆盖模式ScreenSpace - Overlay或者相机模式Screen Space - Camera Mode下由专用的Canvas独立渲染的UI层。这使得它们具有了更多与3D场景交互、变换和运动的可能性，从而实现丰富的视觉效果或游戏玩法。但是UI元素的2D属性并没有改变。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://soincredible777.com.cn">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://soincredible777.com.cn/posts/d5c2d910/">http://soincredible777.com.cn/posts/d5c2d910/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://soincredible777.com.cn" target="_blank">诺倾城丶</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/6ea8fdb7/"><img class="next-cover" src="http://soincredible777.com.cn:90/31.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UML图学习笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/bf138a1e/" title="Bubble开发日志2023_03_09"><img class="cover" src="http://soincredible777.com.cn:90/10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-09</div><div class="title">Bubble开发日志2023_03_09</div></div></a></div><div><a href="/posts/c2115bb9/" title="Bubble开发日志2023_04_03"><img class="cover" src="http://soincredible777.com.cn:90/28.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">Bubble开发日志2023_04_03</div></div></a></div><div><a href="/posts/e57f243c/" title="VSCode配置UnityC#开发环境"><img class="cover" src="http://soincredible777.com.cn:90/14.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-06</div><div class="title">VSCode配置UnityC#开发环境</div></div></a></div><div><a href="/posts/1f15053a/" title="使用Git管理Unity项目"><img class="cover" src="http://soincredible777.com.cn:90/6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-18</div><div class="title">使用Git管理Unity项目</div></div></a></div><div><a href="/posts/61a4721e/" title="使用Rider和Unity进行游戏开发初探"><img class="cover" src="http://soincredible777.com.cn:90/16.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-07</div><div class="title">使用Rider和Unity进行游戏开发初探</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">我的肩上是风,风上是闪耀的星辰</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是诺倾城丶的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bei-jing"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#scroll-view"><span class="toc-number">2.</span> <span class="toc-text">Scroll View</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#scroll-rect-zu-jian"><span class="toc-number">2.1.</span> <span class="toc-text">Scroll Rect组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rect-transform"><span class="toc-number">2.2.</span> <span class="toc-text">RectTransform</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#grid-layout-group"><span class="toc-number">2.3.</span> <span class="toc-text">GridLayoutGroup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ru-he-yin-cang-diao-scroll-bar"><span class="toc-number">2.4.</span> <span class="toc-text">如何隐藏掉ScrollBar</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ru-he-zi-ji-shi-xian-yi-ge-scroll-view"><span class="toc-number">3.</span> <span class="toc-text">如何自己实现一个Scroll View？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ru-he-shi-xian-wu-xian-hua-dong-lie-biao"><span class="toc-number">4.</span> <span class="toc-text">如何实现无限滑动列表？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dai-ma-zai-zhe"><span class="toc-number">5.</span> <span class="toc-text">代码在这</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#guan-yu-rect-transform-he-transform"><span class="toc-number">6.</span> <span class="toc-text">关于RectTransform和Transform</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/d5c2d910/" title="Unity ScrollView学习记录"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity ScrollView学习记录"/></a><div class="content"><a class="title" href="/posts/d5c2d910/" title="Unity ScrollView学习记录">Unity ScrollView学习记录</a><time datetime="2023-04-23T02:44:19.000Z" title="发表于 2023-04-23 10:44:19">2023-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/6ea8fdb7/" title="UML图学习笔记"><img src="http://soincredible777.com.cn:90/31.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UML图学习笔记"/></a><div class="content"><a class="title" href="/posts/6ea8fdb7/" title="UML图学习笔记">UML图学习笔记</a><time datetime="2023-04-18T02:33:10.000Z" title="发表于 2023-04-18 10:33:10">2023-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/83d7c4e7/" title="关于协程Coroutine"><img src="http://soincredible777.com.cn:90/30.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于协程Coroutine"/></a><div class="content"><a class="title" href="/posts/83d7c4e7/" title="关于协程Coroutine">关于协程Coroutine</a><time datetime="2023-04-17T07:04:49.000Z" title="发表于 2023-04-17 15:04:49">2023-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/34114324/" title="C#零碎知识点总结"><img src="http://soincredible777.com.cn:90/29.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C#零碎知识点总结"/></a><div class="content"><a class="title" href="/posts/34114324/" title="C#零碎知识点总结">C#零碎知识点总结</a><time datetime="2023-04-04T07:09:52.000Z" title="发表于 2023-04-04 15:09:52">2023-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c2115bb9/" title="Bubble开发日志2023_04_03"><img src="http://soincredible777.com.cn:90/28.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Bubble开发日志2023_04_03"/></a><div class="content"><a class="title" href="/posts/c2115bb9/" title="Bubble开发日志2023_04_03">Bubble开发日志2023_04_03</a><time datetime="2023-04-03T02:47:44.000Z" title="发表于 2023-04-03 10:47:44">2023-04-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.soincredible777.com.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.soincredible777.com.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/title.js?v1"></script><script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script><script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script><script> LA.init({id:"JuTksFi0ZWLV2TvA",ck:"JuTksFi0ZWLV2TvA"})</script><script>new LingQue.Monitor().init({id:"JuTksFi0ZWLV2TvA",sendSuspicious:true});</script><div class="aplayer no-destroy" data-id="1377075453" data-server="tencent" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:120px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" title="本站已在鲁进行备案"><img src="/img/备案.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '422e3bc4507140efbccc63cc0faded05';
+  var gaud_map_key = '48b8ec303cfe1fc03178b065f1d333e1';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.6534116,27.96920845';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item swiper_container_card" style="height: auto;width: 100%"><div id="random"><div id="random-banner"><canvas id="peoplecanvas"></canvas></div><a id="random-hover" style="width:100%;height:auto;" href="javascript:toRandomPost()" rel="external nofollow noreferrer" one-link-mark="yes"><i class="fa fa-paper-plane" style="margin-left:10px"></i><div style="margin-left:10px">随便逛逛<i class="fa-solid fa-arrow-right" style="margin-left:10px"></i></div></a></div><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/d182d23d/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="http://soincredible777.com.cn:90/2.png" alt="" onerror="this.src=https://cdn.cbd.int/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-06-27</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/d182d23d/&quot;);" href="javascript:void(0);" alt="">从零开始部署个人博客到云服务器</a><div class="blog-slider__text">梦开始的地方</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/d182d23d/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/cd96d12/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="http://soincredible777.com.cn:90/25.png" alt="" onerror="this.src=https://cdn.cbd.int/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-03-17</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/cd96d12/&quot;);" href="javascript:void(0);" alt="">反射委托和事件</a><div class="blog-slider__text">主要介绍了委托</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/cd96d12/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a72e4bb6/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="http://soincredible777.com.cn:90/12.png" alt="" onerror="this.src=https://cdn.cbd.int/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a72e4bb6/&quot;);" href="javascript:void(0);" alt="">git学习记录</a><div class="blog-slider__text">为SourceTree打基础</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a72e4bb6/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/e47b5157/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="http://soincredible777.com.cn:90/7.png" alt="" onerror="this.src=https://cdn.cbd.int/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-06-27</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/e47b5157/&quot;);" href="javascript:void(0);" alt="">使用hexo优雅的地写博客</a><div class="blog-slider__text">博客写作的一系列标准规范</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/e47b5157/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/370bdedc/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="http://soincredible777.com.cn:90/1.png" alt="" onerror="this.src=https://cdn.cbd.int/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-14</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/370bdedc/&quot;);" href="javascript:void(0);" alt="">Butterfly魔改日记</a><div class="blog-slider__text">Butterfly美化记录</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/370bdedc/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/js/swiper.min.js"></script><script defer data-pjax src="https://cdn.cbd.int/hexo-butterfly-swiper-anzhiyu@1.0.4/lib/swiper_init.js"></script><script data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/gsap/3.9.1/gsap.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper-anzhiyu@1.0.4/lib/people.min.js"></script><script async src="/anzhiyu/random.js"></script><script async src="/js/ali_font.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
