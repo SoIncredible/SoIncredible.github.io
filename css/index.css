@@ -6997,7 +6997,6 @@ progress {
 
   /*别动*/
   background: #0a108d;
-  
 }
 
 .shape {
@@ -7085,11 +7084,11 @@ progress {
   z-index: 3;
 }
 
-
 ::selection {
-  color: #c00b0b;
-  background: #82c616;
+  color: #ffffff s;
+  background: #117dff;
 }
+
 .site-card-group .site-card .info {
     margin-top: 0;
   }

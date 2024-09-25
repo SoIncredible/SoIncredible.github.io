@@ -524,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/about/index.html</loc>
+    <loc>https://soincredible.github.io/categories/index.html</loc>
     
     <lastmod>2024-09-12</lastmod>
     
@@ -533,7 +533,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/categories/index.html</loc>
+    <loc>https://soincredible.github.io/about/index.html</loc>
     
     <lastmod>2024-09-12</lastmod>
     
@@ -607,13 +607,6 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2024-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://soincredible.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-09-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -622,6 +615,13 @@
   
   <url>
     <loc>https://soincredible.github.io/tags/Git/</loc>
+    <lastmod>2024-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2024-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -649,13 +649,6 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/tags/MySql/</loc>
-    <lastmod>2024-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://soincredible.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2024-09-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -664,6 +657,13 @@
   
   <url>
     <loc>https://soincredible.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2024-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/tags/MySql/</loc>
     <lastmod>2024-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
