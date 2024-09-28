@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>2024-08问题记录 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="粒子缩放的问题 在某些分辨率下粒子的缩放没有受CanvasScaler的影响 CanvasScaler的作用机制 先缩放再设置位置和先设置位置再缩放的区别有区别么 对多个Pass的理解 我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shad">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>2024-08问题记录 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="粒子缩放的问题在某些分辨率下粒子的缩放没有受CanvasScaler的影响 CanvasScaler的作用机制先缩放再设置位置和先设置位置再缩放的区别有区别么对多个Pass的理解我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shader是要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024-08问题记录">
 <meta property="og:url" content="https://soincredible.github.io/posts/c41139c9/index.html">
 <meta property="og:site_name" content="EddieLee">
-<meta property="og:description" content="粒子缩放的问题 在某些分辨率下粒子的缩放没有受CanvasScaler的影响 CanvasScaler的作用机制 先缩放再设置位置和先设置位置再缩放的区别有区别么 对多个Pass的理解 我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shad">
+<meta property="og:description" content="粒子缩放的问题在某些分辨率下粒子的缩放没有受CanvasScaler的影响 CanvasScaler的作用机制先缩放再设置位置和先设置位置再缩放的区别有区别么对多个Pass的理解我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shader是要">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.notion.so/images/page-cover/met_klimt_1912.jpg">
 <meta property="article:published_time" content="2024-08-13T02:38:40.000Z">
@@ -145,43 +145,24 @@
     })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
 <style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
   white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
-<link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.notion.so/images/page-cover/met_klimt_1912.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2024-08问题记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-13T02:38:40.000Z" title="发表于 2024-08-13 10:38:40">2024-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T15:39:04.551Z" title="更新于 2024-09-25 23:39:04">2024-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>粒子缩放的问题</h1>
-<p>在某些分辨率下粒子的缩放没有受CanvasScaler的影响</p>
-<h1>CanvasScaler的作用机制</h1>
-<h1>先缩放再设置位置和先设置位置再缩放的区别有区别么</h1>
-<h1>对多个Pass的理解</h1>
-<p>我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shader是要附给一个材质 然后这个材质要附到一个模型上 然后模型会表现出Shader里的某些效果 但是RenderTexture应该不是模型吧？那为什么可以对RenderTexture使用Shader呢？</p>
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.notion.so/images/page-cover/met_klimt_1912.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2024-08问题记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-13T02:38:40.000Z" title="发表于 2024-08-13 10:38:40">2024-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T15:39:04.551Z" title="更新于 2024-09-25 23:39:04">2024-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="粒子缩放的问题"><a href="#粒子缩放的问题" class="headerlink" title="粒子缩放的问题"></a>粒子缩放的问题</h1><p>在某些分辨率下粒子的缩放没有受CanvasScaler的影响</p>
+<h1 id="CanvasScaler的作用机制"><a href="#CanvasScaler的作用机制" class="headerlink" title="CanvasScaler的作用机制"></a>CanvasScaler的作用机制</h1><h1 id="先缩放再设置位置和先设置位置再缩放的区别有区别么"><a href="#先缩放再设置位置和先设置位置再缩放的区别有区别么" class="headerlink" title="先缩放再设置位置和先设置位置再缩放的区别有区别么"></a>先缩放再设置位置和先设置位置再缩放的区别有区别么</h1><h1 id="对多个Pass的理解"><a href="#对多个Pass的理解" class="headerlink" title="对多个Pass的理解"></a>对多个Pass的理解</h1><p>我最近在学习屏幕后处理相关的知识 其中提到了Graphics.Blit方法，其中的参数是srcTexture destTexture material shaderPass 按照我目前对Shader的理解 Shader是要附给一个材质 然后这个材质要附到一个模型上 然后模型会表现出Shader里的某些效果 但是RenderTexture应该不是模型吧？那为什么可以对RenderTexture使用Shader呢？ </p>
 <p>你的问题触及了Unity中渲染流程的一个重要概念。确实，通常情况下，Shader是附加到材质上的，而材质则应用于模型上，以此来控制模型的渲染方式。然而，在屏幕后处理和其他高级渲染技术中，Shader的使用方式与传统的模型渲染有所不同。</p>
-<h3 id="Graphics-Blit-和-Shader"><code>Graphics.Blit</code> 和 Shader</h3>
-<p><code>Graphics.Blit</code>是Unity中用于将一个纹理（Texture或RenderTexture）的内容复制到另一个RenderTexture并且可以通过Shader对这个过程进行控制的方法。这个方法常用于屏幕后处理，因为它允许你在渲染的最后阶段修改整个渲染结果，实现各种视觉效果，如模糊、色彩校正、辉光等。</p>
-<h3 id="为什么可以对RenderTexture使用Shader">为什么可以对<code>RenderTexture</code>使用Shader</h3>
-<ul>
-<li>
-<p><strong>渲染到纹理</strong>：在使用<code>Graphics.Blit</code>时，Shader实际上是作用于一个全屏四边形（或叫全屏Quad）上的。这个四边形覆盖了整个屏幕（或目标RenderTexture的尺寸），Shader根据输入的源纹理（<code>srcTexture</code>）和提供的材质（<code>material</code>）来处理图像，并将结果渲染到目标RenderTexture（<code>destTexture</code>）上。这个过程并不需要传统意义上的3D模型。</p>
+<h3 id="Graphics-Blit-和-Shader"><a href="#Graphics-Blit-和-Shader" class="headerlink" title="Graphics.Blit 和 Shader"></a><code>Graphics.Blit</code> 和 Shader</h3><p><code>Graphics.Blit</code>是Unity中用于将一个纹理（Texture或RenderTexture）的内容复制到另一个RenderTexture并且可以通过Shader对这个过程进行控制的方法。这个方法常用于屏幕后处理，因为它允许你在渲染的最后阶段修改整个渲染结果，实现各种视觉效果，如模糊、色彩校正、辉光等。</p>
+<h3 id="为什么可以对RenderTexture使用Shader"><a href="#为什么可以对RenderTexture使用Shader" class="headerlink" title="为什么可以对RenderTexture使用Shader"></a>为什么可以对<code>RenderTexture</code>使用Shader</h3><ul>
+<li><p><strong>渲染到纹理</strong>：在使用<code>Graphics.Blit</code>时，Shader实际上是作用于一个全屏四边形（或叫全屏Quad）上的。这个四边形覆盖了整个屏幕（或目标RenderTexture的尺寸），Shader根据输入的源纹理（<code>srcTexture</code>）和提供的材质（<code>material</code>）来处理图像，并将结果渲染到目标RenderTexture（<code>destTexture</code>）上。这个过程并不需要传统意义上的3D模型。</p>
 </li>
-<li>
-<p><strong>屏幕空间的渲染</strong>：在后处理过程中，我们通常在屏幕空间进行操作，这意味着Shader处理的是二维图像数据而非三维场景。因此，<code>RenderTexture</code>可以被视为一个画布，Shader则根据其算法改变这个画布上的像素，实现各种图像效果。</p>
+<li><p><strong>屏幕空间的渲染</strong>：在后处理过程中，我们通常在屏幕空间进行操作，这意味着Shader处理的是二维图像数据而非三维场景。因此，<code>RenderTexture</code>可以被视为一个画布，Shader则根据其算法改变这个画布上的像素，实现各种图像效果。</p>
 </li>
-<li>
-<p><strong>Shader的灵活性</strong>：Shader编程非常灵活，它不仅可以用于计算3D模型的表面属性（如光照、纹理映射等），还可以用于直接处理图像数据。这使得Shader成为实现复杂图像处理算法的理想工具，尤其是在GPU提供的并行计算能力下。</p>
+<li><p><strong>Shader的灵活性</strong>：Shader编程非常灵活，它不仅可以用于计算3D模型的表面属性（如光照、纹理映射等），还可以用于直接处理图像数据。这使得Shader成为实现复杂图像处理算法的理想工具，尤其是在GPU提供的并行计算能力下。</p>
 </li>
 </ul>
-<h3 id="实际应用">实际应用</h3>
-<p>在屏幕后处理中，<code>Graphics.Blit</code>配合自定义Shader可以实现多种复杂的效果。例如，一个简单的反色Shader可能会这样工作：对于输入的每一个像素，它计算出反色值，然后输出到目标RenderTexture。这个过程不涉及任何3D模型，而是直接在图像数据上进行操作。</p>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>在屏幕后处理中，<code>Graphics.Blit</code>配合自定义Shader可以实现多种复杂的效果。例如，一个简单的反色Shader可能会这样工作：对于输入的每一个像素，它计算出反色值，然后输出到目标RenderTexture。这个过程不涉及任何3D模型，而是直接在图像数据上进行操作。</p>
 <p>总的来说，<code>RenderTexture</code>和Shader的结合打开了Unity渲染技术的新领域，使得开发者能够实现丰富的视觉效果和图像处理功能，这些在传统的基于模型的渲染流程中是难以实现的。</p>
-<p>那么我还有关于可以指定ShaderPass的疑问，比如下面这一段实现高斯模糊效果的Shader<br>
-Shader “Unity Shader Book/Chapter 12/GaussianBlur”<br>
-{<br>
-Properties {<br>
-_MainTex (“Base (RGB)”, 2D) = “white” {}<br>
-_BlurSize (“Blur Size”, Float) = 1.0<br>
-}<br>
-SubShader<br>
-{<br>
-CGINCLUDE</p>
+<p>那么我还有关于可以指定ShaderPass的疑问，比如下面这一段实现高斯模糊效果的Shader<br>Shader “Unity Shader Book/Chapter 12/GaussianBlur”<br>{<br>    Properties {<br>        _MainTex (“Base (RGB)”, 2D) = “white” {}<br>        _BlurSize (“Blur Size”, Float) = 1.0<br>    }<br>    SubShader<br>    {<br>        CGINCLUDE</p>
 <pre><code>    #include &quot;UnityCG.cginc&quot;
-    
+
     sampler2D _MainTex;
     half4 _MainTex_TexelSize;
     float _BlurSize;
@@ -194,32 +175,32 @@ CGINCLUDE</p>
 
     v2f vertexBlurVertical(appdata_img v)
     &#123;
-		v2f o;
-		o.pos = UnityObjectToClipPos(v.vertex);
-		
-		half2 uv = v.texcoord;
-		
-		o.uv[0] = uv;
-		o.uv[1] = uv + float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
-		o.uv[2] = uv - float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
-		o.uv[3] = uv + float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
-		o.uv[4] = uv - float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
-				 
-		return o;
+        v2f o;
+        o.pos = UnityObjectToClipPos(v.vertex);
+
+        half2 uv = v.texcoord;
+
+        o.uv[0] = uv;
+        o.uv[1] = uv + float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+        o.uv[2] = uv - float2(0.0, _MainTex_TexelSize.y * 1.0) * _BlurSize;
+        o.uv[3] = uv + float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+        o.uv[4] = uv - float2(0.0, _MainTex_TexelSize.y * 2.0) * _BlurSize;
+
+        return o;
     &#125;
 
     v2f vertexBlurHorizontal(appdata_img v)
     &#123;
-       	v2f o;
-		o.pos = UnityObjectToClipPos(v.vertex);
-		
-		half2 uv = v.texcoord;
-		
-		o.uv[0] = uv;
-		o.uv[1] = uv + float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
-		o.uv[2] = uv - float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
-		o.uv[3] = uv + float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
-		o.uv[4] = uv - float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+           v2f o;
+        o.pos = UnityObjectToClipPos(v.vertex);
+
+        half2 uv = v.texcoord;
+
+        o.uv[0] = uv;
+        o.uv[1] = uv + float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+        o.uv[2] = uv - float2(_MainTex_TexelSize.x * 1.0, 0.0) * _BlurSize;
+        o.uv[3] = uv + float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
+        o.uv[4] = uv - float2(_MainTex_TexelSize.x * 2.0, 0.0) * _BlurSize;
 
         return o;
     &#125;
@@ -238,54 +219,51 @@ CGINCLUDE</p>
         return fixed4(sum, 1.0);
     &#125;
 
-    
+
     ENDCG
-    
+
     ZTest Always
     Cull Off
     ZWrite Off
-    
+
     Pass
     &#123;
         Name &quot;GAUSSIAN_BLUR_VERTICAL&quot;
-        
+
         CGPROGRAM
 
         #pragma vertex vertexBlurVertical
         #pragma fragment fragBlur
-        
+
         ENDCG
     &#125;
 
     Pass
     &#123;
         Name &quot;GAUSSIAN_BLUR_HORIZONTAL&quot;
-        
+
         CGPROGRAM
 
         #pragma vertex vertexBlurHorizontal
         #pragma fragment fragBlur
-        
+
         ENDCG
     &#125;        
 
 &#125;
 
 Fallback &quot;Diffuse&quot;
-</code></pre>
-<p>}</p>
-<p>我的代码部分的调用如下：<br>
-using UnityEngine;<br>
-using System.Collections;</p>
+</code></pre><p>}</p>
+<p>我的代码部分的调用如下：<br>using UnityEngine;<br>using System.Collections;</p>
 <p>public class GaussianBlur : PostEffectsBase {</p>
 <pre><code>public Shader gaussianBlurShader;
 private Material gaussianBlurMaterial = null;
 
 public Material material &#123;  
-	get &#123;
-		gaussianBlurMaterial = CheckShaderAndCreateMaterial(gaussianBlurShader, gaussianBlurMaterial);
-		return gaussianBlurMaterial;
-	&#125;  
+    get &#123;
+        gaussianBlurMaterial = CheckShaderAndCreateMaterial(gaussianBlurShader, gaussianBlurMaterial);
+        return gaussianBlurMaterial;
+    &#125;  
 &#125;
 
 // Blur iterations - larger number means more blur.
@@ -300,168 +278,132 @@ public float blurSpread = 0.6f;
 public int downSample = 2;
 
 void OnRenderImage (RenderTexture src, RenderTexture dest) &#123;
-	if (material != null) &#123;
-		int rtW = src.width/downSample;
-		int rtH = src.height/downSample;
+    if (material != null) &#123;
+        int rtW = src.width/downSample;
+        int rtH = src.height/downSample;
 
-		RenderTexture buffer0 = RenderTexture.GetTemporary(rtW, rtH, 0);
-		buffer0.filterMode = FilterMode.Bilinear;
+        RenderTexture buffer0 = RenderTexture.GetTemporary(rtW, rtH, 0);
+        buffer0.filterMode = FilterMode.Bilinear;
 
-		Graphics.Blit(src, buffer0);
+        Graphics.Blit(src, buffer0);
 
-		for (int i = 0; i &lt; iterations; i++) &#123;
-			material.SetFloat(&quot;_BlurSize&quot;, 1.0f + i * blurSpread);
+        for (int i = 0; i &lt; iterations; i++) &#123;
+            material.SetFloat(&quot;_BlurSize&quot;, 1.0f + i * blurSpread);
 
-			RenderTexture buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+            RenderTexture buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
 
-			// Render the vertical pass
-			Graphics.Blit(buffer0, buffer1, material, 0);
+            // Render the vertical pass
+            Graphics.Blit(buffer0, buffer1, material, 0);
 
-			RenderTexture.ReleaseTemporary(buffer0);
-			buffer0 = buffer1;
-			buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+            RenderTexture.ReleaseTemporary(buffer0);
+            buffer0 = buffer1;
+            buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
 
-			// Render the horizontal pass
-			Graphics.Blit(buffer0, buffer1, material, 1);
+            // Render the horizontal pass
+            Graphics.Blit(buffer0, buffer1, material, 1);
 
-			RenderTexture.ReleaseTemporary(buffer0);
-			buffer0 = buffer1;
-		&#125;
+            RenderTexture.ReleaseTemporary(buffer0);
+            buffer0 = buffer1;
+        &#125;
 
-		Graphics.Blit(buffer0, dest);
-		RenderTexture.ReleaseTemporary(buffer0);
-	&#125; else &#123;
-		Graphics.Blit(src, dest);
-	&#125;
+        Graphics.Blit(buffer0, dest);
+        RenderTexture.ReleaseTemporary(buffer0);
+    &#125; else &#123;
+        Graphics.Blit(src, dest);
+    &#125;
 &#125;
-</code></pre>
-<p>}</p>
-<p>我的第一个问题是：OnRenderImage是每一帧都调用的，但按照我的理解 ONRenderImage在CPU端执行 而Shader效果的实现是在GPU端进行，CPU中执行OnRenderImage中Graphics.Blit方法时是不会立刻生效的对吗？它更像是缓存了一个命令，当CPU端所有的指令都执行完了之后，进入GPU执行的阶段，GPU会获取到CPU执行阶段提供的指令，在某一时刻，请留意我这里说的某一时刻，这是我的第二个问题，执行CPU的这一指令对吗？<br>
-第二个问题是：一个SubShader中含有两个Pass，其中每一个Pass都包括一个完整的从顶点着色器到片元着色器的处理，那么对这个一个SubShader中含有两个Pass的情况，是不是说明挂载有这个Shader的模型会被GPU计算渲染两次？而且这两次其实是没有依赖关系的，也就是说先处理Pass1还是先处理Pass2对最终的渲染效果没有影响对吗？</p>
+</code></pre><p>}</p>
+<p>我的第一个问题是：OnRenderImage是每一帧都调用的，但按照我的理解 ONRenderImage在CPU端执行 而Shader效果的实现是在GPU端进行，CPU中执行OnRenderImage中Graphics.Blit方法时是不会立刻生效的对吗？它更像是缓存了一个命令，当CPU端所有的指令都执行完了之后，进入GPU执行的阶段，GPU会获取到CPU执行阶段提供的指令，在某一时刻，请留意我这里说的某一时刻，这是我的第二个问题，执行CPU的这一指令对吗？<br>第二个问题是：一个SubShader中含有两个Pass，其中每一个Pass都包括一个完整的从顶点着色器到片元着色器的处理，那么对这个一个SubShader中含有两个Pass的情况，是不是说明挂载有这个Shader的模型会被GPU计算渲染两次？而且这两次其实是没有依赖关系的，也就是说先处理Pass1还是先处理Pass2对最终的渲染效果没有影响对吗？</p>
 <p>你的问题非常好，涵盖了Unity渲染流程中的关键步骤和概念。让我们一一解答：</p>
-<h3 id="第一个问题：OnRenderImage-和-GPU-执行时机">第一个问题：<code>OnRenderImage</code> 和 GPU 执行时机</h3>
-<p>你的理解是正确的。<code>OnRenderImage</code>确实是在CPU端调用的，它是Unity渲染流程中的一个回调方法，用于处理渲染图像（通常在渲染到屏幕之前）。当你在<code>OnRenderImage</code>中调用<code>Graphics.Blit</code>时，你实际上是在创建一个命令，告诉GPU：“请按照这个材质（和它的Shader）处理这个纹理，然后输出到另一个纹理上。”</p>
+<h3 id="第一个问题：OnRenderImage-和-GPU-执行时机"><a href="#第一个问题：OnRenderImage-和-GPU-执行时机" class="headerlink" title="第一个问题：OnRenderImage 和 GPU 执行时机"></a>第一个问题：<code>OnRenderImage</code> 和 GPU 执行时机</h3><p>你的理解是正确的。<code>OnRenderImage</code>确实是在CPU端调用的，它是Unity渲染流程中的一个回调方法，用于处理渲染图像（通常在渲染到屏幕之前）。当你在<code>OnRenderImage</code>中调用<code>Graphics.Blit</code>时，你实际上是在创建一个命令，告诉GPU：“请按照这个材质（和它的Shader）处理这个纹理，然后输出到另一个纹理上。”</p>
 <p>这些命令会被Unity渲染引擎收集起来，然后在适当的时候一起发送给GPU。GPU收到这些命令后，会按照指令执行渲染操作。这个过程确实不是立即发生的，而是在CPU端的所有渲染相关命令都提交给GPU之后，GPU才开始执行这些命令。这意味着，<code>Graphics.Blit</code>调用发生时，并不会立即执行Shader效果，而是稍后在GPU的渲染队列中执行。</p>
-<h3 id="第二个问题：SubShader中的Pass执行顺序">第二个问题：SubShader中的Pass执行顺序</h3>
-<p>在Shader编写中，一个SubShader可以包含多个Pass，这些Pass定义了一系列的渲染操作。每个Pass都会执行一次完整的渲染流程，从顶点着色器到片元着色器。</p>
+<h3 id="第二个问题：SubShader中的Pass执行顺序"><a href="#第二个问题：SubShader中的Pass执行顺序" class="headerlink" title="第二个问题：SubShader中的Pass执行顺序"></a>第二个问题：SubShader中的Pass执行顺序</h3><p>在Shader编写中，一个SubShader可以包含多个Pass，这些Pass定义了一系列的渲染操作。每个Pass都会执行一次完整的渲染流程，从顶点着色器到片元着色器。</p>
 <p>对于你的高斯模糊Shader例子，它包含两个Pass：一个垂直模糊Pass和一个水平模糊Pass。这两个Pass在逻辑上是有顺序的，先执行垂直模糊，再执行水平模糊，以生成最终的模糊效果。这个顺序是由你的C#脚本中的<code>Graphics.Blit</code>调用顺序控制的，而不是Shader内部的Pass顺序。所以，即使Shader中先定义了垂直模糊Pass，然后是水平模糊Pass，实际的执行顺序是由你在<code>OnRenderImage</code>中的调用顺序决定的。</p>
 <p>当你在<code>OnRenderImage</code>中先用<code>material</code>和<code>0</code>（代表第一个Pass，即垂直模糊）调用<code>Graphics.Blit</code>，然后再用<code>material</code>和<code>1</code>（代表第二个Pass，即水平模糊）调用<code>Graphics.Blit</code>时，你就定义了处理顺序：先垂直模糊，再水平模糊。这两个Pass是顺序依赖的，因为水平模糊是在垂直模糊的结果上进行的。</p>
 <p>总结来说，虽然Shader中的Pass看似是并行定义的，但实际执行顺序和依赖关系是由外部调用（如<code>OnRenderImage</code>中的<code>Graphics.Blit</code>调用顺序）控制的。对于需要多步处理的效果（如高斯模糊），正确的Pass执行顺序对于达到预期的视觉效果至关重要。</p>
 <p>那么如果我不在OnRenderImage中进行顺序的调用，只是把这个Shader挂到某一个模型上，它的两个Pass的执行顺序是怎样的呢？</p>
-<p>当你将包含多个Pass的Shader直接应用到模型上时，Shader中的Pass将按照它们在Shader文件中定义的顺序执行。Unity渲染引擎会自动按照这个顺序来渲染每个Pass。这意味着，如果你的Shader文件中首先定义了&quot;GAUSSIAN_BLUR_VERTICAL&quot; Pass，紧接着定义了&quot;GAUSSIAN_BLUR_HORIZONTAL&quot; Pass，那么当这个Shader被应用到模型上时，Unity就会首先渲染垂直模糊Pass，然后是水平模糊Pass。</p>
-<h3 id="Pass的执行顺序和影响">Pass的执行顺序和影响</h3>
-<p>在这种情况下，每个Pass的执行都是基于前一个Pass的输出结果。这意味着：</p>
+<p>当你将包含多个Pass的Shader直接应用到模型上时，Shader中的Pass将按照它们在Shader文件中定义的顺序执行。Unity渲染引擎会自动按照这个顺序来渲染每个Pass。这意味着，如果你的Shader文件中首先定义了”GAUSSIAN_BLUR_VERTICAL” Pass，紧接着定义了”GAUSSIAN_BLUR_HORIZONTAL” Pass，那么当这个Shader被应用到模型上时，Unity就会首先渲染垂直模糊Pass，然后是水平模糊Pass。</p>
+<h3 id="Pass的执行顺序和影响"><a href="#Pass的执行顺序和影响" class="headerlink" title="Pass的执行顺序和影响"></a>Pass的执行顺序和影响</h3><p>在这种情况下，每个Pass的执行都是基于前一个Pass的输出结果。这意味着：</p>
 <ol>
-<li>
-<p><strong>第一个Pass（垂直模糊）</strong>：将首先执行，它会接收原始模型的纹理（或者是前一个渲染阶段的输出），并应用垂直模糊效果。这个Pass的输出将成为下一个Pass的输入。</p>
+<li><p><strong>第一个Pass（垂直模糊）</strong>：将首先执行，它会接收原始模型的纹理（或者是前一个渲染阶段的输出），并应用垂直模糊效果。这个Pass的输出将成为下一个Pass的输入。</p>
 </li>
-<li>
-<p><strong>第二个Pass（水平模糊）</strong>：接着执行，它会接收第一个Pass的输出，并在此基础上应用水平模糊效果。这样，最终的渲染结果是先经过垂直模糊，再经过水平模糊的纹理。</p>
+<li><p><strong>第二个Pass（水平模糊）</strong>：接着执行，它会接收第一个Pass的输出，并在此基础上应用水平模糊效果。这样，最终的渲染结果是先经过垂直模糊，再经过水平模糊的纹理。</p>
 </li>
 </ol>
-<h3 id="注意点">注意点</h3>
-<ul>
-<li>
-<p><strong>依赖关系</strong>：在这种情况下，两个Pass之间存在明确的依赖关系，即第二个Pass依赖于第一个Pass的输出。这与在<code>OnRenderImage</code>中通过<code>Graphics.Blit</code>显式控制执行顺序的情况相似。</p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ul>
+<li><p><strong>依赖关系</strong>：在这种情况下，两个Pass之间存在明确的依赖关系，即第二个Pass依赖于第一个Pass的输出。这与在<code>OnRenderImage</code>中通过<code>Graphics.Blit</code>显式控制执行顺序的情况相似。</p>
 </li>
-<li>
-<p><strong>用途限制</strong>：值得注意的是，这种将Shader直接应用到模型上的方法并不适用于所有类型的后处理效果。对于某些效果，如屏幕空间的后处理效果（包括高斯模糊），通常需要在全屏Quad上执行，而不是模型的表面。因此，直接将这种Shader应用到模型上可能不会产生预期的视觉效果，因为它们是为处理整个屏幕图像而设计的。</p>
+<li><p><strong>用途限制</strong>：值得注意的是，这种将Shader直接应用到模型上的方法并不适用于所有类型的后处理效果。对于某些效果，如屏幕空间的后处理效果（包括高斯模糊），通常需要在全屏Quad上执行，而不是模型的表面。因此，直接将这种Shader应用到模型上可能不会产生预期的视觉效果，因为它们是为处理整个屏幕图像而设计的。</p>
 </li>
-<li>
-<p><strong>渲染队列</strong>：Shader中的Pass执行顺序也受到渲染队列设置的影响。Shader语言允许你指定渲染队列（通过<code>Queue</code>标签），这可以用来控制Shader的渲染顺序（相对于其他Shader）。不过，对于Shader内部的Pass顺序，它们总是按照在文件中出现的顺序执行。</p>
+<li><p><strong>渲染队列</strong>：Shader中的Pass执行顺序也受到渲染队列设置的影响。Shader语言允许你指定渲染队列（通过<code>Queue</code>标签），这可以用来控制Shader的渲染顺序（相对于其他Shader）。不过，对于Shader内部的Pass顺序，它们总是按照在文件中出现的顺序执行。</p>
 </li>
 </ul>
 <p>总的来说，当Shader直接应用于模型时，其内部的Pass将按照它们在Shader文件中的定义顺序执行。这种执行方式适用于那些设计为直接在模型上产生效果的Shader，但可能不适用于需要在屏幕空间执行的后处理效果。</p>
 <p>反正不管怎么说 如果我不干预Pass的执行顺序，让它们默认顺序执行， 我把两个Pass的位置对掉对最终显示的渲染结果是没有影响的吧？ 不只是这个高斯模糊的Shader 任何其他的Shader 是不是都是这样的？</p>
 <p>对于你提到的高斯模糊Shader，以及一般情况下的Shader，如果不明确控制Pass的执行顺序，让它们按照在Shader文件中定义的顺序执行，那么改变Pass的位置确实会影响最终的渲染结果。这是因为在多数情况下，Shader中的不同Pass之间是有依赖关系的，特别是在处理像高斯模糊这样需要多步骤处理的效果时。</p>
-<h3 id="高斯模糊Shader的特例">高斯模糊Shader的特例</h3>
-<p>在你的高斯模糊Shader例子中，Pass的执行顺序对最终效果至关重要：</p>
+<h3 id="高斯模糊Shader的特例"><a href="#高斯模糊Shader的特例" class="headerlink" title="高斯模糊Shader的特例"></a>高斯模糊Shader的特例</h3><p>在你的高斯模糊Shader例子中，Pass的执行顺序对最终效果至关重要：</p>
 <ul>
-<li>
-<p>如果首先执行&quot;GAUSSIAN_BLUR_HORIZONTAL&quot;（水平模糊）Pass，然后执行&quot;GAUSSIAN_BLUR_VERTICAL&quot;（垂直模糊）Pass，这会先对图像进行水平方向上的模糊，然后再进行垂直方向上的模糊。</p>
+<li><p>如果首先执行”GAUSSIAN_BLUR_HORIZONTAL”（水平模糊）Pass，然后执行”GAUSSIAN_BLUR_VERTICAL”（垂直模糊）Pass，这会先对图像进行水平方向上的模糊，然后再进行垂直方向上的模糊。</p>
 </li>
-<li>
-<p>如果你将这两个Pass的位置对调，首先执行垂直模糊，然后是水平模糊，这改变了模糊处理的顺序。虽然最终效果仍然是图像被模糊，但由于模糊是在不同方向上分别进行的，改变顺序可能会导致视觉上的细微差异。</p>
+<li><p>如果你将这两个Pass的位置对调，首先执行垂直模糊，然后是水平模糊，这改变了模糊处理的顺序。虽然最终效果仍然是图像被模糊，但由于模糊是在不同方向上分别进行的，改变顺序可能会导致视觉上的细微差异。</p>
 </li>
 </ul>
-<h3 id="通用Shader的情况">通用Shader的情况</h3>
-<p>对于其他Shader，是否可以无视Pass的顺序，这完全取决于这些Pass之间的依赖关系以及它们是如何设计的。</p>
+<h3 id="通用Shader的情况"><a href="#通用Shader的情况" class="headerlink" title="通用Shader的情况"></a>通用Shader的情况</h3><p>对于其他Shader，是否可以无视Pass的顺序，这完全取决于这些Pass之间的依赖关系以及它们是如何设计的。</p>
 <ul>
-<li>
-<p><strong>无依赖的Pass</strong>：如果一个Shader中的多个Pass之间没有明确的依赖关系（即，每个Pass的输出不作为另一个Pass的输入），那么改变这些Pass的顺序可能不会影响最终的渲染结果。</p>
+<li><p><strong>无依赖的Pass</strong>：如果一个Shader中的多个Pass之间没有明确的依赖关系（即，每个Pass的输出不作为另一个Pass的输入），那么改变这些Pass的顺序可能不会影响最终的渲染结果。</p>
 </li>
-<li>
-<p><strong>有依赖的Pass</strong>：对于那些Pass之间有明确依赖关系的Shader（例如，第二个Pass需要使用第一个Pass的输出），改变Pass的顺序会影响最终的渲染结果。</p>
+<li><p><strong>有依赖的Pass</strong>：对于那些Pass之间有明确依赖关系的Shader（例如，第二个Pass需要使用第一个Pass的输出），改变Pass的顺序会影响最终的渲染结果。</p>
 </li>
 </ul>
-<h3 id="结论">结论</h3>
-<p>因此，不能一概而论地说改变Pass的顺序对所有Shader都没有影响。你需要根据每个Shader的具体设计和Pass之间的依赖关系来判断。对于高斯模糊这样的效果，由于其处理流程的特性（先垂直后水平或先水平后垂直），改变Pass的顺序确实会影响到最终的渲染效果。在设计Shader时，理解和正确处理Pass之间的依赖关系是非常重要的。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>因此，不能一概而论地说改变Pass的顺序对所有Shader都没有影响。你需要根据每个Shader的具体设计和Pass之间的依赖关系来判断。对于高斯模糊这样的效果，由于其处理流程的特性（先垂直后水平或先水平后垂直），改变Pass的顺序确实会影响到最终的渲染效果。在设计Shader时，理解和正确处理Pass之间的依赖关系是非常重要的。</p>
 <p>也就是说 如果不使用RenderTexture就不会造成Pass之间的依赖对吧？那么Pass的顺序就不重要了对吧？</p>
 <p>是的，如果在Shader中的不同Pass之间没有使用RenderTexture（或类似机制）来传递数据，那么这些Pass之间就可以认为是没有直接的依赖关系。在这种情况下，每个Pass都是独立于其他Pass的，只是按顺序执行，而不是基于前一个Pass的输出作为输入。这意味着，如果没有数据依赖，改变Pass的顺序理论上不会影响最终的渲染结果。</p>
 <p>然而，即使在不使用RenderTexture的情况下，Pass的顺序有时仍然重要，原因包括：</p>
 <ol>
-<li>
-<p><strong>状态依赖</strong>：某些渲染状态设置（如混合模式、深度测试等）可能在连续的Pass之间产生影响。例如，如果第一个Pass启用了深度写入，而第二个Pass假设深度写入是禁用的，这种状态的变化需要注意。</p>
+<li><p><strong>状态依赖</strong>：某些渲染状态设置（如混合模式、深度测试等）可能在连续的Pass之间产生影响。例如，如果第一个Pass启用了深度写入，而第二个Pass假设深度写入是禁用的，这种状态的变化需要注意。</p>
 </li>
-<li>
-<p><strong>性能优化</strong>：即使不考虑直接的数据依赖，某些Pass的顺序可能出于性能优化的考虑。例如，可能先执行开销较小的Pass来早期丢弃某些像素，从而减少后续Pass的计算量。</p>
+<li><p><strong>性能优化</strong>：即使不考虑直接的数据依赖，某些Pass的顺序可能出于性能优化的考虑。例如，可能先执行开销较小的Pass来早期丢弃某些像素，从而减少后续Pass的计算量。</p>
 </li>
-<li>
-<p><strong>逻辑依赖</strong>：在某些特定的渲染流程中，即使没有直接的数据传递，Pass的逻辑执行顺序也可能对最终效果有影响。比如，在实现某些特效时，可能需要先渲染背景，再渲染前景，即使它们之间没有数据依赖。</p>
+<li><p><strong>逻辑依赖</strong>：在某些特定的渲染流程中，即使没有直接的数据传递，Pass的逻辑执行顺序也可能对最终效果有影响。比如，在实现某些特效时，可能需要先渲染背景，再渲染前景，即使它们之间没有数据依赖。</p>
 </li>
 </ol>
-<h3 id="结论-2">结论</h3>
-<p>总的来说，如果Shader中的Pass之间没有通过RenderTexture（或其他机制）直接传递数据，它们之间就没有直接的依赖关系，从而Pass的顺序在大多数情况下对最终效果的影响不大。但是，仍然需要考虑渲染状态、性能优化以及特定逻辑顺序等因素。在设计Shader时，理解和规划每个Pass的作用和顺序是非常重要的，即使它们之间没有直接的数据依赖。<br>
-比如我们在渲染透明物体的时候也会用到两个Pass，先渲染背面，然后在渲染前面。如果我们更改了渲染前后的顺序，那么深度信息可以会发生变化，导致最终的渲染效果不正确。</p>
+<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><p>总的来说，如果Shader中的Pass之间没有通过RenderTexture（或其他机制）直接传递数据，它们之间就没有直接的依赖关系，从而Pass的顺序在大多数情况下对最终效果的影响不大。但是，仍然需要考虑渲染状态、性能优化以及特定逻辑顺序等因素。在设计Shader时，理解和规划每个Pass的作用和顺序是非常重要的，即使它们之间没有直接的数据依赖。<br>比如我们在渲染透明物体的时候也会用到两个Pass，先渲染背面，然后在渲染前面。如果我们更改了渲染前后的顺序，那么深度信息可以会发生变化，导致最终的渲染效果不正确。</p>
 <p>最后一个问题，当我的场景中有多个Shader的时候，以及某些Shader中有多个Pass的时候，我是怎么确定zhexieShader的执行顺序的？</p>
 <p>当场景中使用了多个Shader，并且某些Shader包含多个Pass时，确定这些Shader（及其Pass）的执行顺序变得复杂但至关重要。这个执行顺序是通过多种机制和策略来管理的，包括渲染队列、透明度处理、以及手动控制。</p>
-<h3 id="渲染队列">渲染队列</h3>
-<p>大多数渲染引擎（如Unity）使用<strong>渲染队列</strong>来管理Shader的执行顺序。渲染队列是一个排序机制，用于决定哪个物体（及其Shader）先渲染，哪个后渲染。Shader通常会被分配到特定的队列中（例如，在Unity中，有Background、Geometry、AlphaTest、Transparent等队列），这个分配可以基于Shader的透明度、是否需要深度测试等因素。</p>
+<h3 id="渲染队列"><a href="#渲染队列" class="headerlink" title="渲染队列"></a>渲染队列</h3><p>大多数渲染引擎（如Unity）使用<strong>渲染队列</strong>来管理Shader的执行顺序。渲染队列是一个排序机制，用于决定哪个物体（及其Shader）先渲染，哪个后渲染。Shader通常会被分配到特定的队列中（例如，在Unity中，有Background、Geometry、AlphaTest、Transparent等队列），这个分配可以基于Shader的透明度、是否需要深度测试等因素。</p>
 <ul>
 <li><strong>不透明物体</strong>：通常先渲染，因为它们不需要复杂的混合操作。这些物体的Shader通常被放在“Geometry”队列。</li>
 <li><strong>半透明物体</strong>：通常后渲染，因为透明度需要混合，并且正确的混合需要知道背后的像素。这些物体的Shader通常被放在“Transparent”队列。</li>
 </ul>
-<h3 id="Shader中的Pass顺序">Shader中的Pass顺序</h3>
-<p>在单个Shader中，Pass的顺序通常是由Shader的编写者明确指定的。在Shader代码中，Pass会按照它们被列出的顺序执行。这意味着，Shader的作者需要根据需要的效果来安排Pass的顺序。</p>
-<h3 id="手动控制和优化">手动控制和优化</h3>
-<p>在某些情况下，开发者可能需要更细致地控制渲染顺序，这时就需要一些额外的手段：</p>
+<h3 id="Shader中的Pass顺序"><a href="#Shader中的Pass顺序" class="headerlink" title="Shader中的Pass顺序"></a>Shader中的Pass顺序</h3><p>在单个Shader中，Pass的顺序通常是由Shader的编写者明确指定的。在Shader代码中，Pass会按照它们被列出的顺序执行。这意味着，Shader的作者需要根据需要的效果来安排Pass的顺序。</p>
+<h3 id="手动控制和优化"><a href="#手动控制和优化" class="headerlink" title="手动控制和优化"></a>手动控制和优化</h3><p>在某些情况下，开发者可能需要更细致地控制渲染顺序，这时就需要一些额外的手段：</p>
 <ul>
 <li><strong>标签和排序层</strong>：在许多引擎中，你可以为物体分配标签或将它们放在不同的排序层中。这些机制可以帮助引擎决定渲染顺序。</li>
 <li><strong>脚本控制</strong>：在某些引擎中，你可以使用脚本在运行时动态调整物体的渲染顺序或修改它们的渲染队列。</li>
 <li><strong>深度和透明度管理</strong>：对于需要特殊处理的场景（如复杂的透明度效果），可能需要手动调整深度缓冲和透明度排序策略，以确保正确的渲染效果。</li>
 </ul>
-<h3 id="结论-3">结论</h3>
-<p>确定多个Shader及其Pass的执行顺序是一个由渲染队列、Shader设计和可能的手动控制共同决定的过程。理解并有效利用这些机制对于实现预期的渲染效果和优化渲染性能至关重要。在实际开发中，通常需要根据具体的项目需求和渲染引擎的特性来制定最合适的策略。</p>
-<h1>UIGradient组件解读</h1>
-<img src="/posts/c41139c9/image.png" class="">
-<h1>CanvasScaler的理解</h1>
-<p><a target="_blank" rel="noopener" href="https://blog.lujun.co/2019/08/27/unity_canvas_components/">https://blog.lujun.co/2019/08/27/unity_canvas_components/</a></p>
+<h3 id="结论-2"><a href="#结论-2" class="headerlink" title="结论"></a>结论</h3><p>确定多个Shader及其Pass的执行顺序是一个由渲染队列、Shader设计和可能的手动控制共同决定的过程。理解并有效利用这些机制对于实现预期的渲染效果和优化渲染性能至关重要。在实际开发中，通常需要根据具体的项目需求和渲染引擎的特性来制定最合适的策略。</p>
+<h1 id="UIGradient组件解读"><a href="#UIGradient组件解读" class="headerlink" title="UIGradient组件解读"></a>UIGradient组件解读</h1><img src="/posts/c41139c9/image.png" class="">
+<h1 id="CanvasScaler的理解"><a href="#CanvasScaler的理解" class="headerlink" title="CanvasScaler的理解"></a>CanvasScaler的理解</h1><p><a target="_blank" rel="noopener" href="https://blog.lujun.co/2019/08/27/unity_canvas_components/">https://blog.lujun.co/2019/08/27/unity_canvas_components/</a></p>
 <p>遇到 <code>System.IO.DirectoryNotFoundException</code> 错误表明尝试访问的目录路径中的某部分不存在。这个问题通常发生在尝试创建文件或目录、读取文件、或者执行其他需要访问文件系统的操作时。针对这个问题，有几个可能的解决方案：</p>
-<h3 id="1-确认路径的正确性">1. 确认路径的正确性</h3>
-<p>首先，确认你尝试访问的路径是正确的。检查路径中的每一部分，确保没有拼写错误或者路径错误。路径应该完全匹配到你想要访问的位置。</p>
-<h3 id="2-确认目录结构存在">2. 确认目录结构存在</h3>
-<p>在尝试创建文件之前，确保文件所在的目录结构已经存在。如果目录结构中的任何部分不存在，尝试创建文件时就会引发 <code>DirectoryNotFoundException</code>。</p>
-<h3 id="3-创建缺失的目录">3. 创建缺失的目录</h3>
-<p>如果你的应用程序需要在特定的目录中创建文件，但那些目录可能不存在，你应该首先检查这些目录是否存在，如果不存在，则创建它们。可以使用以下代码段来实现这一点：</p>
+<h3 id="1-确认路径的正确性"><a href="#1-确认路径的正确性" class="headerlink" title="1. 确认路径的正确性"></a>1. 确认路径的正确性</h3><p>首先，确认你尝试访问的路径是正确的。检查路径中的每一部分，确保没有拼写错误或者路径错误。路径应该完全匹配到你想要访问的位置。</p>
+<h3 id="2-确认目录结构存在"><a href="#2-确认目录结构存在" class="headerlink" title="2. 确认目录结构存在"></a>2. 确认目录结构存在</h3><p>在尝试创建文件之前，确保文件所在的目录结构已经存在。如果目录结构中的任何部分不存在，尝试创建文件时就会引发 <code>DirectoryNotFoundException</code>。</p>
+<h3 id="3-创建缺失的目录"><a href="#3-创建缺失的目录" class="headerlink" title="3. 创建缺失的目录"></a>3. 创建缺失的目录</h3><p>如果你的应用程序需要在特定的目录中创建文件，但那些目录可能不存在，你应该首先检查这些目录是否存在，如果不存在，则创建它们。可以使用以下代码段来实现这一点：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> directoryPath = <span class="string">@&quot;/Users/mac/Desktop/TetrisBlock/TetrisBlock-Unity/Assets/FontProcessLog/RedundantFontInfo&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> filePath = Path.Combine(directoryPath, <span class="string">&quot;SFUIDisplay-Bold.txt&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确保目录存在</span></span><br><span class="line"><span class="keyword">if</span> (!Directory.Exists(directoryPath))</span><br><span class="line">&#123;</span><br><span class="line">    Directory.CreateDirectory(directoryPath);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在可以安全地创建文件了</span></span><br><span class="line">File.WriteAllText(filePath, <span class="string">&quot;Your content here&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>这段代码首先检查目标目录是否存在，如果不存在，则使用 <code>Directory.CreateDirectory</code> 方法创建它。这样可以确保在尝试写入文件之前，文件的目标目录已经存在，从而避免 <code>DirectoryNotFoundException</code>。</p>
-<h3 id="4-使用绝对路径而非相对路径">4. 使用绝对路径而非相对路径</h3>
-<p>确保你使用的是绝对路径而非相对路径，因为相对路径可能会因为当前工作目录的不同而导致路径解析错误。在你的例子中，你已经使用了绝对路径，这是一个好的做法。</p>
-<h3 id="5-检查权限问题">5. 检查权限问题</h3>
-<p>确保你的应用程序或者你的用户账户有权限访问指定的路径。在某些情况下，权限限制可能会导致无法访问路径。</p>
+<h3 id="4-使用绝对路径而非相对路径"><a href="#4-使用绝对路径而非相对路径" class="headerlink" title="4. 使用绝对路径而非相对路径"></a>4. 使用绝对路径而非相对路径</h3><p>确保你使用的是绝对路径而非相对路径，因为相对路径可能会因为当前工作目录的不同而导致路径解析错误。在你的例子中，你已经使用了绝对路径，这是一个好的做法。</p>
+<h3 id="5-检查权限问题"><a href="#5-检查权限问题" class="headerlink" title="5. 检查权限问题"></a>5. 检查权限问题</h3><p>确保你的应用程序或者你的用户账户有权限访问指定的路径。在某些情况下，权限限制可能会导致无法访问路径。</p>
 <p>按照这些步骤操作，应该能够解决你遇到的 <code>System.IO.DirectoryNotFoundException</code> 问题。</p>
 <p><strong>Path File Directory配合使用</strong></p>
 <p>AssetDataBase接口使用遇到的坑</p>
-<p>AssetDatabase.Refresh<br>
-AssetDatabase.Refresh方法用于刷新Unity编辑器的资产数据库。这个方法会同步磁盘和Unity编辑器之间的资产状态，包括添加、删除、修改文件等。如果你在Unity编辑器外部（比如在文件浏览器中或通过脚本）对项目中的文件进行了更改，使用AssetDatabase.Refresh可以让Unity编辑器识别这些更改。</p>
-<p>AssetDatabase.SaveAssets<br>
-AssetDatabase.SaveAssets方法用于将所有未保存的资产更改持久化到磁盘。这包括对预制体、场景、材质等任何在编辑器中做出的更改。如果你在脚本中修改了任何资产（比如更改了一个材质的颜色，或者添加了一个新的游戏对象到一个预制体中），并且想要确保这些更改被保存，就需要调用这个方法。</p>
+<p>AssetDatabase.Refresh<br>AssetDatabase.Refresh方法用于刷新Unity编辑器的资产数据库。这个方法会同步磁盘和Unity编辑器之间的资产状态，包括添加、删除、修改文件等。如果你在Unity编辑器外部（比如在文件浏览器中或通过脚本）对项目中的文件进行了更改，使用AssetDatabase.Refresh可以让Unity编辑器识别这些更改。</p>
+<p>AssetDatabase.SaveAssets<br>AssetDatabase.SaveAssets方法用于将所有未保存的资产更改持久化到磁盘。这包括对预制体、场景、材质等任何在编辑器中做出的更改。如果你在脚本中修改了任何资产（比如更改了一个材质的颜色，或者添加了一个新的游戏对象到一个预制体中），并且想要确保这些更改被保存，就需要调用这个方法。</p>
 <ol>
 <li>脚本中修改完资源里面的属性的时候，调用一次AssetDataBase.Save() 必须要在AssetDataBase.Load()方法之间调用，不然修改就白做了</li>
 <li>File接口相关的操作Directory相关的操作后必须后面跟一个AssetDataBase.Refresh调用</li>
 <li>GetComponentsInChildren方法中要一个参数，这个参数的作用是是否包括处于非激活状态的节点，默认是false</li>
 </ol>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/c41139c9/">https://soincredible.github.io/posts/c41139c9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://www.notion.so/images/page-cover/met_klimt_1912.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/b2c547d7/"><img class="prev-cover" src="https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1608.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">UnityShader入门精要笔记（十三）——使用深度和法线纹理</div></div></a></div><div class="next-post pull-right"><a href="/posts/a07e7969/"><img class="next-cover" src="https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1608.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UnityShader入门精要笔记（十二）——屏幕后处理效果</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">我的肩上是风,风上是闪耀的星辰</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">粒子缩放的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">CanvasScaler的作用机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">先缩放再设置位置和先设置位置再缩放的区别有区别么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">对多个Pass的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Graphics-Blit-%E5%92%8C-Shader"><span class="toc-number">4.0.1.</span> <span class="toc-text">Graphics.Blit 和 Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%AF%B9RenderTexture%E4%BD%BF%E7%94%A8Shader"><span class="toc-number">4.0.2.</span> <span class="toc-text">为什么可以对RenderTexture使用Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.0.3.</span> <span class="toc-text">实际应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9AOnRenderImage-%E5%92%8C-GPU-%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA"><span class="toc-number">4.0.4.</span> <span class="toc-text">第一个问题：OnRenderImage 和 GPU 执行时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9ASubShader%E4%B8%AD%E7%9A%84Pass%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">4.0.5.</span> <span class="toc-text">第二个问题：SubShader中的Pass执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%BD%B1%E5%93%8D"><span class="toc-number">4.0.6.</span> <span class="toc-text">Pass的执行顺序和影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">4.0.7.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8AShader%E7%9A%84%E7%89%B9%E4%BE%8B"><span class="toc-number">4.0.8.</span> <span class="toc-text">高斯模糊Shader的特例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8Shader%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">4.0.9.</span> <span class="toc-text">通用Shader的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.0.10.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2"><span class="toc-number">4.0.11.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E9%98%9F%E5%88%97"><span class="toc-number">4.0.12.</span> <span class="toc-text">渲染队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shader%E4%B8%AD%E7%9A%84Pass%E9%A1%BA%E5%BA%8F"><span class="toc-number">4.0.13.</span> <span class="toc-text">Shader中的Pass顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%92%8C%E4%BC%98%E5%8C%96"><span class="toc-number">4.0.14.</span> <span class="toc-text">手动控制和优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3"><span class="toc-number">4.0.15.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">UIGradient组件解读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">CanvasScaler的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A1%AE%E8%AE%A4%E8%B7%AF%E5%BE%84%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">6.0.1.</span> <span class="toc-text">1. 确认路径的正确性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AE%E8%AE%A4%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%AD%98%E5%9C%A8"><span class="toc-number">6.0.2.</span> <span class="toc-text">2. 确认目录结构存在</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="toc-number">6.0.3.</span> <span class="toc-text">3. 创建缺失的目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E8%80%8C%E9%9D%9E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">6.0.4.</span> <span class="toc-text">4. 使用绝对路径而非相对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A3%80%E6%9F%A5%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="toc-number">6.0.5.</span> <span class="toc-text">5. 检查权限问题</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1987e04c/" title="2024-09问题记录"><img src="https://www.notion.so/images/page-cover/met_bruegel_1565.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2024-09问题记录"/></a><div class="content"><a class="title" href="/posts/1987e04c/" title="2024-09问题记录">2024-09问题记录</a><time datetime="2024-09-23T15:57:26.000Z" title="发表于 2024-09-23 23:57:26">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e2eb769/" title="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础"><img src="https://www.notion.so/images/page-cover/woodcuts_6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础"/></a><div class="content"><a class="title" href="/posts/9e2eb769/" title="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础">UnityShader入门精要笔记-（四）-学习Shader需要的数学基础</a><time datetime="2024-09-22T01:46:31.000Z" title="发表于 2024-09-22 09:46:31">2024-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bc50bf5f/" title="UnityShader入门精要笔记-（零）-疑惑汇总"><img src="https://www.notion.so/images/page-cover/woodcuts_7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityShader入门精要笔记-（零）-疑惑汇总"/></a><div class="content"><a class="title" href="/posts/bc50bf5f/" title="UnityShader入门精要笔记-（零）-疑惑汇总">UnityShader入门精要笔记-（零）-疑惑汇总</a><time datetime="2024-09-13T12:09:52.000Z" title="发表于 2024-09-13 20:09:52">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb0ca922/" title="游戏开发中的设计模式(零) —— 准备工作"><img src="https://www.notion.so/images/page-cover/met_vincent_van_gogh_oleanders.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="游戏开发中的设计模式(零) —— 准备工作"/></a><div class="content"><a class="title" href="/posts/eb0ca922/" title="游戏开发中的设计模式(零) —— 准备工作">游戏开发中的设计模式(零) —— 准备工作</a><time datetime="2024-09-12T16:38:54.000Z" title="发表于 2024-09-13 00:38:54">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eeec06d0/" title="Mac终端优化记录"><img src="https://www.notion.so/images/page-cover/woodcuts_sekka_3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mac终端优化记录"/></a><div class="content"><a class="title" href="/posts/eeec06d0/" title="Mac终端优化记录">Mac终端优化记录</a><time datetime="2024-09-11T10:08:37.000Z" title="发表于 2024-09-11 18:08:37">2024-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/c41139c9/">https://soincredible.github.io/posts/c41139c9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://www.notion.so/images/page-cover/met_klimt_1912.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/b2c547d7/"><img class="prev-cover" src="https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1608.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">UnityShader入门精要笔记（十三）——使用深度和法线纹理</div></div></a></div><div class="next-post pull-right"><a href="/posts/a07e7969/"><img class="next-cover" src="https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1608.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UnityShader入门精要笔记（十二）——屏幕后处理效果</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">我的肩上是风,风上是闪耀的星辰</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B2%92%E5%AD%90%E7%BC%A9%E6%94%BE%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">粒子缩放的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CanvasScaler%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">CanvasScaler的作用机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E7%BC%A9%E6%94%BE%E5%86%8D%E8%AE%BE%E7%BD%AE%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%85%88%E8%AE%BE%E7%BD%AE%E4%BD%8D%E7%BD%AE%E5%86%8D%E7%BC%A9%E6%94%BE%E7%9A%84%E5%8C%BA%E5%88%AB%E6%9C%89%E5%8C%BA%E5%88%AB%E4%B9%88"><span class="toc-number">3.</span> <span class="toc-text">先缩放再设置位置和先设置位置再缩放的区别有区别么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E5%A4%9A%E4%B8%AAPass%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">对多个Pass的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Graphics-Blit-%E5%92%8C-Shader"><span class="toc-number">4.0.1.</span> <span class="toc-text">Graphics.Blit 和 Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%AF%B9RenderTexture%E4%BD%BF%E7%94%A8Shader"><span class="toc-number">4.0.2.</span> <span class="toc-text">为什么可以对RenderTexture使用Shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.0.3.</span> <span class="toc-text">实际应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9AOnRenderImage-%E5%92%8C-GPU-%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA"><span class="toc-number">4.0.4.</span> <span class="toc-text">第一个问题：OnRenderImage 和 GPU 执行时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9ASubShader%E4%B8%AD%E7%9A%84Pass%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">4.0.5.</span> <span class="toc-text">第二个问题：SubShader中的Pass执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%BD%B1%E5%93%8D"><span class="toc-number">4.0.6.</span> <span class="toc-text">Pass的执行顺序和影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">4.0.7.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E6%A8%A1%E7%B3%8AShader%E7%9A%84%E7%89%B9%E4%BE%8B"><span class="toc-number">4.0.8.</span> <span class="toc-text">高斯模糊Shader的特例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8Shader%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">4.0.9.</span> <span class="toc-text">通用Shader的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.0.10.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1"><span class="toc-number">4.0.11.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E9%98%9F%E5%88%97"><span class="toc-number">4.0.12.</span> <span class="toc-text">渲染队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shader%E4%B8%AD%E7%9A%84Pass%E9%A1%BA%E5%BA%8F"><span class="toc-number">4.0.13.</span> <span class="toc-text">Shader中的Pass顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%92%8C%E4%BC%98%E5%8C%96"><span class="toc-number">4.0.14.</span> <span class="toc-text">手动控制和优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2"><span class="toc-number">4.0.15.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UIGradient%E7%BB%84%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="toc-number">5.</span> <span class="toc-text">UIGradient组件解读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CanvasScaler%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">CanvasScaler的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A1%AE%E8%AE%A4%E8%B7%AF%E5%BE%84%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">6.0.1.</span> <span class="toc-text">1. 确认路径的正确性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AE%E8%AE%A4%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%AD%98%E5%9C%A8"><span class="toc-number">6.0.2.</span> <span class="toc-text">2. 确认目录结构存在</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="toc-number">6.0.3.</span> <span class="toc-text">3. 创建缺失的目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E8%80%8C%E9%9D%9E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">6.0.4.</span> <span class="toc-text">4. 使用绝对路径而非相对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A3%80%E6%9F%A5%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="toc-number">6.0.5.</span> <span class="toc-text">5. 检查权限问题</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1987e04c/" title="2024-09问题记录"><img src="https://www.notion.so/images/page-cover/met_bruegel_1565.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2024-09问题记录"/></a><div class="content"><a class="title" href="/posts/1987e04c/" title="2024-09问题记录">2024-09问题记录</a><time datetime="2024-09-23T15:57:26.000Z" title="发表于 2024-09-23 23:57:26">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e2eb769/" title="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础"><img src="https://www.notion.so/images/page-cover/woodcuts_6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础"/></a><div class="content"><a class="title" href="/posts/9e2eb769/" title="UnityShader入门精要笔记-（四）-学习Shader需要的数学基础">UnityShader入门精要笔记-（四）-学习Shader需要的数学基础</a><time datetime="2024-09-22T01:46:31.000Z" title="发表于 2024-09-22 09:46:31">2024-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bc50bf5f/" title="UnityShader入门精要笔记-（零）-疑惑汇总"><img src="https://www.notion.so/images/page-cover/woodcuts_7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityShader入门精要笔记-（零）-疑惑汇总"/></a><div class="content"><a class="title" href="/posts/bc50bf5f/" title="UnityShader入门精要笔记-（零）-疑惑汇总">UnityShader入门精要笔记-（零）-疑惑汇总</a><time datetime="2024-09-13T12:09:52.000Z" title="发表于 2024-09-13 20:09:52">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb0ca922/" title="游戏开发中的设计模式(零) —— 准备工作"><img src="https://www.notion.so/images/page-cover/met_vincent_van_gogh_oleanders.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="游戏开发中的设计模式(零) —— 准备工作"/></a><div class="content"><a class="title" href="/posts/eb0ca922/" title="游戏开发中的设计模式(零) —— 准备工作">游戏开发中的设计模式(零) —— 准备工作</a><time datetime="2024-09-12T16:38:54.000Z" title="发表于 2024-09-13 00:38:54">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eeec06d0/" title="Mac终端优化记录"><img src="https://www.notion.so/images/page-cover/woodcuts_sekka_3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mac终端优化记录"/></a><div class="content"><a class="title" href="/posts/eeec06d0/" title="Mac终端优化记录">Mac终端优化记录</a><time datetime="2024-09-11T10:08:37.000Z" title="发表于 2024-09-11 18:08:37">2024-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
@@ -621,30 +563,6 @@ document.addEventListener('pjax:error', (e) => {
     pjax.loadUrl('/404.html')
   }
 })</script></div><!-- hexo injector body_end start --><script data-pjax>
-  function butterfly_footer_beautify_injector_config(){
-    var parent_div_git = document.getElementById('footer-wrap');
-    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:120px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" title="本站已在鲁进行备案"><img src="/img/备案.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
-    console.log('已挂载butterfly_footer_beautify')
-    parent_div_git.insertAdjacentHTML("beforeend",item_html)
-    }
-  var elist = 'null'.split(',');
-  var cpage = location.pathname;
-  var epage = 'all';
-  var flag = 0;
-
-  for (var i=0;i<elist.length;i++){
-    if (cpage.includes(elist[i])){
-      flag++;
-    }
-  }
-
-  if ((epage ==='all')&&(flag == 0)){
-    butterfly_footer_beautify_injector_config();
-  }
-  else if (epage === cpage){
-    butterfly_footer_beautify_injector_config();
-  }
-  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script data-pjax>
   function butterfly_clock_anzhiyu_injector_config(){
     var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
     var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
@@ -675,4 +593,28 @@ document.addEventListener('pjax:error', (e) => {
   else if (epage === cpage){
     butterfly_clock_anzhiyu_injector_config();
   }
-  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script async src="/js/ali_font.js"></script><!-- hexo injector body_end end --></body></html>
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:120px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" title="本站已在鲁进行备案"><img src="/img/备案.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script async src="/js/ali_font.js"></script><!-- hexo injector body_end end --></body></html>
