@@ -75,9 +75,21 @@
       <link href="/posts/eb0ca922/"/>
       <url>/posts/eb0ca922/</url>
       
-        <content type="html"><![CDATA[<h1>场景搭建</h1><img src="/posts/eb0ca922/image22.png" class=""><p>在开始进入正题之前，需要先搭建一个可以供角色站立、移动、跳跃并且还有边界的测试场景。笔者希望搭建的场景要遵循一些规范：</p><ol><li>统一所有模型资源的单位长度，极特殊情况，所有模型的缩放都设置为1</li><li>将场景中的地形预制体化，比如墙、地面、台阶等</li><li>…</li></ol><p>下面说一个可以提高我们搭建场景效率的工具：在Unity的Scene窗口中，点击下图位置的图标可以设置物体移动的固定步长。<a href="https://jingyan.baidu.com/article/1612d500968440e20e1eeebd.html">参考文章在这</a>，按住<code>Control/Command</code>键拖拽Scene中选中物体的Object坐标系的坐标轴，就可以以固定的步长移动物体了。按住<code>V</code>键拖拽坐标轴就可以让选中物体的选中顶点吸附到另一个场景中的物体上。</p><img src="/posts/eb0ca922/image.png" class=""><h2 id="创建地形">创建地形</h2><p>Unity中自带的用来表示平面的物体是<code>Plane</code>模型，用来表示墙面的物体是<code>Quad</code>模型，在场景中创建Plane模型，查看这个模型的详细信息，你会发现这个模型的尺寸是10x10的(此处不考虑模型的厚度)，也就是长宽各为10个单位长度；而Quad模型则是1x1的，长宽个1个单位长度。为了让地形看起来不那么单调，我们使用Unity内置的一张贴图来装饰我们的地形，我们会为Plane和Quad各自生成一个材质，这两个材质的区别只有上面的Tilling参数，一个设置成10，而另一个设置为1。这样的设置主要和这两种模型的尺寸有关系。然后将材质分别赋给这两个模型。好了，这样我们就有搭建场景的预制地形了。</p><ul><li>讲清楚 模型的面片和材质上Tilling的对应关系 注意场景搭建的规范 所有的模型都适用1:1的大小标准</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1>场景搭建</h1><img src="/posts/eb0ca922/image22.png" class=""><p>在开始进入正题之前，需要先搭建一个可以供角色站立、移动、跳跃并且还有边界的测试场景。笔者希望搭建的场景要遵循一些规范：</p><ol><li>统一所有模型资源的单位长度，极特殊情况，所有模型的缩放都设置为1</li><li>将场景中的地形预制体化，比如墙、地面、台阶等</li><li>…</li></ol><p>下面说一个可以提高我们搭建场景效率的工具：在Unity的Scene窗口中，点击下图位置的图标可以设置物体移动的固定步长。<a href="https://jingyan.baidu.com/article/1612d500968440e20e1eeebd.html">参考文章在这</a>，按住<code>Control/Command</code>键拖拽Scene中选中物体的Object坐标系的坐标轴，就可以以固定的步长移动物体了。按住<code>V</code>键拖拽坐标轴就可以让选中物体的选中顶点吸附到另一个场景中的物体上。</p><img src="/posts/eb0ca922/image.png" class=""><h2 id="创建地形">创建地形</h2><p>Unity中自带的用来表示平面的物体是<code>Plane</code>模型，用来表示墙面的物体是<code>Quad</code>模型，在场景中创建Plane模型，查看这个模型的详细信息，你会发现这个模型的尺寸是10x10的(此处不考虑模型的厚度)，也就是长宽各为10个单位长度；而Quad模型则是1x1的，长宽个1个单位长度。为了让地形看起来不那么单调，我们使用Unity内置的一张贴图来装饰我们的地形，我们会为Plane和Quad各自生成一个材质，这两个材质的区别只有上面的Tilling参数，一个设置成10，而另一个设置为1。这样的设置主要和这两种模型的尺寸有关系。然后将材质分别赋给这两个模型。好了，这样我们就有搭建场景的预制地形了。</p><ul><li>讲清楚 模型的面片和材质上Tilling的对应关系 注意场景搭建的规范 所有的模型都适用1:1的大小标准</li></ul><h1>创建角色移动脚本</h1><h2 id="基本思想">基本思想</h2><p>游戏中，我们要控制角色往前走，不是往角色的前方走，而是往镜头朝向的前方走，因此我们对前方的定义是摄像机朝向forward的方向为前方。<br><a href="https://blog.csdn.net/kaluluosi111/article/details/17206655?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-17206655-blog-78846299.235%5Ev43%5Econtrol&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-17206655-blog-78846299.235%5Ev43%5Econtrol&amp;utm_relevant_index=5">https://blog.csdn.net/kaluluosi111/article/details/17206655?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-17206655-blog-78846299.235^v43^control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2-17206655-blog-78846299.235^v43^control&amp;utm_relevant_index=5</a> 这篇博客讲的不错</p><p>当transform.translate(vector3.forward*time.deltatime);//物体会沿着本物体Z轴的方向移动，就算本物体旋转了一定角度之后也是沿着Scene面板中的z轴方向移动。</p><p>而transform.translate(transform.forward*time.deltatime);//当物体不旋转的时候会沿着scene面板中的z轴移动，当物体旋转一点角度后物体就不再沿着scene面板中的z轴移动了。</p><p>为什么？</p><p>因为vector3.forward才是真正的本物体的z轴（永远）</p><p>而transform.forward则类似于是在本物体下新建一个空物体,这个空物体是本物体的子级，而transform.forward是这个空物体的本地坐标Z轴。当父级旋转30°，则这个空物体实际上相对于世界坐标轴旋转了30°+30°(子级的local本来就是以父级为世界中心的，父级旋转30°相当于子级的相对于父级的世界旋转了30°，所以子级旋转了60°)、</p><p>//简单理解就是：使用translate的时候用vector3.forward，若使用transform.forward则若自己旋转B°，则自己会朝着2*B°的方向移动</p><p>所以说transform.forward是一个世界空间坐标系下的概念。<br>验证：<br>物体A是物体B的父亲，转动物体A A 、 B的forward同时同步同等发生变化，只转动物体B，不影响物体A的forward 再转动物体A A、B的forward又同时同步发生变化，但是这时候AB的forward就不相等了。</p><h2 id="Quaternion接口相关">Quaternion接口相关</h2><ul><li>Slerp</li><li>LookRotation</li></ul><h2 id="RigidBody接口相关">RigidBody接口相关</h2><ul><li>MoveRotation</li><li>MovePosition</li></ul><h2 id="角色移动">角色移动</h2><h2 id="角色转动">角色转动</h2>]]></content>
       
       
+      <categories>
+          
+          <category> 游戏开发中的设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -104,6 +116,18 @@
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> 游戏开发中的设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -117,6 +141,18 @@
         <content type="html"><![CDATA[<blockquote><p>将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销的操作。</p></blockquote><p>在GTA、巫师这一类游戏中，我们可以使用<code>WASD</code>操控角色的移动，我们也可以使用相同的按键操控载具、马匹的移动。无论是载具还是角色，当你按下了<code>W</code>键，它们都会执行了向前移动的指令。我们可以在代码中写出如下的代码:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">void Update()&#123;</span><br><span class="line">    if(CurrentControllingObject == Horse)&#123;</span><br><span class="line">        if(Input.GetKeyDown(KeyCode.W))&#123;</span><br><span class="line">            HorseMoveForward();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.A))&#123;</span><br><span class="line">            HorseMoveLeft();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.S))&#123;</span><br><span class="line">            HorseMoveBackward();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.D))&#123;</span><br><span class="line">            HorseMoveRight();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(CurrentControllingObject == Hero)&#123;</span><br><span class="line">        if(Input.GetKeyDown(KeyCode.W))&#123;</span><br><span class="line">            HeroMoveForward();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.A))&#123;</span><br><span class="line">            HeroMoveLeft();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.S))&#123;</span><br><span class="line">            HeroMoveBackward();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(Input.GetKeyDown(KeyCode.D))&#123;</span><br><span class="line">            HeroMoveRight();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样的代码太丑陋了，但是更严重的问题是，这样的写法很不利于维护和拓展。想象一下，如果我们想让我们的游戏支持玩家自定义按键操作的功能，上面的代码根本就没办法实现，因为按键的绑定是被我们硬编码进脚本里的。而且，游戏中各种可以被控制移动的物体都被耦合在了一起，这不符合面向对象的设计原则。</p><p>因此，笔者希望通过本文介绍的命令模式解决上面两个问题：</p><ul><li>按键与游戏物体行为硬编码绑定</li><li>所有游戏物体的行为处理逻辑耦合在了一起</li></ul><h1>命令模式</h1>]]></content>
       
       
+      <categories>
+          
+          <category> 游戏开发中的设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -640,7 +676,7 @@
       <link href="/posts/723d2ba/"/>
       <url>/posts/723d2ba/</url>
       
-        <content type="html"><![CDATA[<h1>Canvas</h1><p>Canvas组件提供了一个供UI布局和渲染的抽象空间。所有的UI元素必须是一个挂载有Canvas组件的GameObject的子。当我们创建一个UI元素的时候，如果场景中还没有一个带有Canvas的物体，那么一个Canvas的Object将会自动被创建出来。</p><h2 id="属性">属性</h2><ul><li>Render Mode: UI渲染到屏幕上或者是作为一个Object被渲染到3D空间中的方式。共有三种选项 Screen Space - Overlay， Screen Space - Camera和World Space</li><li>Pixel Pefect(Screen Space modes only): 为了精度UI是否应该关闭抗锯齿并渲染</li><li>Render Camera(Screen Space - Camera mode onle): UI要被渲染到哪个Camera上</li><li>Sort Order: 用于控制不通过Canvas之间的绘制顺序，数值越大，该canvas的绘制优先级越高，会绘制在其他Canvas的上方</li><li>Plane Distance(Screen Space - Camera mode only): 被渲染的UI放置在渲染摄像机前的距离</li><li>Event Camera(World Space mode only): 用来运行UI Event的Camera</li><li>Receives Events: UIEvent是否会被该Canvas驱动？</li></ul><h2 id="细节">细节</h2><p>对于所有的UI元素单个Canvas已经是足够的了，但是在场景中放置多个Canvas也是可以的。同样地，使用嵌套Canvas也是可以的，一般我们出于优化的目的会将一个Canvas设置为另一个Canvas的子节点。嵌套Canvas的Canvas采用和父Canvas相同的渲染模式。</p><p>传统方式中，所有的UI就像它们是简单的图形设计一样被直接地渲染到了屏幕上。这就是说，在Camera的视角下，它们是没有3D空间的概念的。Unity支持这种屏幕空间的渲染并且同时支持UI作为Object被渲染到3D空间中，这取决于Render Mode的值。</p><h2 id="Screen-Space-Overlay">Screen Space - Overlay</h2><p>这种模式下，Canvas会被缩放以适应屏幕然后在没有场景或者Camera的参照下直接渲染出来（UI会直接渲染出来，即使场景中根本就没有Camera）。如果屏幕的尺寸或者分辨率发生了改变，那么UI会自动地重新缩放来适应新的尺寸。UI会绘制在任何其他图形比如摄像机视角的上层</p><p>注意：Screen Space - Overlay模式下，挂载canvas的节点必须是在hierarchy窗口中的最上级的节点。如果没有这样使用canvas的话可能会导致UI从视野里消失。这是从Unity引擎设计上的局限，因此保持ScreenSpace - Overlay canvas在hierarchy的最顶层以保证能够获得期望的效果</p><h2 id="Screen-Space-Camera">Screen Space - Camera</h2><p>在这种模式下，Canvas会被渲染在一个平面的物体上，该平面距离给定的摄像机有一定的距离，这种模式下的UI显示在屏幕上的尺寸并不会随着距离而变化，因为它总是会重新缩放来适应Camera的平截头体中，如果屏幕的尺寸或者分辨率或者Camera的平截头体发生了变化，那么该UI会自动的缩放来适应改变话。任何在场景中的3D物体如果距离摄像机比该UI近的话，那么就会被渲染在该UI的前面，而在UI后面的物体就会被遮挡</p><h2 id="World-Space">World Space</h2><p>这种模式下的UI会想一个平面的物体一样被渲染在场景中，不想Screen Space - Camera一样，这种模式下的UI不需要面向摄像机并且可以朝向任何方向，这种模式下的Canvas的尺寸可以通过该节点上的RectTransform组件进行设置。而它的显示效果取决于观看角度和该UI距离Camera的距离，其他场景中的物体可以穿过该UI，或者在它的前面，或者在它的后面</p><h1>CanvasScaler</h1><p>Canvas Scaler组件用来控制UI元素在Canvas上的整体缩放和像素密度。这个组件会影响所有的位于该Canvas组件下的UI元素，包括字体大小和图片的边界</p><h2 id="属性-2">属性</h2><ul><li>UIScaleMode:  决定在该Canvas上的UI元素该如何进行缩放<ul><li>ConstantPixelSize: 让UI元素保持相同的像素不论屏幕的尺寸<ul><li>Scale Factor: 该Canvas中的所有UI元素的缩放受该factor影响</li><li>ReferencePixelsPerUnit: 如果一个sprite进行了Pixel Per Unity的设置，那么在该sprite中的一个像素将会覆盖一个单元</li></ul></li><li>ScaleWithScreenSize: 屏幕的尺寸越大，UI元素也越大<ul><li>Reference Resolution: UI布局是基于此分辨率设计的，如果屏幕分辨率更大，那么UI会被放大，反之UI会被缩小</li><li>ScreenMatchMode: 一种模式用来适应不同分辨率UI的缩放方式<ul><li>Match Width or Height: 如果设备的分辨率和默认分辨率不匹配的话，那么是保证宽和原分辨率成比例还是高与原分辨率成比例</li><li>Expand:</li><li>Shrink:</li></ul></li><li>Match: 决定</li><li>Reference Pixels Per Unit</li></ul></li><li>ConstantPhysicalSize: 让UI元素保持同样的物理尺寸的大小而不管屏幕的尺寸和分辨率<ul><li>Physical Unit:</li><li>Fallback Screen DPI</li><li>Default Sprite DPI</li><li>Reference Pixels Per Unit</li></ul></li></ul></li><li>当Canvas的RenderMode被设置为WorldSpace的时候<ul><li>Dynamic Pixels Per Unit： 表示UI中动态创建的位图，比如Text，中单个单元的像素数量</li><li>Reference Pixels Per Unit:  如果一个sprite有这个Pixels Per Unity的设置，那么在Sprite中的一个像素将会覆盖世界场景中韩的一个单元，如果Reference Pixel Per Unit 被设置为了1，那么在sprite中的Pixels Per Unit设置将会被直接使用</li></ul></li></ul><h2 id="细节-2">细节</h2><p>对于被设置为Screen Space - Overlay 或者 Screen Space - Camera 的 Canvas，Canvas Scaler UI 的 Scale Mode 可以被设置为Constant PixelSize， Scale With Screen 或者 Constant Physical Size</p><h2 id="Constant-Pixel-Size">Constant Pixel Size</h2><h2 id="Scale-With-Screen-Size">Scale With Screen Size</h2><h2 id="Constant-Physical-Size">Constant Physical Size</h2><h2 id="World-Space-2">World Space</h2><h1>CanvasGroup</h1><p>CanvasGroup用来控制某些方面</p><h1>CanvasRenderer</h1><p>Canvas Renderer 组件将一个Canvas中的一个图像UI渲染出来，该组件需要挂载在每一个需要显示在屏幕上的UI组件上，Canvas Renderer组件没有任何属性暴露在inspector窗口中</p><h2 id="细节-3">细节</h2><p>在Unity的菜单中可以创建的标准的UI组件上不论你需不需要都挂载有Canvas Renderer组件，但是当我们开发我们自定义的UI组件的时候，我们需要手动将该组件挂载到自定义UI上，尽管在Inspector窗口中没有任何的属性，但是有一些属性和功能还是可以通过代码的形式来控制</p><h1>GraphicRaycaster</h1>]]></content>
+        <content type="html"><![CDATA[<h1>Canvas</h1><p>Canvas组件提供了一个供UI布局和渲染的抽象空间。所有的UI元素必须是一个挂载有Canvas组件的GameObject的子。当我们创建一个UI元素的时候，如果场景中还没有一个带有Canvas的物体，那么一个Canvas的Object将会自动被创建出来。</p><h2 id="属性">属性</h2><ul><li>Render Mode: UI渲染到屏幕上或者是作为一个Object被渲染到3D空间中的方式。共有三种选项 Screen Space - Overlay， Screen Space - Camera和World Space</li><li>Pixel Pefect(Screen Space modes only): 为了精度UI是否应该关闭抗锯齿并渲染</li><li>Render Camera(Screen Space - Camera mode onle): UI要被渲染到哪个Camera上</li><li>Sort Order: 用于控制不通过Canvas之间的绘制顺序，数值越大，该canvas的绘制优先级越高，会绘制在其他Canvas的上方</li><li>Plane Distance(Screen Space - Camera mode only): 被渲染的UI放置在渲染摄像机前的距离</li><li>Event Camera(World Space mode only): 用来运行UI Event的Camera</li><li>Receives Events: UIEvent是否会被该Canvas驱动？</li></ul><h2 id="细节">细节</h2><p>对于所有的UI元素单个Canvas已经是足够的了，但是在场景中放置多个Canvas也是可以的。同样地，使用嵌套Canvas也是可以的，一般我们出于优化的目的会将一个Canvas设置为另一个Canvas的子节点。嵌套Canvas的Canvas采用和父Canvas相同的渲染模式。</p><p>传统方式中，所有的UI就像它们是简单的图形设计一样被直接地渲染到了屏幕上。这就是说，在Camera的视角下，它们是没有3D空间的概念的。Unity支持这种屏幕空间的渲染并且同时支持UI作为Object被渲染到3D空间中，这取决于Render Mode的值。</p><h2 id="Screen-Space-Overlay">Screen Space - Overlay</h2><p>这种模式下，Canvas会被缩放以适应屏幕然后在没有场景或者Camera的参照下直接渲染出来（UI会直接渲染出来，即使场景中根本就没有Camera）。如果屏幕的尺寸或者分辨率发生了改变，那么UI会自动地重新缩放来适应新的尺寸。UI会绘制在任何其他图形比如摄像机视角的上层</p><p>注意：Screen Space - Overlay模式下，挂载canvas的节点必须是在hierarchy窗口中的最上级的节点。如果没有这样使用canvas的话可能会导致UI从视野里消失。这是从Unity引擎设计上的局限，因此保持ScreenSpace - Overlay canvas在hierarchy的最顶层以保证能够获得期望的效果</p><h2 id="Screen-Space-Camera">Screen Space - Camera</h2><p>在这种模式下，Canvas会被渲染在一个平面的物体上，该平面距离给定的摄像机有一定的距离，这种模式下的UI显示在屏幕上的尺寸并不会随着距离而变化，因为它总是会重新缩放来适应Camera的平截头体中，如果屏幕的尺寸或者分辨率或者Camera的平截头体发生了变化，那么该UI会自动的缩放来适应改变话。任何在场景中的3D物体如果距离摄像机比该UI近的话，那么就会被渲染在该UI的前面，而在UI后面的物体就会被遮挡</p><h2 id="World-Space">World Space</h2><p>这种模式下的UI会想一个平面的物体一样被渲染在场景中，不想Screen Space - Camera一样，这种模式下的UI不需要面向摄像机并且可以朝向任何方向，这种模式下的Canvas的尺寸可以通过该节点上的RectTransform组件进行设置。而它的显示效果取决于观看角度和该UI距离Camera的距离，其他场景中的物体可以穿过该UI，或者在它的前面，或者在它的后面</p><h1>CanvasScaler</h1><p>Canvas Scaler组件用来控制UI元素在Canvas上的整体缩放和像素密度。这个组件会影响所有的位于该Canvas组件下的UI元素，包括字体大小和图片的边界</p><h2 id="属性-2">属性</h2><ul><li>UIScaleMode:  决定在该Canvas上的UI元素该如何进行缩放<ul><li>ConstantPixelSize: 让UI元素保持相同的像素不论屏幕的尺寸<ul><li>Scale Factor: 该Canvas中的所有UI元素的缩放受该factor影响</li><li>ReferencePixelsPerUnit: 如果一个sprite进行了Pixel Per Unity的设置，那么在该sprite中的一个像素将会覆盖一个单元</li></ul></li><li>ScaleWithScreenSize: 屏幕的尺寸越大，UI元素也越大<ul><li>Reference Resolution: UI布局是基于此分辨率设计的，如果屏幕分辨率更大，那么UI会被放大，反之UI会被缩小</li><li>ScreenMatchMode: 一种模式用来适应不同分辨率UI的缩放方式<ul><li>Match Width or Height: 如果设备的分辨率和默认分辨率不匹配的话，那么是保证宽和原分辨率成比例还是高与原分辨率成比例</li><li>Expand:</li><li>Shrink:</li></ul></li><li>Match: 决定</li><li>Reference Pixels Per Unit</li></ul></li><li>ConstantPhysicalSize: 让UI元素保持同样的物理尺寸的大小而不管屏幕的尺寸和分辨率<ul><li>Physical Unit:</li><li>Fallback Screen DPI</li><li>Default Sprite DPI</li><li>Reference Pixels Per Unit</li></ul></li></ul></li><li>当Canvas的RenderMode被设置为WorldSpace的时候<ul><li>Dynamic Pixels Per Unit</li><li>Reference Pixels Per Unit</li></ul></li></ul><h1>CanvasGroup</h1><h1>CanvasRenderer</h1><h1>GraphicRaycaster</h1>]]></content>
       
       
       
@@ -659,7 +695,7 @@
       <link href="/posts/723d2ba/"/>
       <url>/posts/723d2ba/</url>
       
-        <content type="html"><![CDATA[<h1>Canvas</h1><p>Canvas组件提供了一个供UI布局和渲染的抽象空间。所有的UI元素必须是一个挂载有Canvas组件的GameObject的子。当我们创建一个UI元素的时候，如果场景中还没有一个带有Canvas的物体，那么一个Canvas的Object将会自动被创建出来。</p><h2 id="属性">属性</h2><ul><li>Render Mode: UI渲染到屏幕上或者是作为一个Object被渲染到3D空间中的方式。共有三种选项 Screen Space - Overlay， Screen Space - Camera和World Space</li><li>Pixel Pefect(Screen Space modes only): 为了精度UI是否应该关闭抗锯齿并渲染</li><li>Render Camera(Screen Space - Camera mode onle): UI要被渲染到哪个Camera上</li><li>Sort Order: 用于控制不通过Canvas之间的绘制顺序，数值越大，该canvas的绘制优先级越高，会绘制在其他Canvas的上方</li><li>Plane Distance(Screen Space - Camera mode only): 被渲染的UI放置在渲染摄像机前的距离</li><li>Event Camera(World Space mode only): 用来运行UI Event的Camera</li><li>Receives Events: UIEvent是否会被该Canvas驱动？</li></ul><h2 id="细节">细节</h2><p>对于所有的UI元素单个Canvas已经是足够的了，但是在场景中放置多个Canvas也是可以的。同样地，使用嵌套Canvas也是可以的，一般我们出于优化的目的会将一个Canvas设置为另一个Canvas的子节点。嵌套Canvas的Canvas采用和父Canvas相同的渲染模式。</p><p>传统方式中，所有的UI就像它们是简单的图形设计一样被直接地渲染到了屏幕上。这就是说，在Camera的视角下，它们是没有3D空间的概念的。Unity支持这种屏幕空间的渲染并且同时支持UI作为Object被渲染到3D空间中，这取决于Render Mode的值。</p><h2 id="Screen-Space-Overlay">Screen Space - Overlay</h2><p>这种模式下，Canvas会被缩放以适应屏幕然后在没有场景或者Camera的参照下直接渲染出来（UI会直接渲染出来，即使场景中根本就没有Camera）。如果屏幕的尺寸或者分辨率发生了改变，那么UI会自动地重新缩放来适应新的尺寸。UI会绘制在任何其他图形比如摄像机视角的上层</p><p>注意：Screen Space - Overlay模式下，挂载canvas的节点必须是在hierarchy窗口中的最上级的节点。如果没有这样使用canvas的话可能会导致UI从视野里消失。这是从Unity引擎设计上的局限，因此保持ScreenSpace - Overlay canvas在hierarchy的最顶层以保证能够获得期望的效果</p><h2 id="Screen-Space-Camera">Screen Space - Camera</h2><p>在这种模式下，Canvas会被渲染在一个平面的物体上，该平面距离给定的摄像机有一定的距离，这种模式下的UI显示在屏幕上的尺寸并不会随着距离而变化，因为它总是会重新缩放来适应Camera的平截头体中，如果屏幕的尺寸或者分辨率或者Camera的平截头体发生了变化，那么该UI会自动的缩放来适应改变话。任何在场景中的3D物体如果距离摄像机比该UI近的话，那么就会被渲染在该UI的前面，而在UI后面的物体就会被遮挡</p><h2 id="World-Space">World Space</h2><p>这种模式下的UI会想一个平面的物体一样被渲染在场景中，不想Screen Space - Camera一样，这种模式下的UI不需要面向摄像机并且可以朝向任何方向，这种模式下的Canvas的尺寸可以通过该节点上的RectTransform组件进行设置。而它的显示效果取决于观看角度和该UI距离Camera的距离，其他场景中的物体可以穿过该UI，或者在它的前面，或者在它的后面</p><h1>CanvasScaler</h1><p>Canvas Scaler组件用来控制UI元素在Canvas上的整体缩放和像素密度。这个组件会影响所有的位于该Canvas组件下的UI元素，包括字体大小和图片的边界</p><h2 id="属性-2">属性</h2><ul><li>UIScaleMode:  决定在该Canvas上的UI元素该如何进行缩放<ul><li>ConstantPixelSize: 让UI元素保持相同的像素不论屏幕的尺寸<ul><li>Scale Factor: 该Canvas中的所有UI元素的缩放受该factor影响</li><li>ReferencePixelsPerUnit: 如果一个sprite进行了Pixel Per Unity的设置，那么在该sprite中的一个像素将会覆盖一个单元</li></ul></li><li>ScaleWithScreenSize: 屏幕的尺寸越大，UI元素也越大<ul><li>Reference Resolution: UI布局是基于此分辨率设计的，如果屏幕分辨率更大，那么UI会被放大，反之UI会被缩小</li><li>ScreenMatchMode: 一种模式用来适应不同分辨率UI的缩放方式<ul><li>Match Width or Height: 如果设备的分辨率和默认分辨率不匹配的话，那么是保证宽和原分辨率成比例还是高与原分辨率成比例</li><li>Expand:</li><li>Shrink:</li></ul></li><li>Match: 决定</li><li>Reference Pixels Per Unit</li></ul></li><li>ConstantPhysicalSize: 让UI元素保持同样的物理尺寸的大小而不管屏幕的尺寸和分辨率<ul><li>Physical Unit:</li><li>Fallback Screen DPI</li><li>Default Sprite DPI</li><li>Reference Pixels Per Unit</li></ul></li></ul></li><li>当Canvas的RenderMode被设置为WorldSpace的时候<ul><li>Dynamic Pixels Per Unit</li><li>Reference Pixels Per Unit</li></ul></li></ul><h1>CanvasGroup</h1><h1>CanvasRenderer</h1><h1>GraphicRaycaster</h1>]]></content>
+        <content type="html"><![CDATA[<h1>Canvas</h1><p>Canvas组件提供了一个供UI布局和渲染的抽象空间。所有的UI元素必须是一个挂载有Canvas组件的GameObject的子。当我们创建一个UI元素的时候，如果场景中还没有一个带有Canvas的物体，那么一个Canvas的Object将会自动被创建出来。</p><h2 id="属性">属性</h2><ul><li>Render Mode: UI渲染到屏幕上或者是作为一个Object被渲染到3D空间中的方式。共有三种选项 Screen Space - Overlay， Screen Space - Camera和World Space</li><li>Pixel Pefect(Screen Space modes only): 为了精度UI是否应该关闭抗锯齿并渲染</li><li>Render Camera(Screen Space - Camera mode onle): UI要被渲染到哪个Camera上</li><li>Sort Order: 用于控制不通过Canvas之间的绘制顺序，数值越大，该canvas的绘制优先级越高，会绘制在其他Canvas的上方</li><li>Plane Distance(Screen Space - Camera mode only): 被渲染的UI放置在渲染摄像机前的距离</li><li>Event Camera(World Space mode only): 用来运行UI Event的Camera</li><li>Receives Events: UIEvent是否会被该Canvas驱动？</li></ul><h2 id="细节">细节</h2><p>对于所有的UI元素单个Canvas已经是足够的了，但是在场景中放置多个Canvas也是可以的。同样地，使用嵌套Canvas也是可以的，一般我们出于优化的目的会将一个Canvas设置为另一个Canvas的子节点。嵌套Canvas的Canvas采用和父Canvas相同的渲染模式。</p><p>传统方式中，所有的UI就像它们是简单的图形设计一样被直接地渲染到了屏幕上。这就是说，在Camera的视角下，它们是没有3D空间的概念的。Unity支持这种屏幕空间的渲染并且同时支持UI作为Object被渲染到3D空间中，这取决于Render Mode的值。</p><h2 id="Screen-Space-Overlay">Screen Space - Overlay</h2><p>这种模式下，Canvas会被缩放以适应屏幕然后在没有场景或者Camera的参照下直接渲染出来（UI会直接渲染出来，即使场景中根本就没有Camera）。如果屏幕的尺寸或者分辨率发生了改变，那么UI会自动地重新缩放来适应新的尺寸。UI会绘制在任何其他图形比如摄像机视角的上层</p><p>注意：Screen Space - Overlay模式下，挂载canvas的节点必须是在hierarchy窗口中的最上级的节点。如果没有这样使用canvas的话可能会导致UI从视野里消失。这是从Unity引擎设计上的局限，因此保持ScreenSpace - Overlay canvas在hierarchy的最顶层以保证能够获得期望的效果</p><h2 id="Screen-Space-Camera">Screen Space - Camera</h2><p>在这种模式下，Canvas会被渲染在一个平面的物体上，该平面距离给定的摄像机有一定的距离，这种模式下的UI显示在屏幕上的尺寸并不会随着距离而变化，因为它总是会重新缩放来适应Camera的平截头体中，如果屏幕的尺寸或者分辨率或者Camera的平截头体发生了变化，那么该UI会自动的缩放来适应改变话。任何在场景中的3D物体如果距离摄像机比该UI近的话，那么就会被渲染在该UI的前面，而在UI后面的物体就会被遮挡</p><h2 id="World-Space">World Space</h2><p>这种模式下的UI会想一个平面的物体一样被渲染在场景中，不想Screen Space - Camera一样，这种模式下的UI不需要面向摄像机并且可以朝向任何方向，这种模式下的Canvas的尺寸可以通过该节点上的RectTransform组件进行设置。而它的显示效果取决于观看角度和该UI距离Camera的距离，其他场景中的物体可以穿过该UI，或者在它的前面，或者在它的后面</p><h1>CanvasScaler</h1><p>Canvas Scaler组件用来控制UI元素在Canvas上的整体缩放和像素密度。这个组件会影响所有的位于该Canvas组件下的UI元素，包括字体大小和图片的边界</p><h2 id="属性-2">属性</h2><ul><li>UIScaleMode:  决定在该Canvas上的UI元素该如何进行缩放<ul><li>ConstantPixelSize: 让UI元素保持相同的像素不论屏幕的尺寸<ul><li>Scale Factor: 该Canvas中的所有UI元素的缩放受该factor影响</li><li>ReferencePixelsPerUnit: 如果一个sprite进行了Pixel Per Unity的设置，那么在该sprite中的一个像素将会覆盖一个单元</li></ul></li><li>ScaleWithScreenSize: 屏幕的尺寸越大，UI元素也越大<ul><li>Reference Resolution: UI布局是基于此分辨率设计的，如果屏幕分辨率更大，那么UI会被放大，反之UI会被缩小</li><li>ScreenMatchMode: 一种模式用来适应不同分辨率UI的缩放方式<ul><li>Match Width or Height: 如果设备的分辨率和默认分辨率不匹配的话，那么是保证宽和原分辨率成比例还是高与原分辨率成比例</li><li>Expand:</li><li>Shrink:</li></ul></li><li>Match: 决定</li><li>Reference Pixels Per Unit</li></ul></li><li>ConstantPhysicalSize: 让UI元素保持同样的物理尺寸的大小而不管屏幕的尺寸和分辨率<ul><li>Physical Unit:</li><li>Fallback Screen DPI</li><li>Default Sprite DPI</li><li>Reference Pixels Per Unit</li></ul></li></ul></li><li>当Canvas的RenderMode被设置为WorldSpace的时候<ul><li>Dynamic Pixels Per Unit： 表示UI中动态创建的位图，比如Text，中单个单元的像素数量</li><li>Reference Pixels Per Unit:  如果一个sprite有这个Pixels Per Unity的设置，那么在Sprite中的一个像素将会覆盖世界场景中韩的一个单元，如果Reference Pixel Per Unit 被设置为了1，那么在sprite中的Pixels Per Unit设置将会被直接使用</li></ul></li></ul><h2 id="细节-2">细节</h2><p>对于被设置为Screen Space - Overlay 或者 Screen Space - Camera 的 Canvas，Canvas Scaler UI 的 Scale Mode 可以被设置为Constant PixelSize， Scale With Screen 或者 Constant Physical Size</p><h2 id="Constant-Pixel-Size">Constant Pixel Size</h2><h2 id="Scale-With-Screen-Size">Scale With Screen Size</h2><h2 id="Constant-Physical-Size">Constant Physical Size</h2><h2 id="World-Space-2">World Space</h2><h1>CanvasGroup</h1><p>CanvasGroup用来控制某些方面</p><h1>CanvasRenderer</h1><p>Canvas Renderer 组件将一个Canvas中的一个图像UI渲染出来，该组件需要挂载在每一个需要显示在屏幕上的UI组件上，Canvas Renderer组件没有任何属性暴露在inspector窗口中</p><h2 id="细节-3">细节</h2><p>在Unity的菜单中可以创建的标准的UI组件上不论你需不需要都挂载有Canvas Renderer组件，但是当我们开发我们自定义的UI组件的时候，我们需要手动将该组件挂载到自定义UI上，尽管在Inspector窗口中没有任何的属性，但是有一些属性和功能还是可以通过代码的形式来控制</p><h1>GraphicRaycaster</h1>]]></content>
       
       
       
@@ -986,7 +1022,7 @@
       <link href="/posts/127bc3c9/"/>
       <url>/posts/127bc3c9/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>本篇博客记录笔者在Unity开发中遇到的各种小问题，有可能是Unity奇怪的bug、Unity Editor的使用小技巧或者是一些不值得开一篇新博客的小知识点</p></blockquote><h1>Unity Scriptable Object踩坑</h1><p>下面是一个名为<code>EntityBaseProperty.cs</code>的脚本，但是在创建一个<code>PlayerEntityProperty</code>SO的时候会提示你找不到这个脚本。你必须让脚本的名字和SO的类名保持一致，所以每一个SO都要新建一个和SO类命一样的脚本来写。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class EntityBaseProperty : ScriptableObject</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[CreateAssetMenu(fileName = &quot;PlayerEntityProperty&quot;, menuName = &quot;CreatePlayerEntityProperty&quot;, order = 0)]</span><br><span class="line">public class PlayerEntityProperty : CharacterProperty</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>本篇博客记录笔者在Unity开发中遇到的各种小问题，有可能是Unity奇怪的bug、Unity Editor的使用小技巧或者是一些不值得开一篇新博客的小知识点</p></blockquote><h1>Unity Scriptable Object踩坑</h1><p>下面是一个名为<code>EntityBaseProperty.cs</code>的脚本，但是在创建一个<code>PlayerEntityProperty</code>SO的时候会提示你找不到这个脚本。你必须让脚本的名字和SO的类名保持一致，所以每一个SO都要新建一个和SO类命一样的脚本来写。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class EntityBaseProperty : ScriptableObject</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[CreateAssetMenu(fileName = &quot;PlayerEntityProperty&quot;, menuName = &quot;CreatePlayerEntityProperty&quot;, order = 0)]</span><br><span class="line">public class PlayerEntityProperty : CharacterProperty</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1>Unity项目代码正常运行但是在Rider中大量报红</h1><p>Rider的<code>solution wide analysis</code>组件有问题，在Unity的<code>Settings -&gt; External Tools -&gt; Regenerate project files</code>解决。</p>]]></content>
       
       
       <categories>
@@ -1120,7 +1156,7 @@
       
       <categories>
           
-          <category> 学习笔记 </category>
+          <category> 零碎问题记录 </category>
           
       </categories>
       
@@ -1217,31 +1253,6 @@
     
     
     <entry>
-      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
-      <link href="/posts/qwerqwer/"/>
-      <url>/posts/qwerqwer/</url>
-      
-        <content type="html"><![CDATA[<h1>2023.07.13更新</h1><p>已经不是学生力（悲）</p><p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
-      
-      
-      <categories>
-          
-          <category> 技术文档 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>从零开始部署个人博客到云服务器</title>
       <link href="/posts/d182d23d/"/>
       <url>/posts/d182d23d/</url>
@@ -1261,6 +1272,31 @@
             <tag> Hexo博客 </tag>
             
             <tag> 云服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Apple原生邮件App管理校园网邮箱账户</title>
+      <link href="/posts/qwerqwer/"/>
+      <url>/posts/qwerqwer/</url>
+      
+        <content type="html"><![CDATA[<h1>2023.07.13更新</h1><p>已经不是学生力（悲）</p><p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下</p><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class="">]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文档 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
             
         </tags>
       
