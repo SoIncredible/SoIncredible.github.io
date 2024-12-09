@@ -41,14 +41,17 @@
     <link href="https://soincredible.github.io/posts/562d8b72/"/>
     <id>https://soincredible.github.io/posts/562d8b72/</id>
     <published>2024-11-21T10:20:34.000Z</published>
-    <updated>2024-11-25T17:06:44.008Z</updated>
+    <updated>2024-12-08T16:58:10.695Z</updated>
     
-    <content type="html"><![CDATA[<h1>动效配置</h1>]]></content>
+    <content type="html"><![CDATA[<p>数据驱动、插件式开发</p><p>旨在创建一套配置框架，能够在非硬编码的情况下通过编辑实验配置的方式驱动实验Value</p><h1>配置解析</h1><h1></h1>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1&gt;动效配置&lt;/h1&gt;
+    <summary type="html">&lt;p&gt;数据驱动、插件式开发&lt;/p&gt;
+&lt;p&gt;旨在创建一套配置框架，能够在非硬编码的情况下通过编辑实验配置的方式驱动实验Value&lt;/p&gt;
+&lt;h1&gt;配置解析&lt;/h1&gt;
+&lt;h1&gt;&lt;/h1&gt;
 </summary>
       
     
@@ -87,9 +90,9 @@
     <link href="https://soincredible.github.io/posts/279644bd/"/>
     <id>https://soincredible.github.io/posts/279644bd/</id>
     <published>2024-11-16T03:44:23.000Z</published>
-    <updated>2024-11-17T09:48:30.732Z</updated>
+    <updated>2024-12-08T16:58:10.695Z</updated>
     
-    <content type="html"><![CDATA[<h1>包体构成</h1><p>使用AndroidStudio中的<code>Build -&gt; ApkAnalyzer</code>来对包体内容进行分析，可以看到安卓包内的基本结构如下：</p><img src="/posts/279644bd/image.png" class=""><p>Resources目录下的文件都会被打包进<code>assets/bin/Data/data.unity3d</code>文件中，游戏启动的时候会一次性把这个文件加载到内存中，因此应该要尽可能地减小放在resources目录下的文件体积。</p><h1>libil2cpp.so内容分析</h1><p><a href="https://blog.csdn.net/linxinfa/article/details/116572369">https://blog.csdn.net/linxinfa/article/details/116572369</a></p><h1>AssetRipper使用</h1><p>AssetRipper的GitHub链接👉👉👉 <a href="https://github.com/AssetRipper/AssetRipper">https://github.com/AssetRipper/AssetRipper</a></p><p>下载到本地解压后在根目录打开终端，运行<code>./AssetRipper.GUI.Free</code>在浏览器中启动。</p><p>UnityResources目录下的内容都被打包进了一个unity_3d的目录下，</p><h1>AssetBundle打包问题</h1>]]></content>
+    <content type="html"><![CDATA[<h1>包体构成</h1><p>使用AndroidStudio中的<code>Build -&gt; ApkAnalyzer</code>来对包体内容进行分析，可以看到安卓包内的基本结构如下：</p><img src="/posts/279644bd/image.png" class=""><p>Resources目录下的文件都会被打包进<code>assets/bin/Data/data.unity3d</code>文件中，游戏启动的时候会一次性把这个文件加载到内存中，因此应该要尽可能地减小放在resources目录下的文件体积。</p><h1>libil2cpp.so内容分析</h1><p><a href="https://blog.csdn.net/linxinfa/article/details/116572369">https://blog.csdn.net/linxinfa/article/details/116572369</a></p><h1>AssetRipper使用</h1><p>AssetRipper的GitHub链接👉👉👉 <a href="https://github.com/AssetRipper/AssetRipper">https://github.com/AssetRipper/AssetRipper</a></p><p>下载到本地解压后在根目录打开终端，运行<code>./AssetRipper.GUI.Free</code>在浏览器中启动。</p><p>UnityResources目录下的内容都被打包进了一个unity_3d的目录下，</p><h1>AssetBundle打包问题</h1><h1>资源冗余</h1><p>如果两个ab A和B中的一些资源都依赖了一个没有被指定要打包的资源C，那么C就会同时被打进ab A和B中，造成资源的冗余，增大ab和安装包的体积。而这个被A，B依赖的资源C又可以分为两种类型，一种是Assets下外部导入的资源，即开发者导入或创建的资源；另一种则是Unity内置的资源，例如内置的Shader，Default-Material和UGUI一些组件如Image用的一些纹理资源等等。因此要解决资源冗余的问题，就要分别对这两种被依赖的资源进行处理。</p><p>冗余打包的原因是因为该资源没有被指定打到哪个包内，所以遍历所有的资源，找到所有资源的依赖关系，并找到这些没有被显示指定打到哪个AssetBundle的资源，打印出Log</p>]]></content>
     
     
       
