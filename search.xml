@@ -527,7 +527,7 @@
     
     
     <entry>
-      <title>贰零贰肆-——-书摘</title>
+      <title>贰零贰肆 —— 书摘</title>
       <link href="/posts/e27b9cd3/"/>
       <url>/posts/e27b9cd3/</url>
       
@@ -604,7 +604,7 @@
       <link href="/posts/c41139c9/"/>
       <url>/posts/c41139c9/</url>
       
-        <content type="html"><![CDATA[<p>缓存池可以说是游戏中非常常用的一种设计模式了,</p>]]></content>
+        <content type="html"><![CDATA[<p>缓存池可以说是游戏中非常常用的一种设计模式了,</p><p>注意生命周期</p>]]></content>
       
       
       
@@ -916,9 +916,9 @@
             
             <tag> 技术文档 </tag>
             
-            <tag> C++ </tag>
-            
             <tag> C# </tag>
+            
+            <tag> C++ </tag>
             
         </tags>
       
@@ -1265,7 +1265,7 @@
       <link href="/posts/290d223a/"/>
       <url>/posts/290d223a/</url>
       
-        <content type="html"><![CDATA[<h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><h2 id="John-Wick1"><a href="#John-Wick1" class="headerlink" title="John Wick1"></a>John Wick1</h2><h2 id="John-Wick2"><a href="#John-Wick2" class="headerlink" title="John Wick2"></a>John Wick2</h2><h2 id="John-Wick3"><a href="#John-Wick3" class="headerlink" title="John Wick3"></a>John Wick3</h2><h2 id="John-Wick4"><a href="#John-Wick4" class="headerlink" title="John Wick4"></a>John Wick4</h2>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       
@@ -1389,7 +1389,7 @@
       
       <categories>
           
-          <category> 软筋呢个 </category>
+          <category> 软技能 </category>
           
       </categories>
       
@@ -1436,7 +1436,7 @@
       <link href="/posts/qwerqwer/"/>
       <url>/posts/qwerqwer/</url>
       
-        <content type="html"><![CDATA[<p>用学生邮箱可以捞到不少好处，但因为不是主邮箱，每次需要验证的时候都需要进学校的官网、输入邮箱账号密码才能查看邮件，于是我决定尝试将校园网邮箱绑定给Apple原生邮件App进行管理</p><p>首先，我们学校的邮箱用的是网易的企业邮箱</p><p>打开Apple的邮件，选择新增用户，选择其他“邮件”账户</p><img src="/posts/qwerqwer/1.jpg" class=""><p>名称随便填，电子邮件地址输入你的学生邮箱账号，密码要用授权码</p><img src="/posts/qwerqwer/16476917234383.jpg" class=""><p>填写的收件服务器和发件服务器的主机名如下<br><img src="/posts/qwerqwer/IMG_E383D8492B2B-1.jpeg" class=""></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
