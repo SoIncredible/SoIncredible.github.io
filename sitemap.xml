@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://soincredible.github.io/posts/4e0dbdc7/</loc>
+    
+    <lastmod>2025-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://soincredible.github.io/posts/9891b583/</loc>
     
     <lastmod>2025-01-21</lastmod>
@@ -30,15 +39,6 @@
   
   <url>
     <loc>https://soincredible.github.io/posts/62b3cca9/</loc>
-    
-    <lastmod>2025-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/4e0dbdc7/</loc>
     
     <lastmod>2025-01-21</lastmod>
     
@@ -524,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/about/index.html</loc>
+    <loc>https://soincredible.github.io/categories/index.html</loc>
     
     <lastmod>2024-09-11</lastmod>
     
@@ -533,7 +533,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/categories/index.html</loc>
+    <loc>https://soincredible.github.io/about/index.html</loc>
     
     <lastmod>2024-09-11</lastmod>
     
@@ -649,14 +649,14 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/tags/VSCode/</loc>
+    <loc>https://soincredible.github.io/tags/Git/</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/tags/Git/</loc>
+    <loc>https://soincredible.github.io/tags/VSCode/</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
