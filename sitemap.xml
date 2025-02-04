@@ -2,6 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://soincredible.github.io/posts/34114324/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/posts/bc50bf5f/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/posts/fd7e9d17/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/posts/127bc3c9/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/posts/bcb0fea1/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://soincredible.github.io/posts/9c5dbe31/</loc>
+    
+    <lastmod>2025-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://soincredible.github.io/posts/62b3cca9/</loc>
     
     <lastmod>2025-02-04</lastmod>
@@ -12,15 +66,6 @@
   
   <url>
     <loc>https://soincredible.github.io/posts/735e5788/</loc>
-    
-    <lastmod>2025-02-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/bcb0fea1/</loc>
     
     <lastmod>2025-02-04</lastmod>
     
@@ -56,24 +101,6 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/posts/fd7e9d17/</loc>
-    
-    <lastmod>2025-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/34114324/</loc>
-    
-    <lastmod>2025-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://soincredible.github.io/posts/9891b583/</loc>
     
     <lastmod>2025-01-29</lastmod>
@@ -86,15 +113,6 @@
     <loc>https://soincredible.github.io/posts/a72e4bb6/</loc>
     
     <lastmod>2025-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/127bc3c9/</loc>
-    
-    <lastmod>2025-01-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -120,15 +138,6 @@
   
   <url>
     <loc>https://soincredible.github.io/posts/6824c6e3/</loc>
-    
-    <lastmod>2025-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/9c5dbe31/</loc>
     
     <lastmod>2025-01-21</lastmod>
     
@@ -237,15 +246,6 @@
   
   <url>
     <loc>https://soincredible.github.io/posts/1de61da1/</loc>
-    
-    <lastmod>2024-12-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://soincredible.github.io/posts/bc50bf5f/</loc>
     
     <lastmod>2024-12-11</lastmod>
     
@@ -542,7 +542,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/categories/index.html</loc>
+    <loc>https://soincredible.github.io/about/index.html</loc>
     
     <lastmod>2024-09-11</lastmod>
     
@@ -551,7 +551,7 @@
   </url>
   
   <url>
-    <loc>https://soincredible.github.io/about/index.html</loc>
+    <loc>https://soincredible.github.io/categories/index.html</loc>
     
     <lastmod>2024-09-11</lastmod>
     
