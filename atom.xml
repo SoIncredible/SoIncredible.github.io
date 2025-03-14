@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-03-13T12:42:13.688Z</updated>
+  <updated>2025-03-14T12:26:16.850Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构与算法系列</title>
+    <link href="https://soincredible.github.io/posts/e1a82e1/"/>
+    <id>https://soincredible.github.io/posts/e1a82e1/</id>
+    <published>2025-03-14T12:06:45.000Z</published>
+    <updated>2025-03-14T12:26:16.850Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是数据结构与算法系列的索引页，笔者写下这段话的时间是2025.3.14，此时距离笔者毕业已经过去快两年的时间，诚然笔者一直有个心结，想要补救学生时不曾牢固的基础，便有了此系列诞生。本系列会使用C++从无到有实现树、图、动规、回溯还有游戏中常用的A*、RVO等算法，目的有二，其一上面已经说了，其二也是希望熟悉C++的使用，多一门编程手艺傍身。系列对应的代码都会上传到<a href="https://github.com/SoIncredible/programming-practice">GitHub仓库</a>中</p><h1>目录</h1><ul><li><a href="https://soincredible.github.io/posts/62b3cca9/">树</a></li><li><a href="https://soincredible.github.io/posts/c830c38b/">图</a></li><li><a href="https://soincredible.github.io/posts/735e5788/">排序算法</a></li><li><a href="https://soincredible.github.io/postsa80d0031/">动态规划</a></li><li><a href="https://soincredible.github.io/posts/376d0826/">回溯算法</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;这是数据结构与算法系列的索引页，笔者写下这段话的时间是2025.3.14，此时距离笔者毕业已经过去快两年的时间，诚然笔者一直有个心结，想要补救学生时不曾牢固的基础，便有了此系列诞生。本系列会使用C++从无到有实现树、图、动规、回溯还有游戏中常用的A*、RVO等算法，目的有二</summary>
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://soincredible.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Wesnoth小地图</title>
@@ -135,7 +157,7 @@
     <link href="https://soincredible.github.io/posts/a80d0031/"/>
     <id>https://soincredible.github.io/posts/a80d0031/</id>
     <published>2025-02-27T02:35:50.000Z</published>
-    <updated>2025-03-06T05:10:20.326Z</updated>
+    <updated>2025-03-14T12:25:58.688Z</updated>
     
     <content type="html"><![CDATA[<h1>动态规划</h1><h2 id="动态规划五步">动态规划五步</h2><ul><li>DP数组以及下标的含义</li><li>递推公式</li><li>DP数组如何初始化</li><li>遍历顺序(背包问题中先遍历背包还是先遍历物品?)</li><li>打印数组</li></ul><h2 id="入门">入门</h2><ul><li>爬楼梯、斐波那契</li><li>背包问题</li><li>打家劫舍</li><li>股票问题</li><li>子序列问题</li></ul>]]></content>
     
@@ -153,6 +175,8 @@
       
     
     
+    
+    <category term="数据结构与算法" scheme="https://soincredible.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>
@@ -331,7 +355,7 @@
     <link href="https://soincredible.github.io/posts/d1d5504/"/>
     <id>https://soincredible.github.io/posts/d1d5504/</id>
     <published>2025-01-26T17:22:14.000Z</published>
-    <updated>2025-03-13T12:43:11.551Z</updated>
+    <updated>2025-03-13T12:45:58.195Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://www.wesnoth.org/">Wesnoth社区</a><br><a href="https://github.com/wesnoth/wesnoth">仓库地址</a><br><a href="https://discord.com/channels/231976805987385345/channel-browser">WesnothDiscord频道</a></p><h1>目录</h1><ul><li>构建Wesnoth 也就是这篇博客</li><li><a href="https://soincredible.github.io/posts/9af50f63/">Wesnoth中的小地图如何实现</a></li><li>Wesnoth中的AI</li><li>Wesnoth中的引导逻辑</li><li>Wesnoth中的战役逻辑</li></ul><blockquote><p>2025.2.25更新<br>笔者像小丑一样 尝试用Linux中的构建方式在自己的Mac上构建wesnoth 一直无法成功Build 跟各种问题缠斗了近一个月 在进行放弃前的最后一次尝试时 决定尝试一下Build文档中MacOS小结提到的使用XCodeBuild的方式构建wesnoth 不到十分钟成功了…<br>在笔者过往的经历中 Mac和Linux中构建和运行C++程序的方式是一样的 并且笔者先入为主地以为使用XCode是在Mac上要发布到AppStore、Steam或者SourceForge平台部分才会使用到的 并不是笔者目前需要Care的 笔者只需要让wesnoth的code在自己的电脑上跑起来就可以 只能说相当操蛋…<br>虽然说在Mac终端下直接使用CMake命令来尝试构建wesnoth的方式是错误的,但是在这个过程中笔者了解了一些CMake、C++构建相关的知识 本篇博客便是对这些知识的总结整理</p></blockquote><h1>Mac中正确的构建Wesnoth方式</h1><p>既然Build的时候用到了<code>XCode</code>,那么笔者就舍弃<code>VSCode</code>直接使用<code>XCode</code>开发了.</p><ul><li>首先确保wesnoth中需要的所有依赖都已经安装好,所有的依赖都可以使用<code>homebrew</code>快速安装</li><li>准备一个<a href="https://developer.apple.com/">Apple开发者账号</a> 不需要<code>enroll app store</code>如果你只是希望在自己的电脑上build和运行wesnoth</li><li>根目录下执行<code>scons translations</code>(看起来是一个执行翻译的命令 执行一次就好)</li><li>执行成功后,找到项目中的<code>projectfiles/Xcode/The Battle for Wesnoth.xcodeproj</code>,打开XCode</li><li>在XCode的菜单栏中,找到<code>Product</code>-&gt;<code>Archive</code>,XCode就开始构建wesnoth了</li><li>XCode构建成功之后,应该会自动弹出<code>Organizer</code>窗口,在窗口中选择<code>DistributeApp</code></li></ul><img src="/posts/d1d5504/image.png" class=""><p>选择<code>Custom</code></p><img src="/posts/d1d5504/image-1.png" class=""><p>选择<code>Copy App</code></p><img src="/posts/d1d5504/image-3.png" class=""><p>最后选择导出位置,完成Wesnoth的build.</p><h1>Mac中的环境变量</h1><p>笔者在按照<a href="https://github.com/wesnoth/wesnoth/blob/master/INSTALL.md">INSTALL</a>部分在M1系列芯片的Mac上使用homebrew安装好了wesnoth依赖的所有lib, 但是通过CMake build的时候却还是提示有这样那样的lib未找到、这样那样的头文件没有找到.** 笔者并不清楚中间是什么环节出了问题, 在此先进行记录, 日后若有思路再回来补充**.</p><p>首先, 笔者的假设是, 官方编写的CMake构建脚本是没有问题的, 问题出在了笔者的环境配置上, 在安装完wesnoth需要的库之后,需要在终端执行以下命令:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export LIBRARY_PATH=/opt/homebrew/Cellar/boost/1.87.0/lib:/opt/homebrew/lib:$LIBRARY_PATH</span><br><span class="line">export CPATH=/opt/homebrew/include/harfbuzz:/opt/homebrew/Cellar/boost/1.87.0/include/boost:$CPATH     </span><br><span class="line">```                </span><br><span class="line"># Undefined symbols for architecture arm64</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>Undefined symbols for architecture arm64:<br>“Hello()”, referenced from:<br>_main in test_charconv.cpp.o<br>ld: symbol(s) not found for architecture arm64<br>c++: error: linker command failed with exit code 1 (use -v to see invocation)<br>make[2]: *** [test_charconv] Error 1<br>make[1]: *** [CMakeFiles/test_charconv.dir/all] Error 2<br>make: *** [all] Error 2</p><pre><code>出现如下报错的原因: 方法只有声明 但是没定义 于是在链接阶段的时候 编译器找不到方法的具体实现而报错. 有可能是你在头文件中定义的方法名和在cpp文件中的具体实现名不一样.# C++中的.o文件https://www.cnblogs.com/eyeofbajie/p/16303580.html# CMake中常用的方法CMake中执行表示执行编译的方法是什么?别的CMake方法先不管,笔者比较关心find_package方法背后的实现原理https://stackoverflow.com/questions/75536743/how-to-fix-undefined-symbols-for-arm64-when-using-boostfilesystem-on-m1-macboo</code></pre>]]></content>
     
@@ -484,28 +508,6 @@
     
     
     <category term="OpenGL" scheme="https://soincredible.github.io/tags/OpenGL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UnityAndroid平台自适应刷新率设备设置120HZ刷新率无效问题解决记录</title>
-    <link href="https://soincredible.github.io/posts/7292a3de/"/>
-    <id>https://soincredible.github.io/posts/7292a3de/</id>
-    <published>2024-12-09T16:53:54.000Z</published>
-    <updated>2025-02-28T03:55:31.585Z</updated>
-    
-    <content type="html"><![CDATA[<p>国产厂商的对安卓系统的特殊调教<br>⭕️ 安卓层的尝试 遇到了getHolder获取不到surfaceView的问题 原因是什么unity3d.player.I cant cast to surfaceView<br>⭕️ Unity层的尝试 使用SysInfo.Resolutions获取当前设备所有支持的分辨率+刷新率,从中挑选出那个最高分辨率的,然后调用setResolution接口设置上<br>⭕️ 还有一种策略没尝试:如果一个设备支持120HZ刷新率,但是支持多种分辨率下的120HZ刷新率,我最高的分辨率设置上去不生效,那如果设置最低的呢?另外要取消勾选FramePacing,还要把V Sync关掉</p><h1>解除帧率限制(Android)</h1><p>对一些安卓高刷屏来说，进游戏时屏幕刷新率会被设置成60，这应该和Android系统的策略有关，因此通过<code>Screen.currentResolution.refreshRateRatio</code>接口拿到的屏幕刷新率是不准确的，<br>如果要开启高刷，则需要关闭 ProjectSettings -&gt; Player -&gt; Resolution and Presentation 下的 <a href="https://docs.unity3d.com/ScriptReference/PlayerSettings.Android-optimizedFramePacing.html">Optimized Frame Pacing</a>，并且在脚本中设置 <code>Application.targetFrameRate = 120;</code></p><p>以上的解决方案过于粗糙了，更完善的解决方案需要参考Android的<a href="https://developer.android.com/media/optimize/performance/frame-rate?hl=zh-cn">官方文档</a>去到Android层实现帧率的设置，一篇<a href="https://blog.csdn.net/a310989583/article/details/135771394?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-135771394-blog-118787844.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-135771394-blog-118787844.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;utm_relevant_index=9">实践的帖子</a></p><ul><li><a href="https://source.android.com/docs/core/graphics/multiple-refresh-rate?hl=zh-cn">https://source.android.com/docs/core/graphics/multiple-refresh-rate?hl=zh-cn</a></li></ul><blockquote><p>2024.12.10更新<br>尝试了上面的方法,最终失败了</p></blockquote><h1>问题</h1><p>有些Android手机设置帧率120HZ但是实际上达不到的问题https://answer.uwa4d.com/question/64e7779266b5c657c78be192</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;国产厂商的对安卓系统的特殊调教&lt;br&gt;
-⭕️ 安卓层的尝试 遇到了getHolder获取不到surfaceView的问题 原因是什么unity3d.player.I cant cast to surfaceView&lt;br&gt;
-⭕️ Unity层的尝试 使用SysInfo.Re</summary>
-      
-    
-    
-    
     
   </entry>
   

@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>数据结构与算法系列</title>
+      <link href="/posts/e1a82e1/"/>
+      <url>/posts/e1a82e1/</url>
+      
+        <content type="html"><![CDATA[<p>这是数据结构与算法系列的索引页，笔者写下这段话的时间是2025.3.14，此时距离笔者毕业已经过去快两年的时间，诚然笔者一直有个心结，想要补救学生时不曾牢固的基础，便有了此系列诞生。本系列会使用C++从无到有实现树、图、动规、回溯还有游戏中常用的A*、RVO等算法，目的有二，其一上面已经说了，其二也是希望熟悉C++的使用，多一门编程手艺傍身。系列对应的代码都会上传到<a href="https://github.com/SoIncredible/programming-practice">GitHub仓库</a>中</p><h1>目录</h1><ul><li><a href="https://soincredible.github.io/posts/62b3cca9/">树</a></li><li><a href="https://soincredible.github.io/posts/c830c38b/">图</a></li><li><a href="https://soincredible.github.io/posts/735e5788/">排序算法</a></li><li><a href="https://soincredible.github.io/postsa80d0031/">动态规划</a></li><li><a href="https://soincredible.github.io/posts/376d0826/">回溯算法</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Wesnoth小地图</title>
       <link href="/posts/9af50f63/"/>
       <url>/posts/9af50f63/</url>
@@ -99,6 +118,12 @@
       
         <content type="html"><![CDATA[<h1>动态规划</h1><h2 id="动态规划五步">动态规划五步</h2><ul><li>DP数组以及下标的含义</li><li>递推公式</li><li>DP数组如何初始化</li><li>遍历顺序(背包问题中先遍历背包还是先遍历物品?)</li><li>打印数组</li></ul><h2 id="入门">入门</h2><ul><li>爬楼梯、斐波那契</li><li>背包问题</li><li>打家劫舍</li><li>股票问题</li><li>子序列问题</li></ul>]]></content>
       
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
       
       
     </entry>
@@ -1008,9 +1033,9 @@
       
         <tags>
             
-            <tag> 性能优化 </tag>
-            
             <tag> Unity </tag>
+            
+            <tag> 性能优化 </tag>
             
         </tags>
       
@@ -1145,7 +1170,7 @@
       <link href="/posts/62b3cca9/"/>
       <url>/posts/62b3cca9/</url>
       
-        <content type="html"><![CDATA[<p>数据结构与算法相关的博客搭配</p><h1>树的分类</h1><ul><li>满二叉树 节点数量 $ 2^k - 1 $</li><li>完全二叉树</li><li>搜索二叉树</li><li>平衡二叉搜索树</li><li>最小二叉树</li><li>决策树</li><li>红黑树</li></ul><h1>树</h1><h2 id="二叉树">二叉树</h2><h3 id="遍历">遍历</h3><p>遍历方式可以分为:递归遍历和迭代遍历,以下三种二叉树的遍历都可以使用相关的递归和迭代方式进行遍历</p><h4 id="广度优先遍历">广度优先遍历</h4><h5 id="层序遍历">层序遍历</h5><h4 id="深度优先遍历">深度优先遍历</h4><h5 id="前序遍历">前序遍历</h5><blockquote><p>遍历顺序 中-&gt;左-&gt;右</p></blockquote><h5 id="中序遍历">中序遍历</h5><blockquote><p>遍历顺序 左-&gt;中-&gt;右</p></blockquote><h5 id="后序遍历">后序遍历</h5><blockquote><p>遍历顺序 左-&gt;右-&gt;中</p></blockquote><h2 id="相关概念">相关概念</h2><h1>时间复杂度</h1><p>常用时间复杂度表示<code>O(n)</code> <code>O(log n)</code> <code>O(n!)</code> <code>O(n^2)</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int multiply(int A, int B) &#123;</span><br><span class="line">    return B?multiply(A&lt;&lt;1,B&gt;&gt;1)+(B&amp;1?A:0):0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>代码功能<br>这段代码通过递归和位操作实现了两个整数的乘法，避免了直接使用 * 运算符。</p><p>关键点<br>位操作：</p><p>左移操作 A &lt;&lt; 1 相当于 A * 2。<br>右移操作 B &gt;&gt; 1 相当于 B / 2。<br>按位与操作 B &amp; 1 用于检查 B 的最低位是否为 1。<br>递归：</p><p>每次递归计算当前位的贡献，并将问题规模缩小一半，直到 B == 0。<br>时间复杂度：</p><p>每次递归将 B 减少一半，因此递归深度为 O(log B)。<br>每次递归的计算量为常数，因此总时间复杂度为 O(log B)。</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>阅读本文之前建议先阅读<a href="">索引页</a></p></blockquote><h1>树的分类</h1><ul><li>满二叉树 节点数量 $ 2^k - 1 $</li><li>完全二叉树</li><li>搜索二叉树</li><li>平衡二叉搜索树</li><li>最小二叉树</li><li>决策树</li><li>红黑树</li></ul><h1>树</h1><h2 id="二叉树">二叉树</h2><h3 id="遍历">遍历</h3><ul><li>按照遍历方式可以分为递归遍历和迭代遍历</li><li>按照遍历结果可以分成深度遍历和广度遍历</li></ul><h4 id="广度优先遍历">广度优先遍历</h4><h5 id="层序遍历">层序遍历</h5><h4 id="深度优先遍历">深度优先遍历</h4><p>递归方式</p><ul><li>前序遍历</li></ul><blockquote><p>遍历顺序 中-&gt;左-&gt;右</p></blockquote><ul><li>中序遍历</li></ul><blockquote><p>遍历顺序 左-&gt;中-&gt;右</p></blockquote><ul><li>后序遍历</li></ul><blockquote><p>遍历顺序 左-&gt;右-&gt;中</p></blockquote><p>迭代方式</p><ul><li>前序遍历</li><li>后序遍历</li><li>中序遍历 ⚠️注意: 中序遍历要比前序和后序特殊 因为遍历树节点的顺序和处理树节点的顺序是不一样的</li></ul><h1>时间复杂度</h1><p>常用时间复杂度表示<code>O(n)</code> <code>O(log n)</code> <code>O(n!)</code> <code>O(n^2)</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int multiply(int A, int B) &#123;</span><br><span class="line">    return B?multiply(A&lt;&lt;1,B&gt;&gt;1)+(B&amp;1?A:0):0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>代码功能<br>这段代码通过递归和位操作实现了两个整数的乘法，避免了直接使用 * 运算符。</p><p>关键点<br>位操作：</p><p>左移操作 A &lt;&lt; 1 相当于 A * 2。<br>右移操作 B &gt;&gt; 1 相当于 B / 2。<br>按位与操作 B &amp; 1 用于检查 B 的最低位是否为 1。<br>递归：</p><p>每次递归计算当前位的贡献，并将问题规模缩小一半，直到 B == 0。<br>时间复杂度：</p><p>每次递归将 B 减少一半，因此递归深度为 O(log B)。<br>每次递归的计算量为常数，因此总时间复杂度为 O(log B)。</p>]]></content>
       
       
       <categories>
@@ -1176,11 +1201,11 @@
       
         <tags>
             
+            <tag> C# </tag>
+            
             <tag> 技术文档 </tag>
             
             <tag> C++ </tag>
-            
-            <tag> C# </tag>
             
         </tags>
       
