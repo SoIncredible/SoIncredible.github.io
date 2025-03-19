@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-03-14T12:26:16.850Z</updated>
+  <updated>2025-03-18T09:22:43.512Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -17,11 +17,48 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>YooAsset</title>
+    <link href="https://soincredible.github.io/posts/ae5b3442/"/>
+    <id>https://soincredible.github.io/posts/ae5b3442/</id>
+    <published>2025-03-17T06:09:58.000Z</published>
+    <updated>2025-03-18T09:22:43.512Z</updated>
+    
+    <content type="html"><![CDATA[<h1>角色</h1><p>OperationSystem类，管理、驱动所有异步操作</p><p>AsyncOperationBase类，所有异步操作要继承的积累</p><p>IPlayModeServices 下载相关的接口<br>IBundleServices Bundle信息相关的接口<br>IRemoteServices 服务器URL相关</p><p>PackageManifest 资源信息 资源包的版本、名称、资源列表等<br>PackageAsset<br>AssetSystem<br>ProviderBase</p><h1>资源信息热更新流程</h1><ul><li>游戏启动</li><li>获取当前资源的Manifest信息</li><li>获取远端最新的Manifest的信息</li><li>比较当前和远端Manifest的信息，如果可以更新，则需要更新到最新的Manifest</li><li>创建ResourcePackage，根据最新的Manifest创建运行时的AssetSystem</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;角色&lt;/h1&gt;
+&lt;p&gt;OperationSystem类，管理、驱动所有异步操作&lt;/p&gt;
+&lt;p&gt;AsyncOperationBase类，所有异步操作要继承的积累&lt;/p&gt;
+&lt;p&gt;IPlayModeServices 下载相关的接口&lt;br&gt;
+IBundleServices Bun</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>贪心算法</title>
+    <link href="https://soincredible.github.io/posts/a4ce31d2/"/>
+    <id>https://soincredible.github.io/posts/a4ce31d2/</id>
+    <published>2025-03-16T23:38:25.000Z</published>
+    <updated>2025-03-17T01:47:02.796Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>数据结构与算法系列</title>
     <link href="https://soincredible.github.io/posts/e1a82e1/"/>
     <id>https://soincredible.github.io/posts/e1a82e1/</id>
     <published>2025-03-14T12:06:45.000Z</published>
-    <updated>2025-03-14T12:26:16.850Z</updated>
+    <updated>2025-03-14T12:26:38.004Z</updated>
     
     <content type="html"><![CDATA[<p>这是数据结构与算法系列的索引页，笔者写下这段话的时间是2025.3.14，此时距离笔者毕业已经过去快两年的时间，诚然笔者一直有个心结，想要补救学生时不曾牢固的基础，便有了此系列诞生。本系列会使用C++从无到有实现树、图、动规、回溯还有游戏中常用的A*、RVO等算法，目的有二，其一上面已经说了，其二也是希望熟悉C++的使用，多一门编程手艺傍身。系列对应的代码都会上传到<a href="https://github.com/SoIncredible/programming-practice">GitHub仓库</a>中</p><h1>目录</h1><ul><li><a href="https://soincredible.github.io/posts/62b3cca9/">树</a></li><li><a href="https://soincredible.github.io/posts/c830c38b/">图</a></li><li><a href="https://soincredible.github.io/posts/735e5788/">排序算法</a></li><li><a href="https://soincredible.github.io/postsa80d0031/">动态规划</a></li><li><a href="https://soincredible.github.io/posts/376d0826/">回溯算法</a></li></ul>]]></content>
     
@@ -133,16 +170,20 @@
     <link href="https://soincredible.github.io/posts/376d0826/"/>
     <id>https://soincredible.github.io/posts/376d0826/</id>
     <published>2025-02-27T02:40:57.000Z</published>
-    <updated>2025-03-06T05:12:09.974Z</updated>
+    <updated>2025-03-17T01:47:02.795Z</updated>
     
-    <content type="html"><![CDATA[<h1>基本理论</h1><p>回溯算法和递归是相辅相成的</p>]]></content>
+    <content type="html"><![CDATA[<h1>基本理论</h1><ul><li>回溯算法和递归是相辅相成的</li><li>回溯法是一种纯暴力的算法,它并不是高效算法.</li><li>回溯问题都可以抽象成树形结构.</li></ul><p><strong>回溯法可以解决哪些问题?</strong></p><ul><li>组合问题: 在一组数据中找到大小为2的组合.</li><li>切割问题: 给一个字符串,有几种切割方式.</li><li>子集问题</li><li>排列问题: 排列强调顺序,组合不强调问题</li><li>棋盘问题: N皇后</li></ul><p><strong>回溯法的模板</strong></p><ul><li>递归函数一般没有返回值.</li><li>递归函数的命名一般叫<code>backtracking(参数)</code></li><li>需要有终止条件,在终止条件内收集结果.</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void basetracking(参数)&#123;</span><br><span class="line">    if(终止条件)&#123;</span><br><span class="line">        收集结果</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(集合元素)&#123;</span><br><span class="line">        处理节点;</span><br><span class="line">        递归函数;</span><br><span class="line">        回溯操作;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1>组合问题</h1><p><strong>回溯问题可以通过递归的方式控制for循环的嵌套层数</strong></p><h1>剪枝操作</h1><p>for(集合元素) 通过某种判断条件减少遍历次数</p>]]></content>
     
     
       
       
     <summary type="html">&lt;h1&gt;基本理论&lt;/h1&gt;
-&lt;p&gt;回溯算法和递归是相辅相成的&lt;/p&gt;
-</summary>
+&lt;ul&gt;
+&lt;li&gt;回溯算法和递归是相辅相成的&lt;/li&gt;
+&lt;li&gt;回溯法是一种纯暴力的算法,它并不是高效算法.&lt;/li&gt;
+&lt;li&gt;回溯问题都可以抽象成树形结构.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;回溯法可以解决哪些问题?&lt;/strong&gt;&lt;/p</summary>
       
     
     
@@ -458,56 +499,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>ET框架问题记录</title>
-    <link href="https://soincredible.github.io/posts/9c5dbe31/"/>
-    <id>https://soincredible.github.io/posts/9c5dbe31/</id>
-    <published>2024-12-14T09:50:31.000Z</published>
-    <updated>2025-02-28T03:55:31.529Z</updated>
-    
-    <content type="html"><![CDATA[<h1>启动</h1><p>以ET9为例.</p><p>Mac上需要安装powershell、</p><p>“cn.etetet.statesync”: “2.0.11”</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;启动&lt;/h1&gt;
-&lt;p&gt;以ET9为例.&lt;/p&gt;
-&lt;p&gt;Mac上需要安装powershell、&lt;/p&gt;
-&lt;p&gt;“cn.etetet.statesync”: “2.0.11”&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="硬技能" scheme="https://soincredible.github.io/categories/%E7%A1%AC%E6%8A%80%E8%83%BD/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>OpenGL学习记录——入门篇</title>
-    <link href="https://soincredible.github.io/posts/a627ba0f/"/>
-    <id>https://soincredible.github.io/posts/a627ba0f/</id>
-    <published>2024-12-09T17:00:57.000Z</published>
-    <updated>2025-02-28T03:55:31.556Z</updated>
-    
-    <content type="html"><![CDATA[<p>笔者在网上能找到的C++与OpenGL的教程几乎都是基于Windows+VisualStudio展开的，也因为其直观和简易的环境配置流程，让初学者更专注于学习知识本身。这对作为Mac用户的笔者就很不友好了，需要额外了解CMake的工作原理、要选什么样的编译器等等诸如此类的，都是笔者要去搞清楚的点。</p><h1>C++基础</h1><h2 id="头文件和CPP文件的区别">头文件和CPP文件的区别</h2><p>在(游戏引擎架构)[<a href="https://book.douban.com/subject/25815142/">https://book.douban.com/subject/25815142/</a>]这本书中，介绍了头文件和CPP文件的区别：头文件通常用于在多个翻译单元之间共享信息，例如类型的声明以及函数原型。C++编译器并不了解头文件，实际情况是，C++预处理器预先把每个#include语句替换成相应的头文件内容，然后再把翻译单元送交源一起。这是头文件和源文件之间一个细微但是非常重要的区别。从程序员的角度看，头文件是独立的文件，但多亏了有预处理器把头文件展开，编译器接收到的才都是翻译单元。翻译单元的定义是：因为编译器每次只编译一个C++源文件至机器码，所以在技术上，源文件被称为翻译单元。那么像Mac上用的clang就是编译器的前端，负责预编译和编译的环节，</p><h2 id="include后-和-的区别">include后&quot;&quot;和&lt;&gt;的区别</h2><p>比如在OpenGL入门篇的<a href="https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/#_20">变换</a>一节中，我们使用到了一个名为GLM的库，</p><h2 id="C-代码的执行过程">C++代码的执行过程</h2><p>clang是编译器前端，通过clang，<br>预编译、编译、汇编、链接，每一步都在干什么呢？<br>cmake install或者ninja install又是在干什么呢？</p><h1>Hello Window</h1><p>入门篇的<a href="https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/">你好,窗口</a>章节在笔者配置OpenGL开发环境那一篇博客中已经部分介绍了，不过两篇文章的侧重点不同，本篇文章的侧重点是对每一行教程中的代码和重要概念进行解读。另外，如果我们对某些函数的描述不清楚，我们可以直接去看GLFW的源码，或者查看文档</p><h2 id="GLFW和GLAD">GLFW和GLAD</h2><p>想要使用OpenGL进行渲染，我们需要两个库：GLFW与GLAD。GLFW是一个专门针对OpenGL的C语言库，</p><h2 id="接口使用">接口使用</h2><h3 id="glfwInit">glfwInit()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glfwInit(); // 初始化glfw</span><br></pre></td></tr></table></figure><h3 id="glViewport-GLint-x-GLint-y-GLsizei-width-GLsizei-height">glViewport (GLint x, GLint y, GLsizei width, GLsizei height)</h3><h3 id="GLFWAPI-GLFWwindow-glfwCreateWindow-int-width-int-height-const-char-title-GLFWmonitor-monitor-GLFWwindow-share">GLFWAPI GLFWwindow* glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)</h3><p>这两个接口笔者想要放在一起介绍,因为这两个接口引入了两个相关的概念:窗口(Window)与视口(Viewport).接下来笔者会用一些实操来直观地带各位区分二者的区别.前提是你需要完成Hello Triangle章节的学习.</p><p>首先,我们注释掉代码中glViewport接口的调用,你的代码中可能有两处(如果你是按照中文教程学习的话),一处在<code>main</code>方法内部,另一处在调用<code>glfwSetFramebufferSizeCallback</code>接口时传入的回调方法里.然后,我们将在脚本中声明的三角形顶点数组内容修改成下面的值:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">float vertices[] = &#123;</span><br><span class="line">        1.0f, 1.0f, 0.0f,  // 右上角</span><br><span class="line">        1.0f, -1.0f, 0.0f, // 右下角</span><br><span class="line">        -1.0f, 1.0f, 0.0f, // 左上角</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure><p>最后,我们可以选择将<code>glCreateWindow</code>中窗口的宽度和高度改的大一些,比如改成<code>1920 * 1080</code>,这是笔者显示器的分辨率.重新构建我们的程序你会发现,我们的程序生成了一个铺满我们整个屏幕的窗口,而且窗口中的这个三角形铺满了我们整个窗口的右上部分屏幕!由此我们可以得出第一个结论:我们定义的三角形的顶点位置和窗口的实际大小之间存在一层映射关系.而当我们拖拽窗口的时候,这个三角形的形状会随着窗口形状的变化而变化.<br>如果我们想要让三角形的形状固定,不会随着窗口形状的变化而变化,该怎么做呢?那我们就要使用<code>glViewPort</code>接口了.<code>glViewport</code>接口的的前两个参数代表的是<code>视口</code>左下角距离相对于<code>窗口</code>左下角的坐标.而第三个和第四个参数代表的是视口的大小.现在你可能还不清楚视口和窗口的区别,没关系,跟着笔者一起操作,取消注释代码中的<code>glViewport</code>接口,并设置其接口的参数值如下:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glViewport(600, 400, 200, 200);</span><br></pre></td></tr></table></figure><p>重新构建程序,你会发现,我们的三角形变得好小!这个三角形变成了变长为200*200的等腰直角三角形!和<code>glViewport</code>接口的第三和第四个参数的值是一样的,而且当我们调整窗口大小的时候,注意:我们观察的是鼠标左键抬起后三角形的形状和位置的变化,你会发现这个三角形相对于窗口的左下角的位置没有发生变化!到这里,视口和窗口的区别与联系应该明了了:我们渲染的三角形并不是渲染在窗口上的,而是渲染在视口上的,默认情况下如果我们不调用<code>glViewport</code>设置视口的位置尺寸,视口的大小和窗口的大小相等,而如果调用了<code>glViewport</code>显式指定的视口的大小,那么视口与窗口的区别便会显现.</p><h3 id="其他">其他</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void glfwWindowHint(int hint,</span><br><span class="line">                    int value </span><br><span class="line">                    )</span><br></pre></td></tr></table></figure><p>This function sets hints for the next call to glfwCreateWindow. The hints, once set, retain their values until changed by a call to this function or glfwDefaultWindowHints, or until the library is terminated.</p><p>Window hints need to be set before the creation of the window and context you wish to have the specified attributes. They function as additional arguments to glfwCreateWindow.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">GLFWwindow * glfwCreateWindow(int width,</span><br><span class="line">                            int height,</span><br><span class="line">                            const char * title,</span><br><span class="line">                            GLFWmonitor * monitor,</span><br><span class="line">                            GLFWwindow * share </span><br><span class="line">                            )</span><br></pre></td></tr></table></figure><p>This function creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are specified with window hints.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void glfwMakeContextCurrent(GLFWwindow * window)</span><br></pre></td></tr></table></figure><p>This function makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. It can also detach the current context from the calling thread without making a new one current by passing in NULL.</p><p>我们使用glfwCreateWindow()</p><h1>重要概念</h1><ul><li>VAO: Vertex Array Object, 顶点数组对象</li><li>VBO: Vertex Buffer Object, 顶点缓冲对象</li><li>EBO: Element Buffer Object, 元素缓冲对象</li><li>IBO: Index Buffer Object, 索引缓冲对象</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;笔者在网上能找到的C++与OpenGL的教程几乎都是基于Windows+VisualStudio展开的，也因为其直观和简易的环境配置流程，让初学者更专注于学习知识本身。这对作为Mac用户的笔者就很不友好了，需要额外了解CMake的工作原理、要选什么样的编译器等等诸如此类的，</summary>
-      
-    
-    
-    
-    <category term="硬技能" scheme="https://soincredible.github.io/categories/%E7%A1%AC%E6%8A%80%E8%83%BD/"/>
-    
-    
-    <category term="OpenGL" scheme="https://soincredible.github.io/tags/OpenGL/"/>
     
   </entry>
   
