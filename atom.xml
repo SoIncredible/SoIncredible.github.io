@@ -211,7 +211,7 @@ Gate Session&lt;/p&gt;
     <link href="https://soincredible.github.io/posts/ef16867e/"/>
     <id>https://soincredible.github.io/posts/ef16867e/</id>
     <published>2025-03-28T11:09:03.000Z</published>
-    <updated>2025-04-20T14:15:35.859Z</updated>
+    <updated>2025-04-26T03:51:54.410Z</updated>
     
     <content type="html"><![CDATA[<p>ET框架仓库下其实是有两个工程的，虽然这两个工程里面的脚本有可能是用的同一份</p><p>在Share这个模块中<code>ETSystemGenerator.cs</code>这个脚本里面！</p><blockquote><p>问题 这些代码自动生成的时机是什么时候？</p></blockquote><p>编译的时候自动生成，无需开发者手动管理ETSystemGenerator这个类实现了ISourceGenerator接口，但是需要注意的是，在Unity中自动生成脚本的功能是是通过dll插件的方式接入进来的，还得看一下怎么导出dll，如果对SourceGenerator的源码有修改，需要重新导入dll到Unity中</p><h1>GeneratorExecutionContext</h1>]]></content>
     
@@ -234,9 +234,9 @@ Gate Session&lt;/p&gt;
     <link href="https://soincredible.github.io/posts/ff09e316/"/>
     <id>https://soincredible.github.io/posts/ff09e316/</id>
     <published>2025-03-28T06:37:27.000Z</published>
-    <updated>2025-04-20T15:07:22.557Z</updated>
+    <updated>2025-04-26T03:55:27.676Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>本系列基于ET8.1版本</p></blockquote><ul><li><a href="">ET中的异步</a></li><li><a href="">ET中的Singleton</a></li><li><a href="">ET中反射与特性的使用</a></li><li><a href="">ET框架自动生成脚本</a></li><li><a href="">ET框架Demo启动流程梳理</a></li></ul><p>ET中的SceneType, 可以这样理解: 一个由ET框架开发的游戏就是一个World, 在这个world下会有各种个样的Scene, 这些Scene扮演不同的角色, 这些角色扮演一般都是不同的职责. 在ET中,有一个名叫Demo的SceneType, 还有叫Main的</p><p>由World提供各种原材料, 供各个Scene下面的Entity使用</p><p>每一个Entity都会标记自己被创建出来的Scene<br>SceneType会影响Fiber的创建</p><p>ET中的Entity 有Child和Component之分</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>本系列基于ET8.1版本</p></blockquote><ul><li><a href="https://soincredible.github.io/posts/50d23509/">帧同步与状态同步</a></li><li><a href="https://soincredible.github.io/posts/3613bb98/">ET中的网络通信模块</a></li><li><a href="https://soincredible.github.io/posts/a8cdc42b/">ET中的异步</a></li><li><a href="https://soincredible.github.io/posts/12f854cb/">ET中的Singleton</a></li><li><a href="https://soincredible.github.io/posts/cd96d12/">ET中反射与特性的使用</a></li><li><a href="https://soincredible.github.io/posts/ef16867e/">ET框架自动生成脚本</a></li><li><a href="https://soincredible.github.io/posts/9c5dbe31/">ET框架Demo启动流程梳理</a></li></ul><p>ET中的SceneType, 可以这样理解: 一个由ET框架开发的游戏就是一个World, 在这个world下会有各种个样的Scene, 这些Scene扮演不同的角色, 这些角色扮演一般都是不同的职责. 在ET中,有一个名叫Demo的SceneType, 还有叫Main的</p><p>由World提供各种原材料, 供各个Scene下面的Entity使用</p><p>每一个Entity都会标记自己被创建出来的Scene<br>SceneType会影响Fiber的创建</p><p>ET中的Entity 有Child和Component之分</p>]]></content>
     
     
       
@@ -245,9 +245,8 @@ Gate Session&lt;/p&gt;
 &lt;p&gt;本系列基于ET8.1版本&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;ET中的异步&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;ET中的Singleton&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;ET中反</summary>
+&lt;li&gt;&lt;a href=&quot;https://soincredible.github.io/posts/50d23509/&quot;&gt;帧同步与状态同步&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a hr</summary>
       
     
     
@@ -305,7 +304,7 @@ Gate Session&lt;/p&gt;
     <link href="https://soincredible.github.io/posts/50d23509/"/>
     <id>https://soincredible.github.io/posts/50d23509/</id>
     <published>2025-03-26T23:52:43.000Z</published>
-    <updated>2025-04-13T15:22:15.417Z</updated>
+    <updated>2025-04-26T03:51:11.841Z</updated>
     
     <content type="html"><![CDATA[<h1>ECS架构</h1><p>ECS架构看起来就是这样子的。先有个World，它是系统（译注，这里的系统指的是ECS中的S，不是一般意义上的系统，为了方便阅读，下文统称System）和实体(Entity)的集合。而实体就是一个ID，这个ID对应了组件(Component)的集合。组件用来存储游戏状态并且没有任何的行为(Behavior)。System有行为但是没有状态。</p><p>数据和逻辑分离, Component中只有数据, System中只有逻辑, 首先有一个World, 管理着所有的Entity是Component的容器. 还有一个EntityAdmin来管理所有的Entity</p><p>游戏中不同的角色,看待同一个Entity下同一个Component时的视角是不一样的,角色希望这个Component能做什么,那么这个Component就真的可以做什么, Component自己能做什么不是它自己决定的, 而是由其观察者决定的. 但是这些观察者应当只是从Component中读状态, 而不会修改Component中的状态, Component中的状态需要有专门对应的System进行修改.** 结果看来，根据主体视角区分所有Behavior，这样来描述一棵树的全部行为会更容易，这个道理同样也适用于游戏对象(game objects)。**</p><h1>同步相关</h1><p>服务器上会构建一个纯数据向的World,所有Player的操作都会上报给服务器,不过由于客户端和服务器端的通信存在延迟,因此客户端会现在本地进行模拟,同时将操作上报给服务器并等待结果返回,如果服务器返回回来的数据和客户端模拟的结果是一致的,那么就可以继续下去,否则客户端就要会回退状态 然后客户端进行时间膨胀.</p><h1>参考资料</h1><ul><li><a href="https://www.bilibili.com/video/BV1RR4y1V7T2?spm_id_from=333.788.videopod.sections&amp;vd_source=83f4165825ce9df46cf4fd576ccb1102">烟雨的视频教程</a></li><li><a href="https://www.youtube.com/watch?v=W3aieHjyNvw&amp;t=2886s">守望先锋GDC讲座——架构设计和网络同步</a></li><li><a href="https://www.youtube.com/watch?v=W4oZq4tn57w">守望先锋GDC回放系统、全场最佳</a></li><li><a href="https://mp.weixin.qq.com/s/y8-Xb0az43pmjTlBXtNhdA">https://mp.weixin.qq.com/s/y8-Xb0az43pmjTlBXtNhdA</a></li></ul>]]></content>
     
