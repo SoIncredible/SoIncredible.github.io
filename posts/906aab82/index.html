@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>UnityUGUI源码 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="UGUI的渲染和3D物体渲染的区别? 笔者希望各位读者区分两个概念: 渲染和渲染所需的数据更新. Unity首先更新其要渲染物体的渲染数据, 然后根据渲染数据将画面渲染到屏幕上, 笔者在最初接触这部分内容时, 把两者混为一谈, 给自己造成了理解上的困难, 因此在此说明. UGUI的渲染发生在每一帧CanvasUpdateRegistry的SendWillRenderCanvases()接口被调用之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UnityUGUI源码">
+<meta property="og:url" content="https://soincredible.github.io/posts/906aab82/index.html">
+<meta property="og:site_name" content="EddieLee">
+<meta property="og:description" content="UGUI的渲染和3D物体渲染的区别? 笔者希望各位读者区分两个概念: 渲染和渲染所需的数据更新. Unity首先更新其要渲染物体的渲染数据, 然后根据渲染数据将画面渲染到屏幕上, 笔者在最初接触这部分内容时, 把两者混为一谈, 给自己造成了理解上的困难, 因此在此说明. UGUI的渲染发生在每一帧CanvasUpdateRegistry的SendWillRenderCanvases()接口被调用之">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E6%9C%9F%E6%9C%AB%E7%9A%84%E5%BB%B6%E6%97%B6_09_%E5%85%A8%E6%99%AF.jpg">
+<meta property="article:published_time" content="2025-04-19T08:46:20.000Z">
+<meta property="article:modified_time" content="2025-04-27T01:30:44.577Z">
+<meta property="article:author" content="Eddie Lee">
+<meta property="article:tag" content="博客，EddieLee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E6%9C%9F%E6%9C%AB%E7%9A%84%E5%BB%B6%E6%97%B6_09_%E5%85%A8%E6%99%AF.jpg"><link rel="shortcut icon" href="/img/heart.png"><link rel="canonical" href="https://soincredible.github.io/posts/906aab82/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'UnityUGUI源码',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-27 09:30:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">UnityUGUI源码</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-19T08:46:20.000Z" title="发表于 2025-04-19 16:46:20">2025-04-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-27T01:30:44.577Z" title="更新于 2025-04-27 09:30:44">2025-04-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span></div></div></div><article class="post-content" id="article-container"><h1>UGUI的渲染和3D物体渲染的区别?</h1>
+<p>笔者希望各位读者区分两个概念: 渲染和渲染所需的数据更新. Unity首先更新其要渲染物体的渲染数据, 然后根据渲染数据将画面渲染到屏幕上, 笔者在最初接触这部分内容时, 把两者混为一谈, 给自己造成了理解上的困难, 因此在此说明.</p>
+<p>UGUI的渲染发生在每一帧<code>CanvasUpdateRegistry</code>的<code>SendWillRenderCanvases()</code>接口被调用之后,不过我们看不到调用该接口的代码,猜测调用处通过<code>[RequireByNativeCode]</code>特性隐藏在了Unity更底层的引擎代码中. 但这不影响我们知道UGUI的渲染位于事件执行的什么位置. 为了知道这几个事件的执行顺序,因为这些事件是在每一帧都执行的, 所以使用断点调试的方式不太方便, 于是笔者尝试使用Log方式观察几个事件的执行顺序,</p>
+<h1>CanvasScaler</h1>
+<p>按照标准分辨率来设计的</p>
+<p>Unity粒子的Render和Canvas的OrderInLayer是一样的 用来处理渲染层级的问题</p>
+<p>常规模型和粒子满足谁距离摄像机近谁后渲染<br>
+在Unity中创建一个场景，创建两个Image，然后创建一个Sphere，将Sphere放置在两个Image中间，会发生奇怪的事情<br>
+UI和常规模型满足谁距离摄像机近谁后渲染<br>
+UI和粒子就不满足谁距离摄像机近谁后渲染 为什么？ 给粒子系统挂载RectTransform就会这样<br>
+移除RectTransform后就没有问题了 RectTransform改变了什么？<br>
+RectTransform组件上的Pos Z字段可以设置游戏对象的Z轴位置，但是不影响显示顺序，在同一个Canvas画布中，游戏对象的显示顺序由Hierarchy视图中的顺序决定<br>
+即便是在不同的Canvas中想通过调整PosZ字段也不能影响显示顺序 处理不同Canvas的显示顺序是通过修改Canvas的 OrderInLayer值来实现的</p>
+<p>疑惑场景<br>
+两个Canvas，每个Canvas下面都有一个Image组件，Hierarchy窗口中Canvas1在Canvas2上面，无论如何调整Canvas1和Canvas2的PosZ属性，只要不动Canvas的OrderInLayer属性，Canvas2就一直会显示在Canvas1上面<br>
+Canvas1<br>
+Canvas2</p>
+<p>如果在场景中创建一个Sphere 3D物体，物体上挂载的是Transform不是RectTransform，调整Sphere、Canvas1、Canvas2的PosZ属性使得距离摄像机有远到近的关系为：Canvas2、Sphere、Canvas1，会发现Sphere会潜入Canvas2中，而Canvas1本应该被Canvas2盖住，但是现在也会在Sphere遮挡Canvas2的区域中显示出来，原因是什么？</p>
+<p>就算只有一个Canvas 下添加两个Image组件，Hierarchy中Image1在Image2的上面 就算Image1的PosZ比Image2的PosZ要小 Image1还是应该被Image2挡住，但是将Sphere放在两个Image中间的时候也会出现上述情况，为什么？</p>
+<p>RectTransform的PosZ不能用来处理UI元素之间的层级关系 但是可以用来处理UI和3D物体之间的层级关系</p>
+<p>Unity是如何渲染UI的？</p>
+<h1>Unity的渲染顺序</h1>
+<p>如果开启了深度测试永远都是离摄像机近的物体该在离摄像机远的物体之前</p>
+<h1>Canvas</h1>
+<p>Canvas组件提供了一个供UI布局和渲染的抽象空间。所有的UI元素必须是一个挂载有Canvas组件的GameObject的子。当我们创建一个UI元素的时候，如果场景中还没有一个带有Canvas的物体，那么一个Canvas的Object将会自动被创建出来。</p>
+<h2 id="属性">属性</h2>
+<ul>
+<li>Render Mode: UI渲染到屏幕上或者是作为一个Object被渲染到3D空间中的方式。共有三种选项 Screen Space - Overlay， Screen Space - Camera和World Space</li>
+<li>Pixel Pefect(Screen Space modes only): 为了精度UI是否应该关闭抗锯齿并渲染</li>
+<li>Render Camera(Screen Space - Camera mode onle): UI要被渲染到哪个Camera上</li>
+<li>Sort Order: 用于控制不通过Canvas之间的绘制顺序，数值越大，该canvas的绘制优先级越高，会绘制在其他Canvas的上方</li>
+<li>Plane Distance(Screen Space - Camera mode only): 被渲染的UI放置在渲染摄像机前的距离</li>
+<li>Event Camera(World Space mode only): 用来运行UI Event的Camera</li>
+<li>Receives Events: UIEvent是否会被该Canvas驱动？</li>
+</ul>
+<h2 id="细节">细节</h2>
+<p>对于所有的UI元素单个Canvas已经是足够的了，但是在场景中放置多个Canvas也是可以的。同样地，使用嵌套Canvas也是可以的，一般我们出于优化的目的会将一个Canvas设置为另一个Canvas的子节点。嵌套Canvas的Canvas采用和父Canvas相同的渲染模式。</p>
+<p>传统方式中，所有的UI就像它们是简单的图形设计一样被直接地渲染到了屏幕上。这就是说，在Camera的视角下，它们是没有3D空间的概念的。Unity支持这种屏幕空间的渲染并且同时支持UI作为Object被渲染到3D空间中，这取决于Render Mode的值。</p>
+<h2 id="Screen-Space-Overlay">Screen Space - Overlay</h2>
+<p>这种模式下，Canvas会被缩放以适应屏幕然后在没有场景或者Camera的参照下直接渲染出来（UI会直接渲染出来，即使场景中根本就没有Camera）。如果屏幕的尺寸或者分辨率发生了改变，那么UI会自动地重新缩放来适应新的尺寸。UI会绘制在任何其他图形比如摄像机视角的上层</p>
+<p>注意：Screen Space - Overlay模式下，挂载canvas的节点必须是在hierarchy窗口中的最上级的节点。如果没有这样使用canvas的话可能会导致UI从视野里消失。这是从Unity引擎设计上的局限，因此保持ScreenSpace - Overlay canvas在hierarchy的最顶层以保证能够获得期望的效果</p>
+<h2 id="Screen-Space-Camera">Screen Space - Camera</h2>
+<p>在这种模式下，Canvas会被渲染在一个平面的物体上，该平面距离给定的摄像机有一定的距离，这种模式下的UI显示在屏幕上的尺寸并不会随着距离而变化，因为它总是会重新缩放来适应Camera的平截头体中，如果屏幕的尺寸或者分辨率或者Camera的平截头体发生了变化，那么该UI会自动的缩放来适应改变话。任何在场景中的3D物体如果距离摄像机比该UI近的话，那么就会被渲染在该UI的前面，而在UI后面的物体就会被遮挡</p>
+<h2 id="World-Space">World Space</h2>
+<p>这种模式下的UI会想一个平面的物体一样被渲染在场景中，不想Screen Space - Camera一样，这种模式下的UI不需要面向摄像机并且可以朝向任何方向，这种模式下的Canvas的尺寸可以通过该节点上的RectTransform组件进行设置。而它的显示效果取决于观看角度和该UI距离Camera的距离，其他场景中的物体可以穿过该UI，或者在它的前面，或者在它的后面</p>
+<h1>CanvasScaler</h1>
+<p>Canvas Scaler组件用来控制UI元素在Canvas上的整体缩放和像素密度。这个组件会影响所有的位于该Canvas组件下的UI元素，包括字体大小和图片的边界</p>
+<h2 id="属性-2">属性</h2>
+<ul>
+<li>UIScaleMode:  决定在该Canvas上的UI元素该如何进行缩放
+<ul>
+<li>ConstantPixelSize: 让UI元素保持相同的像素不论屏幕的尺寸
+<ul>
+<li>Scale Factor: 该Canvas中的所有UI元素的缩放受该factor影响</li>
+<li>ReferencePixelsPerUnit: 如果一个sprite进行了Pixel Per Unity的设置，那么在该sprite中的一个像素将会覆盖一个单元</li>
+</ul>
+</li>
+<li>ScaleWithScreenSize: 屏幕的尺寸越大，UI元素也越大
+<ul>
+<li>Reference Resolution: UI布局是基于此分辨率设计的，如果屏幕分辨率更大，那么UI会被放大，反之UI会被缩小</li>
+<li>ScreenMatchMode: 一种模式用来适应不同分辨率UI的缩放方式
+<ul>
+<li>Match Width or Height: 如果设备的分辨率和默认分辨率不匹配的话，那么是保证宽和原分辨率成比例还是高与原分辨率成比例</li>
+<li>Expand:</li>
+<li>Shrink:</li>
+</ul>
+</li>
+<li>Match: 决定</li>
+<li>Reference Pixels Per Unit</li>
+</ul>
+</li>
+<li>ConstantPhysicalSize: 让UI元素保持同样的物理尺寸的大小而不管屏幕的尺寸和分辨率
+<ul>
+<li>Physical Unit:</li>
+<li>Fallback Screen DPI</li>
+<li>Default Sprite DPI</li>
+<li>Reference Pixels Per Unit</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当Canvas的RenderMode被设置为WorldSpace的时候
+<ul>
+<li>Dynamic Pixels Per Unit： 表示UI中动态创建的位图，比如Text，中单个单元的像素数量</li>
+<li>Reference Pixels Per Unit:  如果一个sprite有这个Pixels Per Unity的设置，那么在Sprite中的一个像素将会覆盖世界场景中韩的一个单元，如果Reference Pixel Per Unit 被设置为了1，那么在sprite中的Pixels Per Unit设置将会被直接使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="细节-2">细节</h2>
+<p>对于被设置为Screen Space - Overlay 或者 Screen Space - Camera 的 Canvas，Canvas Scaler UI 的 Scale Mode 可以被设置为Constant PixelSize， Scale With Screen 或者 Constant Physical Size</p>
+<h2 id="Constant-Pixel-Size">Constant Pixel Size</h2>
+<h2 id="Scale-With-Screen-Size">Scale With Screen Size</h2>
+<h2 id="Constant-Physical-Size">Constant Physical Size</h2>
+<h2 id="World-Space-2">World Space</h2>
+<h1>CanvasGroup</h1>
+<p>CanvasGroup用来控制某些方面</p>
+<h1>CanvasRenderer</h1>
+<p>Canvas Renderer 组件将一个Canvas中的一个图像UI渲染出来，该组件需要挂载在每一个需要显示在屏幕上的UI组件上，Canvas Renderer组件没有任何属性暴露在inspector窗口中</p>
+<h2 id="细节-3">细节</h2>
+<p>在Unity的菜单中可以创建的标准的UI组件上不论你需不需要都挂载有Canvas Renderer组件，但是当我们开发我们自定义的UI组件的时候，我们需要手动将该组件挂载到自定义UI上，尽管在Inspector窗口中没有任何的属性，但是有一些属性和功能还是可以通过代码的形式来控制</p>
+<h1>GraphicRaycaster</h1>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/906aab82/">https://soincredible.github.io/posts/906aab82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E6%9C%9F%E6%9C%AB%E7%9A%84%E5%BB%B6%E6%97%B6_09_%E5%85%A8%E6%99%AF.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fad28a7c/"><img class="prev-cover" src="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E9%98%BF%E7%8E%9B%E7%9B%B4%E7%B1%B3_4_%E5%85%A8%E6%99%AF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">对C#中类型转换和拆装箱的思考</div></div></a></div><div class="next-post pull-right"><a href="/posts/11d7edcb/"><img class="next-cover" src="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E6%9C%9F%E6%9C%AB%E7%9A%84%E5%BB%B6%E6%97%B6_08_%E5%85%A8%E6%99%AF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Unity事件更新顺序</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">to infinity and beyond✨🛸.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">UGUI的渲染和3D物体渲染的区别?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">CanvasScaler</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Unity的渲染顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Canvas</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E8%8A%82"><span class="toc-number">4.2.</span> <span class="toc-text">细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Screen-Space-Overlay"><span class="toc-number">4.3.</span> <span class="toc-text">Screen Space - Overlay</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Screen-Space-Camera"><span class="toc-number">4.4.</span> <span class="toc-text">Screen Space - Camera</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#World-Space"><span class="toc-number">4.5.</span> <span class="toc-text">World Space</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">CanvasScaler</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7-2"><span class="toc-number">5.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E8%8A%82-2"><span class="toc-number">5.2.</span> <span class="toc-text">细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Constant-Pixel-Size"><span class="toc-number">5.3.</span> <span class="toc-text">Constant Pixel Size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale-With-Screen-Size"><span class="toc-number">5.4.</span> <span class="toc-text">Scale With Screen Size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Constant-Physical-Size"><span class="toc-number">5.5.</span> <span class="toc-text">Constant Physical Size</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#World-Space-2"><span class="toc-number">5.6.</span> <span class="toc-text">World Space</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">CanvasGroup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">CanvasRenderer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E8%8A%82-3"><span class="toc-number">7.1.</span> <span class="toc-text">细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">GraphicRaycaster</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/72dba58e/" title="Dissecting the async methods in CSharp"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Dissecting the async methods in CSharp"/></a><div class="content"><a class="title" href="/posts/72dba58e/" title="Dissecting the async methods in CSharp">Dissecting the async methods in CSharp</a><time datetime="2025-05-07T12:44:20.000Z" title="发表于 2025-05-07 20:44:20">2025-05-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4bbdbff1/" title="精细化实验策略下一种多策略交叉的美术、动效框架的实现"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="精细化实验策略下一种多策略交叉的美术、动效框架的实现"/></a><div class="content"><a class="title" href="/posts/4bbdbff1/" title="精细化实验策略下一种多策略交叉的美术、动效框架的实现">精细化实验策略下一种多策略交叉的美术、动效框架的实现</a><time datetime="2025-05-01T15:07:44.000Z" title="发表于 2025-05-01 23:07:44">2025-05-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/1cb37a62/" title="时势:周期波动下的国家、社会和个人"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时势:周期波动下的国家、社会和个人"/></a><div class="content"><a class="title" href="/posts/1cb37a62/" title="时势:周期波动下的国家、社会和个人">时势:周期波动下的国家、社会和个人</a><time datetime="2025-04-29T05:58:00.000Z" title="发表于 2025-04-29 13:58:00">2025-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fad28a7c/" title="对C#中类型转换和拆装箱的思考"><img src="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E9%98%BF%E7%8E%9B%E7%9B%B4%E7%B1%B3_4_%E5%85%A8%E6%99%AF.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对C#中类型转换和拆装箱的思考"/></a><div class="content"><a class="title" href="/posts/fad28a7c/" title="对C#中类型转换和拆装箱的思考">对C#中类型转换和拆装箱的思考</a><time datetime="2025-04-26T03:18:44.000Z" title="发表于 2025-04-26 11:18:44">2025-04-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/906aab82/" title="UnityUGUI源码"><img src="https://public.ysjf.com/mediastorm/material/material/%E8%87%AA%E7%84%B6%E9%A3%8E%E5%85%89_%E6%9C%9F%E6%9C%AB%E7%9A%84%E5%BB%B6%E6%97%B6_09_%E5%85%A8%E6%99%AF.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnityUGUI源码"/></a><div class="content"><a class="title" href="/posts/906aab82/" title="UnityUGUI源码">UnityUGUI源码</a><time datetime="2025-04-19T08:46:20.000Z" title="发表于 2025-04-19 16:46:20">2025-04-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.soincredible777.com.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.soincredible777.com.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/title.js?v1"></script><script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script><script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script><script> LA.init({id:"JuTksFi0ZWLV2TvA",ck:"JuTksFi0ZWLV2TvA"})</script><script>new LingQue.Monitor().init({id:"JuTksFi0ZWLV2TvA",sendSuspicious:true});</script><div class="aplayer no-destroy" data-id="1377075453" data-server="tencent" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '422e3bc4507140efbccc63cc0faded05';
+  var gaud_map_key = '48b8ec303cfe1fc03178b065f1d333e1';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.6534116,27.96920845';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:120px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" title="本站已在鲁进行备案"><img src="/img/备案.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script async src="/js/ali_font.js"></script><!-- hexo injector body_end end --></body></html>
