@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-05-22T14:37:13.012Z</updated>
+  <updated>2025-05-24T01:08:07.374Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -17,11 +17,24 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CSharp中的CancellationToken</title>
+    <link href="https://soincredible.github.io/posts/7331d0f1/"/>
+    <id>https://soincredible.github.io/posts/7331d0f1/</id>
+    <published>2025-05-24T01:08:07.000Z</published>
+    <updated>2025-05-24T01:08:07.374Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>SVN——SubVersion学习记录</title>
     <link href="https://soincredible.github.io/posts/fb782408/"/>
     <id>https://soincredible.github.io/posts/fb782408/</id>
     <published>2025-05-22T13:04:39.000Z</published>
-    <updated>2025-05-22T14:37:13.012Z</updated>
+    <updated>2025-05-23T01:04:39.454Z</updated>
     
     <content type="html"><![CDATA[<h1>SVN外链的使用</h1>]]></content>
     
@@ -42,7 +55,7 @@
     <link href="https://soincredible.github.io/posts/823ad99a/"/>
     <id>https://soincredible.github.io/posts/823ad99a/</id>
     <published>2025-05-22T12:59:53.000Z</published>
-    <updated>2025-05-22T14:37:13.012Z</updated>
+    <updated>2025-05-23T01:04:39.455Z</updated>
     
     <content type="html"><![CDATA[<h2 id="快速阅读代码">快速阅读代码</h2><p>提高快速查找相关信息的能力有助于减少反复浏览代码的次数. 如果代码阅读水平很高, 那么还可以降低浏览代码以查找其他信息的频率. 花在阅读代码方面的时间越少, 留给修复错误或者添加新功能的时间就越多, 程序员的效率因而越高.</p>]]></content>
     
@@ -393,27 +406,6 @@
       
     <summary type="html">&lt;h1&gt;拓展UnityInspector窗口&lt;/h1&gt;
 &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>乌合之众</title>
-    <link href="https://soincredible.github.io/posts/2ecb1e55/"/>
-    <id>https://soincredible.github.io/posts/2ecb1e55/</id>
-    <published>2025-04-09T12:00:31.000Z</published>
-    <updated>2025-04-26T03:49:28.300Z</updated>
-    
-    <content type="html"><![CDATA[<h1>序</h1><p>我发现，社会组织就像人体结构一样复杂，我们完全无法让它们突然经受深刻的变化。大自然有时是非常极端的，但决不像我们所理解的那样。所以，对一个民族来说，迷恋大变革是最可怕的事情之一。不管这种变革在理论上显得如何伟大，只有当它能立即改变民族的深层心理时，它才是有用的。然而，只有时间拥有这种力量。支配人类的，是思想、感情和习俗，是存在于我们自身的东西。制度和法律是人们内心精神的表现形式，反映了它的需要，既然是人们的内心精神诞生了制度和法律，制度和法律自然就无法改变它。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1&gt;序&lt;/h1&gt;
-&lt;p&gt;我发现，社会组织就像人体结构一样复杂，我们完全无法让它们突然经受深刻的变化。大自然有时是非常极端的，但决不像我们所理解的那样。所以，对一个民族来说，迷恋大变革是最可怕的事情之一。不管这种变革在理论上显得如何伟大，只有当它能立即改变民族的深层心理时，它才</summary>
       
     
     
