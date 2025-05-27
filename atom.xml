@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-05-24T01:08:07.374Z</updated>
+  <updated>2025-05-25T16:32:51.261Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -21,8 +21,16 @@
     <link href="https://soincredible.github.io/posts/7331d0f1/"/>
     <id>https://soincredible.github.io/posts/7331d0f1/</id>
     <published>2025-05-24T01:08:07.000Z</published>
-    <updated>2025-05-24T01:08:07.374Z</updated>
+    <updated>2025-05-25T16:32:51.261Z</updated>
     
+    <content type="html"><![CDATA[<h1>参考资料</h1><p><a href="https://medium.com/@mitesh_shah/a-deep-dive-into-c-s-cancellationtoken-44bc7664555f">A Deep Dive into C#’s CancellationToken</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://medium.com/@mitesh_shah/a-deep-dive-into-c-s-cancellationtoken-44bc7664555f&quot;&gt;A Deep Dive into C#’s Cancell</summary>
+      
     
     
     
