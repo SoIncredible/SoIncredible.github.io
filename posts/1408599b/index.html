@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>实现基于frp的内网穿透 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天花了一天的时间，才把内网穿透给搞好了，这次把步骤好好记下来，下次再需要重新配置可以有个参照。 我需要用内网穿透做什么？ 我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>实现基于frp的内网穿透 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天花了一天的时间，才把内网穿透给搞好了，这次把步骤好好记下来，下次再需要重新配置可以有个参照。 我需要用内网穿透做什么？我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的博">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现基于frp的内网穿透">
 <meta property="og:url" content="https://soincredible.github.io/posts/1408599b/index.html">
 <meta property="og:site_name" content="EddieLee">
-<meta property="og:description" content="今天花了一天的时间，才把内网穿透给搞好了，这次把步骤好好记下来，下次再需要重新配置可以有个参照。 我需要用内网穿透做什么？ 我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的">
+<meta property="og:description" content="今天花了一天的时间，才把内网穿透给搞好了，这次把步骤好好记下来，下次再需要重新配置可以有个参照。 我需要用内网穿透做什么？我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的博">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.notion.so/images/page-cover/met_jean_beraud.jpg">
 <meta property="article:published_time" content="2022-06-26T16:00:00.000Z">
@@ -142,23 +142,20 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
 <style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
   white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
-<link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
+<link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
 </head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">110</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">实现基于frp的内网穿透</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-26T16:00:00.000Z" title="发表于 2022-06-27 00:00:00">2022-06-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-17T05:42:38.206Z" title="更新于 2025-04-17 13:42:38">2025-04-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div><article class="post-content" id="article-container"><p>今天花了一天的时间，才把内网穿透给搞好了，这次把步骤好好记下来，下次再需要重新配置可以有个参照。</p>
-<h2 id="我需要用内网穿透做什么？">我需要用内网穿透做什么？</h2>
-<p>我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的博客发到iMac上，然后在iMac上打包部署到云服务器上，这样就不会乱了。</p>
-<h2 id="搭建步骤">搭建步骤</h2>
-<p>我们需要现在github上把需要的frp版本下载下来</p>
+<h2 id="我需要用内网穿透做什么？"><a href="#我需要用内网穿透做什么？" class="headerlink" title="我需要用内网穿透做什么？"></a>我需要用内网穿透做什么？</h2><p>我寝室里有一台iMac，还有一台MacBook。我在两台设备上都有编辑博客的需求，但如果在两台设备上都部署博客会比较混乱，比如iMac上存有博客a、b、c，MacBook上存有d、e、f。所以我想只用iMac来打包部署，平时带着笔记本在外面写好了博客之后，用内网穿透把编辑好的博客发到iMac上，然后在iMac上打包部署到云服务器上，这样就不会乱了。</p>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><p>我们需要现在github上把需要的frp版本下载下来</p>
 <p>我的Mac都是M1版本的，所以下载<code>arm64</code>版本。</p>
 <p>使用<code>uname -a</code>查看你的云服务器的架构，我的是<code>x86</code>，所以下载<code>amd64</code>版本</p>
 <p>另外，我用的ssh工具是<code>Termius</code>。</p>
 <p>mac版本：<a href="">https://github.com/fatedier/frp/releases/download/v0.39.1/frp_0.39.1_darwin_arm64.tar.gz</a></p>
 <p>linux版本：<a href="">https://github.com/fatedier/frp/releases/download/v0.39.1/frp_0.39.1_linux_amd64.tar.gz</a></p>
 <ol>
-<li>
-<p>服务器端</p>
+<li><p>服务器端</p>
 <p>我们可以在本地下载好服务器版本的frp，然后用<code>Termius</code>的文件传输功能把文件传送给服务器，这样比较快。</p>
 <p>传送到根目录下，使用解压命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf frp_0.39.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
@@ -171,51 +168,41 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./frps</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">注意要在frp目录下</span></span><br></pre></td></tr></table></figure>
 <p><strong>开启自启动frp</strong></p>
 <ol>
-<li>
-<p>添加systemd配置文件</p>
+<li><p>添加systemd配置文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/frp.service</span><br></pre></td></tr></table></figure>
 <p>文件内容如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=The nginx HTTP and reverse proxy server</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/root/frp/frps -c /root/frp/frps.ini</span><br><span class="line">KillSignal=SIGQUIT</span><br><span class="line">TimeoutStopSec=5</span><br><span class="line">KillMode=process</span><br><span class="line">PrivateTmp=true</span><br><span class="line">StandardOutput=syslog</span><br><span class="line">StandardError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 <p>ExecStart的内容请根据自己frp安装目录修改。</p>
 </li>
-<li>
-<p>设置开机启动</p>
+<li><p>设置开机启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable frp</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>启动frp</p>
+<li><p>启动frp</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start frp</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>查看frp是否启动</p>
+<li><p>查看frp是否启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep frps</span><br></pre></td></tr></table></figure>
 <img src="/posts/1408599b/1079.png" class="">
 <p>看到如上结果，代表frp启动成功</p>
 </li>
 </ol>
 </li>
-<li>
-<p>客户端</p>
+<li><p>客户端</p>
 <p>我们先把frp文件下放在用户根目录下，然后配置frpc.ini文件如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 139.224.82.218</span><br><span class="line">server_port = 7000</span><br></pre></td></tr></table></figure>
-<p>[ssh]<br>
-type = tcp<br>
-local_ip = 127.0.0.1<br>
-local_port = 22<br>
-remote_port = 6000</p>
+<p>[ssh]<br>type = tcp<br>local_ip = 127.0.0.1<br>local_port = 22<br>remote_port = 6000</p>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server_addr是服务器的ip地址</span><br><span class="line"></span><br><span class="line">server_port是frp应用占用的端口</span><br><span class="line"></span><br><span class="line">我使用macbook访问服务器的6000端口，frp就会把这个端口映射成iMac的22端口。</span><br><span class="line"></span><br><span class="line">**设置Mac上frp开启启动**</span><br><span class="line"></span><br><span class="line">1. 终端执行</span><br><span class="line"></span><br><span class="line">   ```shell</span><br><span class="line">   sudo vim /Library/LaunchDaemons/frpc.plist</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>
-<p>追加并保存内容</p>
+<ol>
+<li><p>追加并保存内容</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;Label&lt;/key&gt;</span><br><span class="line">    &lt;string&gt;frpc&lt;/string&gt;</span><br><span class="line">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span><br><span class="line">    &lt;array&gt;</span><br><span class="line">        &lt;string&gt;/Users/jonathan/frpc/frpc&lt;/string&gt;//替换为自己的frpc执行程序路径,并移除当前注释 </span><br><span class="line">        &lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">        &lt;string&gt;/Users/jonathan/frpc/frpc.ini&lt;/string&gt;//替换为自己的frpc.ini配置路径,并移除当前注释 </span><br><span class="line">    &lt;/array&gt;</span><br><span class="line">    &lt;key&gt;KeepAlive&lt;/key&gt;</span><br><span class="line">    &lt;true/&gt;</span><br><span class="line">    &lt;key&gt;RunAtLoad&lt;/key&gt;</span><br><span class="line">    &lt;true/&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3. 加入启动项</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">sudo chown root /Library/LaunchDaemons/frpc.plist</span><br><span class="line">sudo launchctl load -w /Library/LaunchDaemons/frpc.plist</span><br></pre></td></tr></table></figure>
-<p><strong>取消frp自启动</strong></p>
+<p>   <strong>取消frp自启动</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo launchctl unload -w /Library/LaunchDaemons/frpc.plist</span><br></pre></td></tr></table></figure>
-<ol start="3">
+<ol>
 <li>使用MacBook内网穿透iMac</li>
 </ol>
 <p>使用Termius新建一个HOST</p>
@@ -413,7 +400,7 @@ document.addEventListener('pjax:error', (e) => {
   else if (epage === cpage){
     butterfly_clock_anzhiyu_injector_config();
   }
-  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script data-pjax>
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.js"></script><script async src="/js/ali_font.js"></script><script data-pjax>
   function butterfly_footer_beautify_injector_config(){
     var parent_div_git = document.getElementById('footer-wrap');
     var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:120px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" title="本站已在鲁进行备案"><img src="/img/备案.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
@@ -437,4 +424,4 @@ document.addEventListener('pjax:error', (e) => {
   else if (epage === cpage){
     butterfly_footer_beautify_injector_config();
   }
-  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script async src="/js/ali_font.js"></script><!-- hexo injector body_end end --></body></html>
+  </script><script async src="/js/runtime/runtime.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://unpkg.zhimg.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><!-- hexo injector body_end end --></body></html>
