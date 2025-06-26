@@ -11,7 +11,11 @@
 <meta property="article:author" content="Eddie Lee">
 <meta property="article:tag" content="博客，EddieLee">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg"><link rel="shortcut icon" href="/img/heart.png"><link rel="canonical" href="https://soincredible.github.io/posts/4e0dbdc7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg"><link rel="shortcut icon" href="/img/heart.png"><link rel="canonical" href="https://soincredible.github.io/posts/4e0dbdc7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-Y4K02ZNBTX"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y4K02ZNBTX');
+</script><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
@@ -269,7 +273,7 @@ var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,
   cacheBust: false,
-  analytics: false,
+  analytics: true,
   scrollRestoration: false
 })
 
@@ -315,7 +319,7 @@ document.addEventListener('pjax:complete', function () {
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+  typeof gtag === 'function' && gtag('config', 'G-Y4K02ZNBTX', {'page_path': window.location.pathname});
 
   // baidu analytics
   typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
