@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>UnityRenderPipeline | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="看完Unity 官方Graphics文档 Render中的概念   RenderPipeline   Graphics tiers   frustum culling   occlusion culling   reflection probe   rendering path   RenderPipeline就干三件事情 剔除 分为视锥体提出(frustum culling)和遮挡剔除(occl">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>UnityRenderPipeline | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="看完Unity 官方Graphics文档 Render中的概念 RenderPipeline Graphics tiers  frustum culling  occlusion culling reflection probe rendering path  RenderPipeline就干三件事情剔除 分为视锥体提出(frustum culling)和遮挡剔除(occlusion cullin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UnityRenderPipeline">
 <meta property="og:url" content="https://soincredible.github.io/posts/d1e0d4f0/index.html">
 <meta property="og:site_name" content="EddieLee">
-<meta property="og:description" content="看完Unity 官方Graphics文档 Render中的概念   RenderPipeline   Graphics tiers   frustum culling   occlusion culling   reflection probe   rendering path   RenderPipeline就干三件事情 剔除 分为视锥体提出(frustum culling)和遮挡剔除(occl">
+<meta property="og:description" content="看完Unity 官方Graphics文档 Render中的概念 RenderPipeline Graphics tiers  frustum culling  occlusion culling reflection probe rendering path  RenderPipeline就干三件事情剔除 分为视锥体提出(frustum culling)和遮挡剔除(occlusion cullin">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-22T16:25:44.000Z">
 <meta property="article:modified_time" content="2025-08-26T01:37:03.681Z">
@@ -149,33 +149,19 @@ gtag('config', 'G-Y4K02ZNBTX');
   white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
 <link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
 </head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">UnityRenderPipeline</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-22T16:25:44.000Z" title="发表于 2025-08-23 00:25:44">2025-08-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-26T01:37:03.681Z" title="更新于 2025-08-26 09:37:03">2025-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span></div></div></div><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://docs.unity3d.com/2022.3/Documentation/Manual/Graphics.html">看完Unity 官方Graphics文档</a></p>
-<h1>Render中的概念</h1>
-<ul>
-<li>
-<p>RenderPipeline</p>
+<h1 id="Render中的概念"><a href="#Render中的概念" class="headerlink" title="Render中的概念"></a>Render中的概念</h1><ul>
+<li>RenderPipeline</li>
+<li><p>Graphics tiers</p>
 </li>
-<li>
-<p>Graphics tiers</p>
+<li><p>frustum culling</p>
 </li>
-<li>
-<p>frustum culling</p>
-</li>
-<li>
-<p>occlusion culling</p>
-</li>
-<li>
-<p>reflection probe</p>
-</li>
-<li>
-<p>rendering path</p>
-</li>
+<li>occlusion culling</li>
+<li>reflection probe</li>
+<li>rendering path</li>
 </ul>
-<h1>RenderPipeline就干三件事情</h1>
-<p>剔除 分为视锥体提出(frustum culling)和遮挡剔除(occlusion culling)</p>
-<p>Preventing wasted rendering operations can save on both CPU and GPU time. Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves. Occlusion culling is therefore most likely to result in performance improvements when a Project is GPU-bound due to overdraw. Unity官方文档中对于Occlusion Culling的叙述我没明白, 为什么GPU瓶颈的情况 通过使用OcclusionCulling操作可以提高性能? 那它说的Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves. 这句话又是什么意思?<br>
-非常好的问题！你引用的这段Unity官方文档确实点出了 occlusion culling 的一个核心权衡。我们来把它拆解清楚。</p>
-<p>核心问题：为什么GPU瓶颈时，使用OC能提高性能？<br>
-简单回答：因为 OC从根本上解决的是“过度绘制（Overdraw）”问题，而过度绘制是GPU的主要负担之一。</p>
+<h1 id="RenderPipeline就干三件事情"><a href="#RenderPipeline就干三件事情" class="headerlink" title="RenderPipeline就干三件事情"></a>RenderPipeline就干三件事情</h1><p>剔除 分为视锥体提出(frustum culling)和遮挡剔除(occlusion culling)</p>
+<p>Preventing wasted rendering operations can save on both CPU and GPU time. Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves. Occlusion culling is therefore most likely to result in performance improvements when a Project is GPU-bound due to overdraw. Unity官方文档中对于Occlusion Culling的叙述我没明白, 为什么GPU瓶颈的情况 通过使用OcclusionCulling操作可以提高性能? 那它说的Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves. 这句话又是什么意思?<br>非常好的问题！你引用的这段Unity官方文档确实点出了 occlusion culling 的一个核心权衡。我们来把它拆解清楚。</p>
+<p>核心问题：为什么GPU瓶颈时，使用OC能提高性能？<br>简单回答：因为 OC从根本上解决的是“过度绘制（Overdraw）”问题，而过度绘制是GPU的主要负担之一。</p>
 <p>让我们详细解释一下：</p>
 <p>什么是过度绘制（Overdraw）？</p>
 <p>它指的是GPU在同一帧中，对屏幕上的同一个像素进行了多次绘制。</p>
@@ -188,8 +174,7 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>判断完成后，CPU会形成一个“最终可见物体列表”并交给GPU。</p>
 <p>GPU只会渲染这个列表里的物体，而那些被完全挡住的物体（例如，房间外的物体、被墙挡住的家具等）根本不会进入渲染管线。</p>
 <p>结果就是：GPU需要处理的物体数量大大减少，过度绘制被极大降低。 GPU的工作负担减轻了，帧率自然就上去了。这就是为什么在GPU瓶颈时，OC能带来显著的性能提升。</p>
-<p>第二句话：“Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves.” 是什么意思？<br>
-这句话描述的是OC的成本或副作用。它意思是：</p>
+<p>第二句话：“Unity’s built-in occlusion culling performs runtime calculations on the CPU, which can offset the CPU time that it saves.” 是什么意思？<br>这句话描述的是OC的成本或副作用。它意思是：</p>
 <p>“Unity自带的遮挡剔除功能需要在运行时由CPU进行计算，这个计算本身会消耗CPU时间，从而可能抵消掉它（通过减少渲染）为CPU节省下来的时间。”</p>
 <p>我们来分解一下：</p>
 <p>“performs runtime calculations on the CPU”：OC不是一个简单的开关。它需要CPU每帧（或在一定频率下）进行视锥体剔除（Frustum Culling，剔除相机视野外的物体）和更复杂的遮挡剔除计算（使用预先烘焙的数据或运行时算法判断物体之间的遮挡关系）。这些计算是需要消耗CPU计算资源的。</p>
@@ -197,9 +182,7 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>OC本来也能为CPU节省时间：因为CPU需要准备渲染数据并提交给GPU（称为Draw Call）。如果OC成功剔除了一半的物体，CPU需要准备和提交的Draw Call也就减少了一半，这部分工作是节省了的。</p>
 <p>但是，进行OC计算本身也需要花费CPU时间。</p>
 <p>如果 OC计算本身消耗的CPU时间 &gt; 因减少Draw Call而节省的CPU时间，那么总体上，CPU的负担反而加重了。</p>
-<p>举个例子：<br>
-假设没有OC时，CPU一帧需要花 5ms 来提交所有Draw Call。<br>
-开启OC后：</p>
+<p>举个例子：<br>假设没有OC时，CPU一帧需要花 5ms 来提交所有Draw Call。<br>开启OC后：</p>
 <p>CPU需要花 3ms 来执行OC计算。</p>
 <p>由于OC剔除了很多物体，CPU现在只需要花 1ms 来提交剩下的Draw Call。</p>
 <p>CPU总耗时 = 3ms + 1ms = 4ms。 这比之前的5ms要少，性能提升。</p>
@@ -207,15 +190,13 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>CPU执行复杂的OC计算花了 6ms。</p>
 <p>剔除后，提交Draw Call花了 1ms。</p>
 <p>CPU总耗时 = 6ms + 1ms = 7ms。 这比不开OC时的5ms更糟，性能下降。</p>
-<p>总结与结论<br>
-对GPU的好处（核心价值）：OC通过减少渲染对象数量，直接降低了GPU的过度绘制，这在GPU瓶颈时效果极佳。</p>
+<p>总结与结论<br>对GPU的好处（核心价值）：OC通过减少渲染对象数量，直接降低了GPU的过度绘制，这在GPU瓶颈时效果极佳。</p>
 <p>对CPU的双刃剑效应：OC会带来CPU的额外计算开销。它节省了提交Draw Call的时间，但增加了剔除计算的时间。</p>
 <p>在CPU瓶颈（CPU-Bound）的项目中：如果OC计算本身很重，它很可能得不偿失，导致整体帧率下降。</p>
 <p>在GPU瓶颈或CPU/GPU平衡的项目中：OC节省的GPU时间远大于它带来的CPU开销，从而大幅提升帧率。</p>
 <p>因此，Unity文档的那段话是在教你如何正确地使用这个功能：</p>
 <p>不要无脑地开启Occlusion Culling。你应该先使用Unity Profiler分析你的游戏，确定瓶颈到底是CPU还是GPU。如果主要是GPU瓶颈且由过度绘制引起，那么开启OC很可能带来收益。如果已经是CPU瓶颈了，开启OC可能会让情况恶化。</p>
-<p>所以这是一个此消彼长的过程是吧<br>
-完全正确！这就是一个非常经典的“此消彼长”或者说“权衡（Trade-off）”的过程。</p>
+<p>所以这是一个此消彼长的过程是吧<br>完全正确！这就是一个非常经典的“此消彼长”或者说“权衡（Trade-off）”的过程。</p>
 <p>你用这个词来形容，非常精准地抓住了 occlusion culling 乃至很多游戏优化技术的核心思想。</p>
 <p>我们可以把这个过程清晰地画出来：</p>
 <img src="/posts/d1e0d4f0/deepseek_mermaid_20250822_5ebda0.png" class="">
@@ -224,10 +205,8 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>你付出的代价（CPU计算）小于你得到的收益（GPU时间减少）。</p>
 <p>你换取的资源正好是系统最缺的那个（即缓解了系统的瓶颈）。</p>
 <p>所以，Unity 官方文档的那段话，本质上就是在提醒你：不要盲目使用优化技术。一定要先分析（Profile），找到真正的瓶颈（Bottleneck），然后再有针对性地进行优化，否则很可能适得其反。</p>
-<p>You can use occlusion culling to occlude Dynamic GameObjects, but Dynamic GameObjects cannot occlude other GameObjects. If your Project generates Scene geometry at runtime, then Unity’s built-in occlusion culling is not suitable for your Project. Dynamic Gameobject是什么 是我动态加载实例化的东西吗?<br>
-说得非常对！你的理解基本正确，但我们可以更精确地定义一下。</p>
-<p>什么是 Dynamic GameObject（动态游戏对象）？<br>
-在Unity occlusion culling（遮挡剔除）的上下文中，Dynamic GameObject 主要指的是在运行时移动、旋转或缩放的物体，而不是指“动态加载实例化”这个动作。</p>
+<p>You can use occlusion culling to occlude Dynamic GameObjects, but Dynamic GameObjects cannot occlude other GameObjects. If your Project generates Scene geometry at runtime, then Unity’s built-in occlusion culling is not suitable for your Project. Dynamic Gameobject是什么 是我动态加载实例化的东西吗?<br>说得非常对！你的理解基本正确，但我们可以更精确地定义一下。</p>
+<p>什么是 Dynamic GameObject（动态游戏对象）？<br>在Unity occlusion culling（遮挡剔除）的上下文中，Dynamic GameObject 主要指的是在运行时移动、旋转或缩放的物体，而不是指“动态加载实例化”这个动作。</p>
 <p>更准确的区分如下：</p>
 <p>静态遮挡物（Static Occluder）：</p>
 <p>在场景中永远不会移动、旋转或缩放的物体。</p>
@@ -241,32 +220,23 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>它可以被静态遮挡物遮挡（例如，一个移动的角色走到墙后面，会被墙遮挡而剔除）。</p>
 <p>但它自身无法作为遮挡物去遮挡其他物体（例如，一辆移动的大卡车开过去，它无法遮挡它后面的房子或树，即使从相机角度看它确实挡住了）。</p>
 <p>例子：玩家角色、敌人、NPC、可移动的车辆、可被拾取的物品、由代码实例化并会移动的对象等。</p>
-<p>针对你提到的两种情况：<br>
-“是我动态加载实例化的东西吗？”</p>
+<p>针对你提到的两种情况：<br>“是我动态加载实例化的东西吗？”</p>
 <p>你动态实例化（Instantiate）出来的一个物体，如果它在生成后一动不动，并且你将其标记为了 Occluder Static，那么它可以作为遮挡物。（但这种情况很少见，因为通常静态物体直接放在场景里就好，没必要运行时实例化）。</p>
 <p>你动态实例化出来的物体，如果会移动或者没有标记为Static，那它就是Dynamic GameObject。它只能被遮挡，不能遮挡别人。</p>
 <p>“如果您的项目在运行时生成场景几何体，那么Unity的内置遮挡剔除不适合您的项目。”</p>
 <p>这句话的意思是：如果你的游戏关卡、地形、房间布局等主要几何结构是在运行时随机生成或动态加载的（例如程序化生成的地牢、随机地图的沙盒游戏），那么就不适合使用Unity内置的烘焙式 occlusion culling。</p>
 <p>原因：Unity的 occlusion culling 需要预先烘焙（Precompute/Bake）。烘焙过程会基于那些标记为 Occluder Static 的物体来计算它们之间的遮挡关系，并将结果保存成数据。运行时只是查询这些预计算的数据。</p>
 <p>如果场景结构是运行时才确定的，那么就无法进行预先烘焙，这个系统也就失效了。</p>
-<p>总结<br>
-对象类型	能否移动？	能否被遮挡？	能否作为遮挡物？	例子<br>
-静态遮挡物 (Occluder Static)	不能	可以（但没必要）	可以	地形、静态建筑<br>
-动态游戏对象 (Dynamic GameObject)	可以	可以	不可以	角色、车辆、子弹<br>
-所以，如果你的游戏有很多大型的、会移动的物体（比如巨型机器人、移动的堡垒），你希望它们也能遮挡其身后的东西，Unity内置的OC就无法满足需求了。这种情况下，开发者通常会寻求基于软件光栅化（Software Rasterization）的实时遮挡剔除系统（如Umbra、PVSporta等第三方解决方案，或Unity的Entitiy组件系统ECS下的一些新方法）。</p>
-<p>运行时 动态加载实例化一些预制体出来 Unity也没有什么接口能让我在运行时给这些物体设置静态的操作吗?<br>
-非常好的问题！这触及了Unity静态系统的一个核心限制。</p>
+<p>总结<br>对象类型    能否移动？    能否被遮挡？    能否作为遮挡物？    例子<br>静态遮挡物 (Occluder Static)    不能    可以（但没必要）    可以    地形、静态建筑<br>动态游戏对象 (Dynamic GameObject)    可以    可以    不可以    角色、车辆、子弹<br>所以，如果你的游戏有很多大型的、会移动的物体（比如巨型机器人、移动的堡垒），你希望它们也能遮挡其身后的东西，Unity内置的OC就无法满足需求了。这种情况下，开发者通常会寻求基于软件光栅化（Software Rasterization）的实时遮挡剔除系统（如Umbra、PVSporta等第三方解决方案，或Unity的Entitiy组件系统ECS下的一些新方法）。</p>
+<p>运行时 动态加载实例化一些预制体出来 Unity也没有什么接口能让我在运行时给这些物体设置静态的操作吗?<br>非常好的问题！这触及了Unity静态系统的一个核心限制。</p>
 <p>简单直接的回答是：没有。Unity 没有提供在运行时（Runtime）通过代码将 GameObject 设置为“静态”（包括 Occluder Static）并使其生效的接口。</p>
-<p>详细解释<br>
-为什么不行？</p>
+<p>详细解释<br>为什么不行？</p>
 <p>烘焙（Baking）是一个编辑器（Editor-Time）过程：静态标记的真正意义在于，它告诉Unity的光照系统（GI）、遮挡剔除系统（Occlusion Culling） 和导航系统（Navigation） 等，这些物体是静止的，可以针对它们进行预计算。</p>
 <p>这个预计算过程（我们常说的“Bake灯光”、“Bake Occlusion”）非常耗时，它需要分析场景中所有静态物体的几何关系、UV、材质属性等，并生成相应的数据（如光照贴图、遮挡数据、导航网格）。这个过程绝不可能在游戏运行时实时完成，否则会卡住游戏好几秒甚至几分钟。</p>
-<p>gameObject.isStatic 属性存在，但它是“陷阱”<br>
-你确实能在代码中找到 gameObject.isStatic 这个属性，并且可以设置它。但是！</p>
+<p>gameObject.isStatic 属性存在，但它是“陷阱”<br>你确实能在代码中找到 gameObject.isStatic 这个属性，并且可以设置它。但是！</p>
 <p>它只改变标识，不触发烘焙。你可以在运行时将一个物体 isStatic = true，但这只是一个“标签”。光照、遮挡等系统所使用的预计算数据是在编辑器阶段就生成好的，运行时不会因为你这个标记的改变而重新计算。</p>
 <p>结果是无效的。你把它标记为静态，但它并不会因此就能遮挡其他物体，也不会参与全局光照。它的作用微乎其微，几乎只是为了查询。</p>
-<p>运行时实例化的物体如何参与遮挡？<br>
-虽然不能成为“遮挡物”，但你动态实例化的物体仍然可以作为“被遮挡者”，这是自动的，无需任何设置。</p>
+<p>运行时实例化的物体如何参与遮挡？<br>虽然不能成为“遮挡物”，但你动态实例化的物体仍然可以作为“被遮挡者”，这是自动的，无需任何设置。</p>
 <p>流程是这样的：</p>
 <p>你在编辑器烘焙Occlusion Data时，场景里那些标记为 Occluder Static 的墙壁、山体等生成了遮挡数据。</p>
 <p>运行时，你实例化了一个角色（动态物体）。</p>
@@ -274,8 +244,7 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>它会判断你这个角色的包围盒是否被那些预计算好的静态遮挡物挡住。</p>
 <p>如果被挡住，Unity就不会渲染这个角色。</p>
 <p>所以，动态物体享受到了被静态遮挡物剔除的好处，但它自己不能贡献遮挡。</p>
-<p>替代方案与解决方案<br>
-如果你的项目确实需要在运行时动态生成关卡，并且希望这些新生成的墙体等能作为有效的遮挡物，你有几个选择：</p>
+<p>替代方案与解决方案<br>如果你的项目确实需要在运行时动态生成关卡，并且希望这些新生成的墙体等能作为有效的遮挡物，你有几个选择：</p>
 <p>使用第三方实时遮挡剔除解决方案：</p>
 <p>例如 Umbra（很多3A大作在用）、PVS Studio 等。</p>
 <p>它们的工作原理不同，通常基于软件光栅化等技术，在CPU上实时计算遮挡关系，不依赖预烘焙的数据，因此非常适合动态环境。但这些都是付费插件，并且需要一定的集成和学习成本。</p>
@@ -286,33 +255,25 @@ gtag('config', 'G-Y4K02ZNBTX');
 <p>设计上的规避：</p>
 <p>这是最常用的方法。既然知道动态生成的物体不能遮挡，就在设计关卡时避免出现“需要一个动态生成的大物体去遮挡大量其他动态物体”的情况。</p>
 <p>确保主要的、大型的遮挡物（如外围城墙、主要建筑结构）是场景中预先放置好并烘焙好的静态物体。而动态生成的部分只是内部的可移动细节。</p>
-<p>结论<br>
-你不能在运行时创建真正的“静态”物体。Unity的静态系统是一个为编辑器预计算服务的系统。</p>
+<p>结论<br>你不能在运行时创建真正的“静态”物体。Unity的静态系统是一个为编辑器预计算服务的系统。</p>
 <p>对于遮挡剔除：运行时实例化的物体只能是被遮挡者，无法成为遮挡物。</p>
 <p>如果你的项目严重依赖运行时生成几何体并需要它们遮挡，你需要寻求不依赖预烘焙的实时剔除方案，而不是试图去设置静态标志。</p>
-<p>那比如说 场景中有一个被标记为static的物体 我在运行时通过脚本获取到了这个物体 然后用代码去移动这个物体 会有什么问题吗?<br>
-千万不要这样做！ 这是一个非常错误的操作，会导致一系列问题，但Unity并不会阻止你这么做。</p>
+<p>那比如说 场景中有一个被标记为static的物体 我在运行时通过脚本获取到了这个物体 然后用代码去移动这个物体 会有什么问题吗?<br>千万不要这样做！ 这是一个非常错误的操作，会导致一系列问题，但Unity并不会阻止你这么做。</p>
 <p>移动一个在编辑器中被标记为 Static 的物体，会导致“静态”系统的假设完全失效，从而引发各种渲染和逻辑错误。</p>
-<p>会产生的问题：<br>
-渲染错误（最主要的问题）：</p>
+<p>会产生的问题：<br>渲染错误（最主要的问题）：</p>
 <p>光照错误（Lighting Artifacts）：静态物体参与了全局光照（GI） 和光照贴图（Lightmapping） 的烘焙。光照贴图上的光线、阴影和反弹光信息都是基于该物体原始的位置、旋转和缩放计算并“烤”在纹理上的。如果你移动了物体，它的模型顶点和光照贴图上的信息就错位了，会导致奇怪的阴影、错误的光照甚至模型变黑。</p>
 <p>遮挡剔除失效（Broken Occlusion Culling）：遮挡数据是基于物体静态时的位置预计算的。你移动它之后，它可能还在原地遮挡着实际上已经可见的物体，或者它本该在新位置遮挡物体却没能起到作用。这会导致本应被剔除的物体被渲染（性能下降） 或本应被渲染的物体被错误剔除（物体消失）。</p>
 <p>性能问题：</p>
 <p>虽然你移动了它，但Unity的许多系统（如GI、OC）仍然会把它当作静态物体来处理，使用那份已经失效的预计算数据。这会导致CPU和GPU在做无用功，甚至比直接使用一个动态物体的性能还要差。</p>
 <p>导航系统问题（如果标记了 Navigation Static）：</p>
 <p>如果这个静态物体还参与了导航网格（NavMesh）的烘焙，那么AI会依然认为它在旧的位置上，从而撞向空气墙（因为物体实际已经移走了）或者穿墙而过（因为物体移动到了一个原本可通行的区域）。</p>
-<p>正确的做法是什么？<br>
-如果你需要一个物体在游戏开始时是静态的（参与烘焙），但运行时又需要移动它，你必须遵循以下流程：</p>
+<p>正确的做法是什么？<br>如果你需要一个物体在游戏开始时是静态的（参与烘焙），但运行时又需要移动它，你必须遵循以下流程：</p>
 <p>在运行时取消其静态标记：在移动它之前，通过代码将其 isStatic 属性设置为 false。</p>
 <p>通知相关系统更新：告诉Unity的各个系统，这个物体的状态已经改变了。</p>
 <p>对于渲染器（Renderer）：通常需要强制刷新或重新计算一些数据，但在Unity中，简单地取消静态标记后，渲染器会将其视为动态物体，使用实时光照而不是光照贴图。这可能会导致视觉效果突变（例如从有烘焙光变到只有实时光）。</p>
 <p>对于导航（Navigation）：如果你移动了一个曾经是导航静态的物体，你可能需要重新烘焙导航网格（NavMesh） 或使用 NavMesh Obstacle 组件来动态阻挡AI。运行时烘焙NavMesh是一个开销很大的操作，需要谨慎使用。</p>
 <p>示例代码：</p>
-<p>csharp<br>
-public class MoveStaticObject : MonoBehaviour<br>
-{<br>
-public GameObject staticObject; // 赋值那个静态物体<br>
-public Vector3 targetPosition;</p>
+<p>csharp<br>public class MoveStaticObject : MonoBehaviour<br>{<br>    public GameObject staticObject; // 赋值那个静态物体<br>    public Vector3 targetPosition;</p>
 <pre><code>void Start()
 &#123;
     // 1. 在移动前，取消它的静态标记！
@@ -332,17 +293,12 @@ public Vector3 targetPosition;</p>
 
     // 注意：对于导航，处理起来更复杂，需要添加NavMeshObstacle或RebakeNavMesh。
 &#125;
-</code></pre>
-<p>}<br>
-总结<br>
-静态标记是一个“契约”：你向Unity承诺这个物体在运行时永远不会变换（移动、旋转、缩放），Unity则通过耗时的预计算来为你优化光照和性能。</p>
+</code></pre><p>}<br>总结<br>静态标记是一个“契约”：你向Unity承诺这个物体在运行时永远不会变换（移动、旋转、缩放），Unity则通过耗时的预计算来为你优化光照和性能。</p>
 <p>如果你在运行时打破了这份契约（移动了静态物体），Unity基于承诺所进行的优化就会全部出错。 因此，最佳实践是：任何需要在运行时变换的物体，都不要在编辑器里标记为 Static。 如果它最初是静态的，移动前务必先取消其静态标记。</p>
-<p>Camera -&gt; DynamicA -&gt; DynamicB -&gt; Static C -&gt; Dynamic D -&gt; Static E 这个位置关系中, D 、E实际上是不会渲染的, 剩下的A B C 都渲染<br>
-非常好！你给出的这个例子非常经典，完美地说明了Unity遮挡剔除（Occlusion Culling）的工作原理。</p>
+<p>Camera -&gt; DynamicA -&gt; DynamicB -&gt; Static C -&gt; Dynamic D -&gt; Static E 这个位置关系中, D 、E实际上是不会渲染的, 剩下的A B C 都渲染<br>非常好！你给出的这个例子非常经典，完美地说明了Unity遮挡剔除（Occlusion Culling）的工作原理。</p>
 <p>你的理解是完全正确的。</p>
 <p>在这个位置关系 Camera -&gt; DynamicA -&gt; DynamicB -&gt; Static C -&gt; Dynamic D -&gt; Static E 中，最终的渲染结果很可能是：Dynamic A, Dynamic B, Static C 被渲染，而 Dynamic D 和 Static E 不会被渲染。</p>
-<p>原理逐步分析：<br>
-让我们一步步分析相机渲染时发生了什么：</p>
+<p>原理逐步分析：<br>让我们一步步分析相机渲染时发生了什么：</p>
 <p>视锥体剔除（Frustum Culling）：</p>
 <p>首先，相机会进行视锥体剔除。我们假设所有物体（A, B, C, D, E）都在相机的视野范围内，所以这一步它们全部通过。</p>
 <p>遮挡查询（Occlusion Query）：</p>
@@ -354,16 +310,13 @@ public Vector3 targetPosition;</p>
 <p>Static C：它是一个强大的静态遮挡物。系统会检查它是否可见。因为前面的A和B都是动态物，不遮挡它，所以它是可见的。（渲染）</p>
 <p>Dynamic D：系统会检查D的包围盒（Bounds）。由于 Static C 是一个有效的静态遮挡物，并且从相机视角看，D完全在C的后面，因此Unity会判定D被C完全遮挡。（剔除，不渲染）</p>
 <p>Static E：系统同样会检查E的包围盒。它不仅在C的后面，还在D的后面。但判断遮挡时，只要有一个不透明的静态遮挡物（C）挡住了它，它就会被剔除。不需要关心它前面还有一个Dynamic D。（剔除，不渲染）</p>
-<p>核心要点总结：<br>
-遮挡物的权威性：只有被标记为 Occluder Static 的物体（如你的C和E）才能在遮挡查询中起到遮挡作用。动态物体（A, B, D）即使看起来很大，也完全不会影响遮挡计算。</p>
+<p>核心要点总结：<br>遮挡物的权威性：只有被标记为 Occluder Static 的物体（如你的C和E）才能在遮挡查询中起到遮挡作用。动态物体（A, B, D）即使看起来很大，也完全不会影响遮挡计算。</p>
 <p>查询逻辑：遮挡查询并不关心物体之间的“父子关系”或“逻辑关系”，它只关心它们的世界坐标下的包围盒和从相机出发的射线是否被静态遮挡物阻断。</p>
 <p>性能增益：正是因为这个机制，Static C 成功地将它身后的整个区域（包括D和E）都剔除了，为GPU节省了大量的渲染工作量（避免了overdraw）。这就是 occlusion culling 在GPU瓶颈场景中提升性能的关键。</p>
 <p>所以，你的判断非常准确！这个例子清晰地展示了为何将重要的、大的场景结构标记为 Occluder Static 是如此重要。</p>
-<p>如果场景中没有物体被标记为Static 那么开启摄像机的OcclusionCulling有什么作用呢?<br>
-这是一个非常好的问题，它触及了Unity occlusion culling 系统的一个关键前提。</p>
+<p>如果场景中没有物体被标记为Static 那么开启摄像机的OcclusionCulling有什么作用呢?<br>这是一个非常好的问题，它触及了Unity occlusion culling 系统的一个关键前提。</p>
 <p>简单直接的回答是：如果场景中没有任何物体被标记为 Occluder Static，那么开启摄像机的 Occlusion Culling 功能几乎没有任何作用，只会白白浪费一点CPU性能。</p>
-<p>详细解释<br>
-Occlusion Culling 系统的工作分为两个核心阶段：</p>
+<p>详细解释<br>Occlusion Culling 系统的工作分为两个核心阶段：</p>
 <p>预计算阶段（烘焙，Baking）：</p>
 <p>在编辑器里，你点击“Bake”按钮时，Unity会遍历场景中所有标记了 Occluder Static 的物体。</p>
 <p>它会将这些物体的几何信息（简化后的）分解成一个个小块（ cells），并计算它们之间的相互遮挡关系，然后将这些关系保存成一个遮挡数据文件（OcclusionCullingData.asset）。</p>
@@ -373,8 +326,7 @@ Occlusion Culling 系统的工作分为两个核心阶段：</p>
 <p>它会根据相机的位置和视角，快速地从数据中查出：“在这个视角下，哪些静态遮挡物是可见的？哪些区域被它们完全挡住了？”</p>
 <p>然后，它会将那些位于被挡住区域内的物体（无论是静态还是动态）从渲染队列中剔除。</p>
 <p>如果没有预计算的遮挡数据（因为没标记静态物体），这个查询就无数据可查，系统也就无法知道任何遮挡关系。</p>
-<p>那么，开启后还有什么效果？<br>
-即使没有静态遮挡物，开启Occlusion Culling可能还会有以下极其有限的效果，但这些效果并不依赖它：</p>
+<p>那么，开启后还有什么效果？<br>即使没有静态遮挡物，开启Occlusion Culling可能还会有以下极其有限的效果，但这些效果并不依赖它：</p>
 <p>视锥体剔除（Frustum Culling）：</p>
 <p>这是所有摄像机默认永远开启的核心功能，与你是否开启Occlusion Culling无关。</p>
 <p>它的作用是只渲染相机视锥体（视野范围）内的物体。视野外的物体本来就不会渲染。</p>
@@ -382,40 +334,34 @@ Occlusion Culling 系统的工作分为两个核心阶段：</p>
 <p>非常微弱的动态物体处理：</p>
 <p>理论上，Unity的OC系统可能仍会为动态物体执行一些最基本的包围盒检查。但由于没有静态遮挡物作为参考，它无法判断一个动态物体是否被另一个动态物体挡住（因为动态物体不能作为遮挡物）。</p>
 <p>因此，所有动态物体只要在视野内，就都会被渲染，哪怕它们堆叠在一起。这会导致严重的过度绘制（Overdraw）。</p>
-<p>结论与比喻<br>
-你可以把这个过程想象成一个捉迷藏游戏：</p>
+<p>结论与比喻<br>你可以把这个过程想象成一个捉迷藏游戏：</p>
 <p>静态遮挡物（Occluder Static）：就像是房间里预先把家具、墙壁的位置和大小画好的藏宝图。</p>
 <p>烘焙（Baking）：就是绘制这张藏宝图的过程。</p>
 <p>运行时Occlusion Culling：就是“鬼”看着这张藏宝图，直接知道哪些地方藏了人（被遮挡），不用一个个角落去翻找（渲染）。</p>
 <p>如果你的场景里没有标记任何静态物体，就相当于：</p>
 <p>你告诉“鬼”：“我们玩捉迷藏吧！”，然后递给他一张白纸（空的遮挡数据）。“鬼”拿着这张白纸，依然需要翻遍房间的每一个角落（渲染所有视野内的物体），因为他没有任何信息能帮他排除任何位置。</p>
 <p>因此，开启摄像机的Occlusion Culling功能，但又不提供任何静态遮挡物，是完全没有意义的优化策略。 正确的做法是：将场景中永远不会移动的大型物体（地形、建筑、山体）标记为 Occluder Static，并进行烘焙，这样才能真正发挥OC的强大威力。</p>
-<p>这个Bake操作 是每次打包前必须我自己处理吗? 还是自动处理<br>
-这是一个非常关键的工作流问题。</p>
+<p>这个Bake操作 是每次打包前必须我自己处理吗? 还是自动处理<br>这是一个非常关键的工作流问题。</p>
 <p>答案是：Bake操作必须由你在Unity编辑器中手动执行。它不会在打包时自动处理，也不会在运行时自动完成。</p>
-<p>详细解释<br>
-为什么不是自动的？</p>
+<p>详细解释<br>为什么不是自动的？</p>
 <p>极其耗时：烘焙光照（GI）和遮挡剔除（Occlusion Culling）是非常消耗计算资源的进程，可能需要几分钟到几小时不等，取决于场景的复杂度和你的电脑配置。如果每次打包前都自动执行一次，整个开发流程会变得无法忍受的缓慢。</p>
 <p>需要人工审核：烘焙结果常常需要开发者用眼睛去检查。比如光照贴图是否有瑕疵、漏光？遮挡剔除是否正确，有没有不该被剔除的物体被剔除了？这些都需要人工在编辑器里查看和调整参数后重新烘焙，无法全自动完成。</p>
 <p>基于编辑器状态：烘焙过程依赖于物体在编辑器场景（Scene） 中的状态（位置、静态标记、光照参数等）。打包（Build）过程只是将编辑器的最终成果（包括烘焙好的数据文件）打包成一个游戏应用程序。</p>
-<p>烘焙的数据去哪了？<br>
-当你点击Bake按钮后，Unity会在你的项目资产（Assets） 文件夹中生成对应的数据文件：</p>
+<p>烘焙的数据去哪了？<br>当你点击Bake按钮后，Unity会在你的项目资产（Assets） 文件夹中生成对应的数据文件：</p>
 <p>光照烘焙（Lighting Bake）：会在场景文件所在的同级目录生成一个名为 LightingData 的文件夹，里面包含 .exr, .lighting 等光照贴图和数据文件。</p>
 <p>遮挡剔除烘焙（Occlusion Culling Bake）：会在场景文件所在的同级目录生成一个 OcclusionCullingData.asset 文件。</p>
 <p>打包（Build）时，这些数据文件会和场景、模型、纹理等资源一起被包含到最终的游戏包（.apk, .exe等）中。运行时直接读取这些预计算好的数据。</p>
-<p>正确的工作流程<br>
-你的工作流程应该是这样的，特别是在项目后期：</p>
+<p>正确的工作流程<br>你的工作流程应该是这样的，特别是在项目后期：</p>
 <p>在编辑器中进行最终调整：布置好场景中的所有静态物体，设置好灯光参数、 occlusion culling 参数。</p>
 <p>手动执行烘焙：在 Window &gt; Rendering &gt; Lighting 和 Window &gt; Rendering &gt; Occlusion Culling 面板中，点击 Generate Lighting 和 Bake 按钮。</p>
 <p>等待并检查结果：等待烘焙完成，在场景视图中检查烘焙效果是否正确。如果有问题，调整参数后回到第2步重新烘焙。</p>
 <p>保存场景和项目：确保烘焙生成的数据文件已经保存。</p>
 <p>打包（Build）：现在你可以点击 File &gt; Build Settings… &gt; Build 进行打包了。打包器会自动包含所有当前已经烘焙好的数据文件。</p>
-<p>非常重要的注意事项<br>
-版本控制（Version Control）：烘焙生成的数据文件（光照贴图、OcclusionCullingData.asset）是必须提交到版本控制系统（如Git, SVN） 的文件。这样能保证所有团队成员和构建服务器（CI/CD）拿到项目后，看到的画面和性能是一致的，而无需自己重新烘焙。</p>
+<p>非常重要的注意事项<br>版本控制（Version Control）：烘焙生成的数据文件（光照贴图、OcclusionCullingData.asset）是必须提交到版本控制系统（如Git, SVN） 的文件。这样能保证所有团队成员和构建服务器（CI/CD）拿到项目后，看到的画面和性能是一致的，而无需自己重新烘焙。</p>
 <p>构建服务器（CI/CD）：在自动化的构建流水线上，通常不会执行烘焙操作。构建脚本会直接打包已经由开发者在本机烘焙好并提交到版本库的数据。如果需要在服务器上烘焙，需要专门配置，但这会极大地增加构建时间。</p>
 <p>动态修改：如果你在运行时通过代码实例化或移动了物体，这些变动完全不会影响已经烘焙好的数据。这也是为什么移动静态物体会导致渲染错误的原因。</p>
 <p>总结一句话：Bake 是你在编辑器里为游戏“预处理”数据的创作过程，而 Build 只是将这些处理好的成果“打包发货”。</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/d1e0d4f0/">https://soincredible.github.io/posts/d1e0d4f0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/e78f9514/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++合集</div></div></a></div><div class="next-post pull-right"><a href="/posts/75ed80d8/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">迷思——尽信书不如无书</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">to infinity and beyond✨🛸.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Render中的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">RenderPipeline就干三件事情</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d74c8db/" title="迷思——日本经济洞察"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——日本经济洞察"/></a><div class="content"><a class="title" href="/posts/1d74c8db/" title="迷思——日本经济洞察">迷思——日本经济洞察</a><time datetime="2025-09-02T08:36:09.000Z" title="发表于 2025-09-02 16:36:09">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d649707a/" title="迷思——不要老是想着装逼"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——不要老是想着装逼"/></a><div class="content"><a class="title" href="/posts/d649707a/" title="迷思——不要老是想着装逼">迷思——不要老是想着装逼</a><time datetime="2025-09-02T07:30:36.000Z" title="发表于 2025-09-02 15:30:36">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/958d72fd/" title="UnitySourceCode——bindings"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——bindings"/></a><div class="content"><a class="title" href="/posts/958d72fd/" title="UnitySourceCode——bindings">UnitySourceCode——bindings</a><time datetime="2025-08-27T02:30:47.000Z" title="发表于 2025-08-27 10:30:47">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——Jobs"/></a><div class="content"><a class="title" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs">UnitySourceCode——Jobs</a><time datetime="2025-08-27T02:30:03.000Z" title="发表于 2025-08-27 10:30:03">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——如何利用AI提升知识吸收和开发效率"/></a><div class="content"><a class="title" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率">迷思——如何利用AI提升知识吸收和开发效率</a><time datetime="2025-08-26T13:48:52.000Z" title="发表于 2025-08-26 21:48:52">2025-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/d1e0d4f0/">https://soincredible.github.io/posts/d1e0d4f0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/e78f9514/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++合集</div></div></a></div><div class="next-post pull-right"><a href="/posts/75ed80d8/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">迷思——尽信书不如无书</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">to infinity and beyond✨🛸.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Render%E4%B8%AD%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">Render中的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RenderPipeline%E5%B0%B1%E5%B9%B2%E4%B8%89%E4%BB%B6%E4%BA%8B%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">RenderPipeline就干三件事情</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d74c8db/" title="迷思——日本经济洞察"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——日本经济洞察"/></a><div class="content"><a class="title" href="/posts/1d74c8db/" title="迷思——日本经济洞察">迷思——日本经济洞察</a><time datetime="2025-09-02T08:36:09.000Z" title="发表于 2025-09-02 16:36:09">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d649707a/" title="迷思——不要老是想着装逼"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——不要老是想着装逼"/></a><div class="content"><a class="title" href="/posts/d649707a/" title="迷思——不要老是想着装逼">迷思——不要老是想着装逼</a><time datetime="2025-09-02T07:30:36.000Z" title="发表于 2025-09-02 15:30:36">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/958d72fd/" title="UnitySourceCode——bindings"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——bindings"/></a><div class="content"><a class="title" href="/posts/958d72fd/" title="UnitySourceCode——bindings">UnitySourceCode——bindings</a><time datetime="2025-08-27T02:30:47.000Z" title="发表于 2025-08-27 10:30:47">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——Jobs"/></a><div class="content"><a class="title" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs">UnitySourceCode——Jobs</a><time datetime="2025-08-27T02:30:03.000Z" title="发表于 2025-08-27 10:30:03">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——如何利用AI提升知识吸收和开发效率"/></a><div class="content"><a class="title" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率">迷思——如何利用AI提升知识吸收和开发效率</a><time datetime="2025-08-26T13:48:52.000Z" title="发表于 2025-08-26 21:48:52">2025-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
