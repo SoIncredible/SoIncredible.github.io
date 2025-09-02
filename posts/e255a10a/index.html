@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>计算机网络 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Skynet入门 路由器的概念端口IP地址C# Socket编程什么是Socket一个Socket连接的流程客户端发起 需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险 客户端Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据 服务端Accept是建立连接用Receive是接受消息用 Accept -&gt; Receive 结合GPT 使用C">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>计算机网络 | EddieLee</title><meta name="author" content="Eddie Lee"><meta name="copyright" content="Eddie Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Skynet入门 路由器的概念 端口 IP地址 C# Socket编程 什么是Socket 一个Socket连接的流程 客户端发起 需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险 Socket分为两种 第一种是监听Socket 第二种是会话Socket 你的理解很准确，确实服务端会有两个不同用途的Socket对象：   监听 Socket（称为 listenSoc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络">
 <meta property="og:url" content="https://soincredible.github.io/posts/e255a10a/index.html">
 <meta property="og:site_name" content="EddieLee">
-<meta property="og:description" content="Skynet入门 路由器的概念端口IP地址C# Socket编程什么是Socket一个Socket连接的流程客户端发起 需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险 客户端Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据 服务端Accept是建立连接用Receive是接受消息用 Accept -&gt; Receive 结合GPT 使用C">
+<meta property="og:description" content="Skynet入门 路由器的概念 端口 IP地址 C# Socket编程 什么是Socket 一个Socket连接的流程 客户端发起 需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险 Socket分为两种 第一种是监听Socket 第二种是会话Socket 你的理解很准确，确实服务端会有两个不同用途的Socket对象：   监听 Socket（称为 listenSoc">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-20T16:42:31.000Z">
-<meta property="article:modified_time" content="2025-09-02T02:21:51.952Z">
+<meta property="article:modified_time" content="2025-09-02T13:54:42.548Z">
 <meta property="article:author" content="Eddie Lee">
 <meta property="article:tag" content="博客，EddieLee">
 <meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/heart.png"><link rel="canonical" href="https://soincredible.github.io/posts/e255a10a/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-Y4K02ZNBTX"></script><script>window.dataLayer = window.dataLayer || [];
@@ -55,7 +55,7 @@ gtag('config', 'G-Y4K02ZNBTX');
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2025-09-02 10:21:51'
+  postUpdate: '2025-09-02 21:54:42'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -148,14 +148,326 @@ gtag('config', 'G-Y4K02ZNBTX');
 <style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
   white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
 <link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.6/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="EddieLee" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">计算机网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-20T16:42:31.000Z" title="发表于 2025-08-21 00:42:31">2025-08-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-02T02:21:51.952Z" title="更新于 2025-09-02 10:21:51">2025-09-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">127</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102">Skynet入门</a></p>
-<h1 id="路由器的概念"><a href="#路由器的概念" class="headerlink" title="路由器的概念"></a>路由器的概念</h1><h1 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h1><h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><h1 id="C-Socket编程"><a href="#C-Socket编程" class="headerlink" title="C# Socket编程"></a>C# Socket编程</h1><h1 id="什么是Socket"><a href="#什么是Socket" class="headerlink" title="什么是Socket"></a>什么是Socket</h1><p>一个Socket连接的流程<br>客户端发起</p>
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">EddieLee</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fa-fw fas fa-home faa-tada"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><i class="fa-fw fas fa-archive faa-tada"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fa-fw fas fa-folder-open faa-tada"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">计算机网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-20T16:42:31.000Z" title="发表于 2025-08-21 00:42:31">2025-08-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-02T13:54:42.548Z" title="更新于 2025-09-02 21:54:42">2025-09-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102">Skynet入门</a></p>
+<h1>路由器的概念</h1>
+<h1>端口</h1>
+<h1>IP地址</h1>
+<h1>C# Socket编程</h1>
+<h1>什么是Socket</h1>
+<p>一个Socket连接的流程<br>
+客户端发起</p>
 <p>需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险</p>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据</p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>Accept是建立连接用<br>Receive是接受消息用</p>
+<h2 id="Socket分为两种">Socket分为两种</h2>
+<p>第一种是监听Socket</p>
+<p>第二种是会话Socket</p>
+<p>你的理解很准确，确实<strong>服务端会有两个不同用途的Socket对象</strong>：</p>
+<ol>
+<li>
+<p><strong>监听 Socket</strong>（称为 <code>listenSocket</code>），职责是：</p>
+<ul>
+<li>绑定端口，用于侦听新的连接请求（<code>Bind</code> + <code>Listen</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>会话 Socket</strong>（每连一个客户端，对应一个），职责是：</p>
+<ul>
+<li>和某个客户端具体收发数据（<code>Accept</code> 的返回值）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="为什么要这样分开？为什么不能直接用监听socket和客户端通信？">为什么要这样分开？为什么不能直接用监听socket和客户端通信？</h2>
+<h3 id="一、协议-设计层面的原因">一、协议/设计层面的原因</h3>
+<ol>
+<li>
+<p><strong>监听Socket只负责接收连接请求</strong></p>
+<ul>
+<li>监听socket在TCP层维护了一个“正在监听端口、等待连接”的队列（backlog）。</li>
+<li>它不能用来真正收发数据，只能等待新连接，然后通过<code>Accept</code>产生一个新的会话socket。</li>
+<li>TCP协议里，监听socket和会话socket拥有不同的状态。</li>
+</ul>
+</li>
+<li>
+<p><strong>每个客户端要有独立的socket对象</strong></p>
+<ul>
+<li>这样服务端才能同时和多个客户端通信（每个连接一个独立文件描述符），互不干扰。</li>
+<li>如果直接用监听socket收发数据，就无法区分哪个客户端发来的数据，也无法并发处理，直接崩溃！</li>
+<li><code>Accept</code> 会为每个客户端分配一个新的 socket，底层内核分配新的资源、端点，服务端逻辑才能独立管理。</li>
+</ul>
+</li>
+<li>
+<p><strong>多路复用、并发模型需要会话socket</strong></p>
+<ul>
+<li>服务端通常有几十万个连接，如果全部抢占同一个监听socket，相互干扰，严重影响并发性能。</li>
+<li>新的socket会与客户端唯一绑定，方便后续select/epoll/IOCP或线程池单独处理。</li>
+</ul>
+</li>
+<li>
+<p><strong>监听socket和会话socket的状态不一样</strong></p>
+<ul>
+<li>监听socket是“LISTEN”状态，只能等待连接。</li>
+<li>接受后的会话socket进入“ESTABLISHED”状态，才能双向收发数据。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、操作系统实现原因">二、操作系统实现原因</h3>
+<ul>
+<li>
+<p><strong>Linux/Windows的内核管理：</strong></p>
+<ul>
+<li>监听socket分配backlog（等待区），只用于管理连接请求队列；</li>
+<li>收到客户端请求，内核分配一个新socket fd（会话socket），维护与对方的TCP会话状态。</li>
+<li>只有这个fd才能安全读写数据，监听socket的fd不能用来读写，只能accept。</li>
+</ul>
+</li>
+<li>
+<p><strong>安全/隔离：</strong></p>
+<ul>
+<li>监听socket本身不能被污染——收发数据万一断了会影响整个服务器socket监听。</li>
+<li>每个连接单独分配资源，有问题只会影响单个连接，容易控制和管理。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="图示理解（伪代码）：">图示理解（伪代码）：</h3>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Server Socket Life Cycle</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建监听Socket</span></span><br><span class="line">Socket listenSocket = <span class="keyword">new</span> Socket(...);</span><br><span class="line"><span class="comment">// 2. 绑定端口</span></span><br><span class="line">listenSocket.Bind(...);</span><br><span class="line"><span class="comment">// 3. 进入监听</span></span><br><span class="line">listenSocket.Listen(...);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// 4. 每有一个新连接, Accept会分配一个新的会话Socket</span></span><br><span class="line">    Socket conn = listenSocket.Accept();</span><br><span class="line">    <span class="comment">// 5. 后续和客户端的所有收发数据，都用conn这个socket</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>listenSocket</code> 只负责新增连接。</li>
+<li><code>conn</code> 负责和某个客户端通信。</li>
+<li>有n个客户端，就有n个会话Socket，<strong>只有一个监听Socket</strong>。</li>
+</ul>
+<hr>
+<h2 id="举个实际例子">举个实际例子</h2>
+<ul>
+<li><strong>Web服务器（比如IIS/Apache/nginx）</strong>
+<ul>
+<li>监听端口80，只用监听socket握手接收新用户连接请求。</li>
+<li>每有新请求，生成一个会话socket，和该连接通信，互不干扰。</li>
+<li>如果用同一个监听socket收发数据，所有人混流，无法区别谁是谁。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>监听socket</strong>：只负责侦听和接受新连接，不能收发数据。</li>
+<li><strong>会话socket（Accept出来的）</strong>：和某个客户端具体通信，收发数据。</li>
+<li>这样设计是操作系统/协议规定的，<strong>能确保高效并发、安全隔离和稳定运行</strong>。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>“监听socket是连接的大门，只用来看谁想进来；会话socket是进入之后，与某个人的密室专线，对每个身份都有独立沟通渠道。只有分开，管理和性能才能做好。”</strong></p>
+</blockquote>
+<hr>
+<p>如需更底层协议细节，可以补充TCP状态转移图/源码！</p>
+<p>你的两个问题很专业，下面逐条详细说明：</p>
+<hr>
+<h2 id="1-创建监听-Socket-和会话-Socket-的流程一样吗？">1. 创建监听 Socket 和会话 Socket 的流程一样吗？</h2>
+<h3 id="在-Socket-编程（比如-C-）里：">在 Socket 编程（比如 C#）里：</h3>
+<ul>
+<li><strong>监听 Socket</strong> (<code>listenSocket</code>)
+<ul>
+<li>你得主动创建：<code>new Socket(...)</code></li>
+<li>然后 Bind 到某端口：<code>.Bind(...)</code></li>
+<li>然后开启侦听：<code>.Listen(backlog)</code></li>
+</ul>
+</li>
+<li><strong>会话 Socket</strong> (<code>connSocket</code>)
+<ul>
+<li><strong>不是你主动创建的</strong>。它是 listener 调用 <code>.Accept()</code> 时由系统自动生成、返回的对象。</li>
+<li>你不用再手动 Bind/Listen，它一出生就“已连上”，通信双方已确定（对端IP:Port 本地IP:Port等）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="流程总结">流程总结</h3>
+<ul>
+<li>监听 Socket 需要 显式 创建-绑定-监听</li>
+<li>会话 Socket 是通过监听 Socket 的 <code>.Accept()</code> 生成</li>
+<li>你不需要对会话 Socket 进行 Bind/Listen（如果你再次Bind会报错）</li>
+</ul>
+<blockquote>
+<p><strong>流程不一样：监听Socket手动创建配置，连接Socket自动生成，只要收数据即可。</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-两者的数据内容构成上有什么区别？">2. 两者的数据内容构成上有什么区别？</h2>
+<h3 id="监听-Socket">监听 Socket</h3>
+<ul>
+<li>包含内容：
+<ul>
+<li>本地端口/IP（Bind 过的地址，如 0.0.0.0:8000）</li>
+<li>一个监听队列（backlog）——new连接排队用</li>
+<li>Socket类型(TCP/UDP)，协议族等</li>
+</ul>
+</li>
+<li><strong>没有“远端”信息，也没有TCP序列号等通信状态</strong></li>
+<li>不能直接收发应用数据，只能收到新连接请求。</li>
+</ul>
+<h3 id="会话-Socket">会话 Socket</h3>
+<ul>
+<li>包含内容：
+<ul>
+<li>本地端口/IP（一般是监听Socket的端口）</li>
+<li><strong>远端客户端IP/端口</strong></li>
+<li>当前TCP连接状态、序列号、缓冲区等</li>
+<li>发送和接收缓冲区</li>
+<li>TCP协议维护的连接控制块（TCP state machine、TCP窗口、拥塞控制等）</li>
+</ul>
+</li>
+<li>可以直接收发数据</li>
+<li>维护与唯一远端的连接状态、收发缓冲、数据包</li>
+</ul>
+<h4 id="举个例子：">举个例子：</h4>
+<p>监听Socket的数据结构只包含“我负责管理这个端口和连接队列”；<br>
+会话Socket的数据结构包含“我和这个客户端的连线状态、数据缓冲、包顺序等详细内容”。</p>
+<h3 id="表格对比">表格对比</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>监听Socket</th>
+<th>会话Socket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本地地址/端口</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>远端地址/端口</td>
+<td>无</td>
+<td>有</td>
+</tr>
+<tr>
+<td>TCP连接状态</td>
+<td>LISTEN</td>
+<td>ESTABLISHED</td>
+</tr>
+<tr>
+<td>连接队列</td>
+<td>backlog连接请求队列</td>
+<td>无</td>
+</tr>
+<tr>
+<td>应用层数据通信</td>
+<td>不行</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>缓冲区</td>
+<td>没有数据缓冲</td>
+<td>有发送/接收缓冲区</td>
+</tr>
+<tr>
+<td>唯一性</td>
+<td>只一个（主动建）</td>
+<td>客户端连接一个生成一个</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="结论">结论</h2>
+<p><strong>创建流程：</strong></p>
+<ul>
+<li>监听Socket要先创建、bind、listen，主动准备好；会话Socket通过accept由内核自动生成（你调accept方法就有了）。</li>
+</ul>
+<p><strong>内容区别：</strong></p>
+<ul>
+<li>监听Socket缺失“远端”数据，只管新连接请求；会话Socket则包含详细通信双方信息和全部TCP连接细节及缓冲区、序列号等。</li>
+</ul>
+<blockquote>
+<p><strong>监听Socket专注于“新连接排队、接收”，会话Socket专注于“具体数据传输”——角色完全不同。</strong></p>
+</blockquote>
+<hr>
+<p>如果想看更底层源码（比如Linux内核的<code>struct sock</code>、<code>struct tcp_sock</code>），可以补充！</p>
+<h1>Socket中如何判断一个连接断开?</h1>
+<h1>一定要注意 Socket的执行不一定在主线程上, 可千万不要在非主线程上操作MonoBehaviour中的数据, 比如UI</h1>
+<h2 id="客户端">客户端</h2>
+<p>Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据</p>
+<h2 id="服务端">服务端</h2>
+<p>Accept是建立连接用<br>
+Receive是接受消息用</p>
 <p>Accept -&gt; Receive</p>
 <p>结合GPT 使用C#使用一个Actor模型</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/e255a10a/">https://soincredible.github.io/posts/e255a10a/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/4d82216e/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">迷思——哪有什么岁月静好,都是有人替你负重前行</div></div></a></div><div class="next-post pull-right"><a href="/posts/43a309b5/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UnrealEngine源码</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">to infinity and beyond✨🛸.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">路由器的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-Socket%E7%BC%96%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">C# Socket编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSocket"><span class="toc-number">5.</span> <span class="toc-text">什么是Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.1.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">5.2.</span> <span class="toc-text">服务端</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d74c8db/" title="迷思——日本经济洞察"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——日本经济洞察"/></a><div class="content"><a class="title" href="/posts/1d74c8db/" title="迷思——日本经济洞察">迷思——日本经济洞察</a><time datetime="2025-09-02T08:36:09.000Z" title="发表于 2025-09-02 16:36:09">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d649707a/" title="迷思——不要老是想着装逼"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——不要老是想着装逼"/></a><div class="content"><a class="title" href="/posts/d649707a/" title="迷思——不要老是想着装逼">迷思——不要老是想着装逼</a><time datetime="2025-09-02T07:30:36.000Z" title="发表于 2025-09-02 15:30:36">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/958d72fd/" title="UnitySourceCode——bindings"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——bindings"/></a><div class="content"><a class="title" href="/posts/958d72fd/" title="UnitySourceCode——bindings">UnitySourceCode——bindings</a><time datetime="2025-08-27T02:30:47.000Z" title="发表于 2025-08-27 10:30:47">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——Jobs"/></a><div class="content"><a class="title" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs">UnitySourceCode——Jobs</a><time datetime="2025-08-27T02:30:03.000Z" title="发表于 2025-08-27 10:30:03">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——如何利用AI提升知识吸收和开发效率"/></a><div class="content"><a class="title" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率">迷思——如何利用AI提升知识吸收和开发效率</a><time datetime="2025-08-26T13:48:52.000Z" title="发表于 2025-08-26 21:48:52">2025-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<p>非常好的问题！<br>
+我们来详细分析下：</p>
+<hr>
+<h2 id="问题重述">问题重述</h2>
+<p>假设你有<strong>一批 Socket</strong>（比如100个连接），你要定期检测哪些“可读”，方式有两种：</p>
+<ol>
+<li>用 <code>foreach</code>，对每个 socket 调用 <code>.Poll(...)</code>。</li>
+<li>用 <code>Socket.Select(...)</code>，一次性把所有 socket 放进列表，检查谁可读。</li>
+</ol>
+<p><strong>哪种开销大？为什么？性能代价在哪里？</strong></p>
+<hr>
+<h2 id="1-分析-Poll（对每个Socket单独轮询）">1. 分析 Poll（对每个Socket单独轮询）</h2>
+<ul>
+<li>你对每个 Socket 都调用一次 Poll。</li>
+<li>Poll 的本质：.NET 框架会为每个 socket 调用一次底层API（可能是 poll/select/epoll/kqueue，视平台而定），每个 socket 都要进入内核态、做一次查询，并等待指定超时时间。</li>
+<li>100个Socket你就要进入内核态100次。</li>
+<li>用户态和内核态的切换非常昂贵，尤其你每次只查单个Socket，无法利用系统批量检测优化。</li>
+<li>结果，你的检测总时间 ≈ 100 次 Poll 耗时总和。大量重复系统调用，<strong>内核态资源消耗大，性能低</strong>。</li>
+</ul>
+<hr>
+<h2 id="2-分析-Select（一次性批量查询）">2. 分析 Select（一次性批量查询）</h2>
+<ul>
+<li>你把所有Socket批量传给一次Select调用。</li>
+<li>内部只进入内核态<strong>一次</strong>，内核态代码在本地 for（或者epoll也许是红黑树遍历等）判断这一批socket的状态，把可读/socket事件状况都批量告诉你的应用。</li>
+<li>这样<strong>调用一次系统接口</strong>，拿回所有结果。</li>
+<li>和Poll做100次系统调用比，Select只做一次系统调用+本地循环。</li>
+</ul>
+<hr>
+<h2 id="3-结果对比">3. 结果对比</h2>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>内核切换次数</th>
+<th>系统调用次数</th>
+<th>主要瓶颈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多次Poll</td>
+<td>N(100次)</td>
+<td>N(100次)</td>
+<td>用户态&lt;-&gt;内核态,多余切换</td>
+</tr>
+<tr>
+<td>一次Select</td>
+<td>1</td>
+<td>1</td>
+<td>内核批量查找更高效</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>开销主要在“内核切换+系统调用次数”！</strong>
+<ul>
+<li>多次 Poll 开销主要是：大量的系统调用 &amp; 频繁的用户态/内核态切换。</li>
+<li>Select 只需一次调用，数据结构拷贝也一次，不会反复切换内核，而且能一次性处理所有。</li>
+</ul>
+</li>
+<li>另外，Poll 如果你用长超时或阻塞方式，遍历所有socket总耗时会变得很长（等待多个socket轮流各自超时）。</li>
+</ul>
+<hr>
+<h2 id="4-结论">4. 结论</h2>
+<ul>
+<li><strong>Select 明显效率更高，开销更低。</strong></li>
+<li>Poll 在N多socket时几乎不可接受，只有少数socket（比如客户端）才推荐这么写。</li>
+<li>在高并发服务器场景，多路复用总是推荐批量Select（或更优的epoll/IOCP/SocketAsyncEventArgs）。</li>
+</ul>
+<hr>
+<h2 id="总结（标准面试答案）">总结（标准面试答案）</h2>
+<blockquote>
+<p><em>“遍历多个socket分别Poll，相比一次Select批量检测，最大的额外开销在于多次进行系统调用和用户/内核态切换。在socket数量增多时，这种切换会极大增加CPU和内核资源消耗。而Select可以一次性批量检测所有socket状态，大幅减少系统调用次数和切换负载，因此效率远高于多次Poll。”</em></p>
+</blockquote>
+<hr>
+<p><strong>结论：有多个socket（&gt;10），推荐用<code>Select</code>。<br>
+只用单个socket/客户端可偶尔用<code>Poll</code>。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://soincredible.github.io">Eddie Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://soincredible.github.io/posts/e255a10a/">https://soincredible.github.io/posts/e255a10a/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://soincredible.github.io" target="_blank">EddieLee</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><link rel="stylesheet" href="/css/coin/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">不给糖果就捣蛋</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://cdn.cbd.int/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/4d82216e/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">迷思——哪有什么岁月静好,都是有人替你负重前行</div></div></a></div><div class="next-post pull-right"><a href="/posts/43a309b5/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UnrealEngine源码</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eddie Lee</div><div class="author-info__description">to infinity and beyond✨🛸.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">128</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/SoIncredible" target="_blank" title="Github"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-github"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2636060652@qq.com" target="_blank" title="Email"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-youjian"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/434655900" target="_blank" title="BiliBili"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-bilibili"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Hi,这里是EddieLee的博客！👏👏👏</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">路由器的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">C# Socket编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">什么是Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket%E5%88%86%E4%B8%BA%E4%B8%A4%E7%A7%8D"><span class="toc-number">5.1.</span> <span class="toc-text">Socket分为两种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%99%E6%A0%B7%E5%88%86%E5%BC%80%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E7%94%A8%E7%9B%91%E5%90%ACsocket%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">5.2.</span> <span class="toc-text">为什么要这样分开？为什么不能直接用监听socket和客户端通信？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8D%8F%E8%AE%AE-%E8%AE%BE%E8%AE%A1%E5%B1%82%E9%9D%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">5.2.1.</span> <span class="toc-text">一、协议&#x2F;设计层面的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%9B%A0"><span class="toc-number">5.2.2.</span> <span class="toc-text">二、操作系统实现原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%A4%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%BC%AA%E4%BB%A3%E7%A0%81%EF%BC%89%EF%BC%9A"><span class="toc-number">5.2.3.</span> <span class="toc-text">图示理解（伪代码）：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E5%AE%9E%E9%99%85%E4%BE%8B%E5%AD%90"><span class="toc-number">5.3.</span> <span class="toc-text">举个实际例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.4.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%9B%91%E5%90%AC-Socket-%E5%92%8C%E4%BC%9A%E8%AF%9D-Socket-%E7%9A%84%E6%B5%81%E7%A8%8B%E4%B8%80%E6%A0%B7%E5%90%97%EF%BC%9F"><span class="toc-number">5.5.</span> <span class="toc-text">1. 创建监听 Socket 和会话 Socket 的流程一样吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Socket-%E7%BC%96%E7%A8%8B%EF%BC%88%E6%AF%94%E5%A6%82-C-%EF%BC%89%E9%87%8C%EF%BC%9A"><span class="toc-number">5.5.1.</span> <span class="toc-text">在 Socket 编程（比如 C#）里：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="toc-number">5.5.2.</span> <span class="toc-text">流程总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%A4%E8%80%85%E7%9A%84%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9%E6%9E%84%E6%88%90%E4%B8%8A%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">5.6.</span> <span class="toc-text">2. 两者的数据内容构成上有什么区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC-Socket"><span class="toc-number">5.6.1.</span> <span class="toc-text">监听 Socket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D-Socket"><span class="toc-number">5.6.2.</span> <span class="toc-text">会话 Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">5.6.2.1.</span> <span class="toc-text">举个例子：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E5%AF%B9%E6%AF%94"><span class="toc-number">5.6.3.</span> <span class="toc-text">表格对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.7.</span> <span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Socket中如何判断一个连接断开?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">一定要注意 Socket的执行不一定在主线程上, 可千万不要在非主线程上操作MonoBehaviour中的数据, 比如UI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">7.1.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E9%87%8D%E8%BF%B0"><span class="toc-number">7.3.</span> <span class="toc-text">问题重述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%86%E6%9E%90-Poll%EF%BC%88%E5%AF%B9%E6%AF%8F%E4%B8%AASocket%E5%8D%95%E7%8B%AC%E8%BD%AE%E8%AF%A2%EF%BC%89"><span class="toc-number">7.4.</span> <span class="toc-text">1. 分析 Poll（对每个Socket单独轮询）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E6%9E%90-Select%EF%BC%88%E4%B8%80%E6%AC%A1%E6%80%A7%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="toc-number">7.5.</span> <span class="toc-text">2. 分析 Select（一次性批量查询）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94"><span class="toc-number">7.6.</span> <span class="toc-text">3. 结果对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BB%93%E8%AE%BA"><span class="toc-number">7.7.</span> <span class="toc-text">4. 结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%88%E6%A0%87%E5%87%86%E9%9D%A2%E8%AF%95%E7%AD%94%E6%A1%88%EF%BC%89"><span class="toc-number">7.8.</span> <span class="toc-text">总结（标准面试答案）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d74c8db/" title="迷思——日本经济洞察"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——日本经济洞察"/></a><div class="content"><a class="title" href="/posts/1d74c8db/" title="迷思——日本经济洞察">迷思——日本经济洞察</a><time datetime="2025-09-02T08:36:09.000Z" title="发表于 2025-09-02 16:36:09">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d649707a/" title="迷思——不要老是想着装逼"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——不要老是想着装逼"/></a><div class="content"><a class="title" href="/posts/d649707a/" title="迷思——不要老是想着装逼">迷思——不要老是想着装逼</a><time datetime="2025-09-02T07:30:36.000Z" title="发表于 2025-09-02 15:30:36">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/958d72fd/" title="UnitySourceCode——bindings"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——bindings"/></a><div class="content"><a class="title" href="/posts/958d72fd/" title="UnitySourceCode——bindings">UnitySourceCode——bindings</a><time datetime="2025-08-27T02:30:47.000Z" title="发表于 2025-08-27 10:30:47">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UnitySourceCode——Jobs"/></a><div class="content"><a class="title" href="/posts/9e38ed66/" title="UnitySourceCode——Jobs">UnitySourceCode——Jobs</a><time datetime="2025-08-27T02:30:03.000Z" title="发表于 2025-08-27 10:30:03">2025-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迷思——如何利用AI提升知识吸收和开发效率"/></a><div class="content"><a class="title" href="/posts/79d0ad57/" title="迷思——如何利用AI提升知识吸收和开发效率">迷思——如何利用AI提升知识吸收和开发效率</a><time datetime="2025-08-26T13:48:52.000Z" title="发表于 2025-08-26 21:48:52">2025-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Eddie Lee</div><div class="framework-info"><span>框架 </span><span>Hexo</span><span class="footer-separator">|</span><span>主题 <span>Butterfly</span></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
