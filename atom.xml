@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-09-02T10:30:00.250Z</updated>
+  <updated>2025-09-05T01:49:03.509Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -17,13 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Unity插件合集</title>
+    <link href="https://soincredible.github.io/posts/3248703d/"/>
+    <id>https://soincredible.github.io/posts/3248703d/</id>
+    <published>2025-09-05T01:12:08.000Z</published>
+    <updated>2025-09-05T01:49:03.509Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://assetstore.unity.com/packages/tools/utilities/vfolders-2-255470">vFolders 2</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://assetstore.unity.com/packages/tools/utilities/vfolders-2-255470&quot;&gt;vFolders 2&lt;/a&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Unity渲染合集</title>
+    <link href="https://soincredible.github.io/posts/b20b7f63/"/>
+    <id>https://soincredible.github.io/posts/b20b7f63/</id>
+    <published>2025-09-05T01:10:15.000Z</published>
+    <updated>2025-09-05T01:43:31.410Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>迷思——日本经济洞察</title>
     <link href="https://soincredible.github.io/posts/1d74c8db/"/>
     <id>https://soincredible.github.io/posts/1d74c8db/</id>
     <published>2025-09-02T08:36:09.000Z</published>
-    <updated>2025-09-02T10:30:00.250Z</updated>
+    <updated>2025-09-08T03:57:18.368Z</updated>
     
-    <content type="html"><![CDATA[<p>日本经济泡沫破裂发生在20世纪90年代, 自1975年石油危机之后日本进入高速发展.</p><h1>日本“窗边族”文化</h1><p>日本社会价值观与欧美不同, 企业是终生雇佣制度, 企业对于员工来说是第二个家, 因此企业裁员倒闭 不被日本主流价值观所接受</p><h1>参考资料</h1><p><a href="">以日为鉴</a></p>]]></content>
+    <content type="html"><![CDATA[<p>日本经济泡沫破裂发生在20世纪90年代, 自1975年石油危机之后日本进入高速发展.</p><h1>日本“窗边族”文化</h1><p>日本社会价值观与欧美不同, 企业是终生雇佣制度, 企业对于员工来说是第二个家, 因此企业裁员倒闭 不被日本主流价值观所接受</p><h1>住专公司问题</h1><h1>参考资料</h1><p><a href="https://weread.qq.com/web/reader/77d32440813aba4e2g01644a">以日为鉴</a><br><a href="">时势</a><br><a href="">大衰退 经济学圣杯</a></p>]]></content>
     
     
       
@@ -44,9 +78,9 @@
     <link href="https://soincredible.github.io/posts/d649707a/"/>
     <id>https://soincredible.github.io/posts/d649707a/</id>
     <published>2025-09-02T07:30:36.000Z</published>
-    <updated>2025-09-02T12:06:52.096Z</updated>
+    <updated>2025-09-05T07:24:53.406Z</updated>
     
-    <content type="html"><![CDATA[<h1>对近期工作的反思</h1><p>Figma Convert Unity插件, 明知道有说明文档, 却就是不看, 或者说到手一个插件或者某一个Unity库, 因为是自己不属于的领域, 就算没有说明文档, 也要先尽量去找说明文档, 而不是先去看代码</p><p>整个流程是<br>先看说明文档-&gt;根据说明文档实操-&gt;根据操作的流程以这条线为脉络看代码-&gt;抽象这个库的设计思路和架构-&gt;思考化为己用、考虑如何扩展.</p><p>这个流程不能变, 不论是在任何情况下都是这样, 要做的是要提高自己阅读文档、梳理代码的速度, 指导方针来自于《程序员超强大脑这本书》, 如果时间不紧急的话可以通过画UML图和时序图的方式熟悉代码, 如果时间紧急, 需要找一个更高效的方法.</p><h1>行动方针</h1><p>如果一个插件有说明文档, 先好好地看一遍说明文档, 不要一上来先看代码, 避免重复造轮子</p>]]></content>
+    <content type="html"><![CDATA[<h1>对近期工作的反思</h1><p>Figma Convert Unity插件, 明知道有说明文档, 却就是不看, 或者说到手一个插件或者某一个Unity库, 因为是自己不属于的领域, 就算没有说明文档, 也要先尽量去找说明文档, 而不是先去看代码</p><p>整个流程是<br>先看说明文档-&gt;根据说明文档实操-&gt;根据操作的流程以这条线为脉络看代码-&gt;抽象这个库的设计思路和架构-&gt;思考化为己用、考虑如何扩展.</p><p>这个流程不能变, 不论是在任何情况下都是这样, 要做的是要提高自己阅读文档、梳理代码的速度, 指导方针来自于《程序员超强大脑这本书》, 如果时间不紧急的话可以通过画UML图和时序图的方式熟悉代码, 如果时间紧急, 需要找一个更高效的方法.</p><h1>行动方针</h1><p>如果一个插件有说明文档, 先好好地看一遍说明文档, 不要一上来先看代码, 避免重复造轮子</p><h1>如何看Log</h1><p>不要觉得Log多, 出现问题的时候这些Log能帮你<br>看的不只是自己打的Log, 别人打的Log也会帮助你<br>每条Log中的每个数据都有其含义<br>通过看Log排查bug就像是当侦探 拼凑线索 还原案发现场.</p><h1>以微信营销平台上的配置为例子</h1><p>在获得新角色的时候, 会在本地截图, 不会用营销平台上配置的图片, 因此需要和后台定义一个标识, 当这个<br>但是由于config是引用类型, 如果一个玩家在一个Session内多次触发获得角色的分享, 那么在第一次分享之后, 这套配置中的图片就会被写入并覆盖, 导致和后端定义的标识被破坏了, 新的角色截图也不会被写入</p>]]></content>
     
     
       
@@ -211,9 +245,9 @@
     <link href="https://soincredible.github.io/posts/4d82216e/"/>
     <id>https://soincredible.github.io/posts/4d82216e/</id>
     <published>2025-08-20T17:36:58.000Z</published>
-    <updated>2025-08-28T12:11:23.449Z</updated>
+    <updated>2025-09-08T13:20:06.481Z</updated>
     
-    <content type="html"><![CDATA[<p>起因是, 笔者想要在Unity中实现一些基于UGUI的拖拽效果, 于是开始去思考UGUI是如何实现响应输入的, 接着了解到Unity的EventSystem和一系列EventHandler接口(IPointerClickHandler、 IDragHandler等)来驱动整个System的运转. 笔者在这篇博客中并非是要讨论EventSystem的具体实现. 而是想陈述自己对EventHandler这些接口在UGUI体系中扮演角色的一些迷思. 作为UGUI的使用者, 我只关心如何实现自己想要的功能. 如果我想让一个UI元素可以响应点击, 那我就要创建一个继承自MonoBehaviour的脚本, 挂载到这个UI元素上, 并且还要实现IPointerClickHandler接口, 这样就结束了, 至于怎么样在运行时获取到这个UI元素上的脚本实例, 以及如何触发接口中的方法, 我不关心, Unity会帮我处理. 这就是我对接口最初的理解, <strong>我</strong>只负责接口行为的定义, 我不负责接口行为的调用. 于是有一段时间我经常会遇到这种处境: 在业务的开发中发现一些类型中能抽象出一部分行为封装成接口, 但有可能这些类根本就不是同一个概念下的东西, 或者, 正是由于这种 只考考虑抽离行为 而不考虑接口调用时机和接口持有者的数据组织格式, 导致绝大部分抽离行为封装接口的操作都十分多余.</p><p>接口的行为不止于此 我记得在刚入行的时候, 一个程序员前辈跟我说, 写代码是一个十分繁琐的过程, 但如果你觉得某一部分代码写起来好像不用那么繁琐就能实现你的功能, 那有可能是有人在你不知道的地方帮你做了很多事情. 我上面举的EventSystem就是这样一个例子, UGUI系统通过对外暴露EventHandler接口的方式, 在内部有能够持有接口实例的方法, 你不需要去关心UGUI系统内部是如何持有接口示例的. YooAsset自定义打包Step也是类似的思想, 二者都是通过某种方式持有了外部的对象实例, Unity是通过运行时持有并遍历所有的GameObject, 找到上面的EventHandler来持有它们, 而YooAsset则是在Init时将需要的buildstep实例注册到YooAsset内部去. 两者的思想或许可以表述如下: <strong>外部定义行为, 内部控制流程</strong>.</p><p>最近笔者想要给项目的换皮活动也做一个类似的, 一个活动换皮要有下面几个固定的步骤 导入资源、更新配置表, 定义一个IStep接口, 接口内有一个Action行为, 调用方可以实现多个继承IStep接口的类, 比如导入资源类、更新配置表类, 然后在Action行为中就可以实现是如何导入资源的、如何更新配置表的. 然后将导入资源类和更新配置表类再注册到一个序列化的数据结构或者硬编码的脚本中, 在执行换皮的时候就是从序列化数据或者硬编码脚本中拿到这一套流程信息 传入到 我这套换皮框架中, 外部不用管我内部是如何驱动这套流程信息运转的, 这样的模式和上面举的UGUI、YooAsset的例子大同小异.</p><p>Unity协程、C#的Task也是如此, 只因我被“保护”得太好了, Unity的协程和Task都很好用, 丢进去一个异步的任务, 让他自己在那里执行就好了, 可是异步任务本质上是怎么执行的呢? Unity协程依赖于MonoBehaviour的Update机制, Task依赖于C#内部的线程池. 背后都会有一个间隔一定时间轮询的逻辑, 只是我不需要关心这段逻辑罢了</p><p>我有段时间看了大量讲述C#Task的文章, 现在再去回想其实还是不甚理解, 多去想想</p><p>定义接口的目的, 让一些类型具有某些行为, 并且可以通过声明接口类型, 来持有接口的实例, 一个实例的对象既可以是该实例的class类型, 也可以是其实现的任意一个接口的类型.<br>下面列举了笔者在开发过程中遇到的</p><ol><li><p>C#中的非托管资源在使用的时候可以实现IDisposable接口, 在Dispose接口中, 给了开发者比较统一便捷的方式对不同的非托管资源进行释放的一个点, 另外其中</p></li><li><p>语法糖foreach, 有一个IEnumerable和IEnumerator, 使用IEnumerable标识一个类型的身份,</p></li></ol><p>因此 接口在设计隔离性、统一操作、标识统一身份等场景下能发挥作用.</p>]]></content>
+    <content type="html"><![CDATA[<p>起因是, 笔者想要在Unity中实现一些基于UGUI的拖拽效果, 于是开始去思考UGUI是如何实现响应输入的, 接着了解到Unity的EventSystem和一系列EventHandler接口(IPointerClickHandler、 IDragHandler等)来驱动整个System的运转. 笔者在这篇博客中并非是要讨论EventSystem的具体实现. 而是想陈述自己对EventHandler这些接口在UGUI体系中扮演角色的一些迷思. 作为UGUI的使用者, 我只关心如何实现自己想要的功能. 如果我想让一个UI元素可以响应点击, 那我就要创建一个继承自MonoBehaviour的脚本, 挂载到这个UI元素上, 并且还要实现IPointerClickHandler接口, 这样就结束了, 至于怎么样在运行时获取到这个UI元素上的脚本实例, 以及如何触发接口中的方法, 我不关心, Unity会帮我处理. 这就是我对接口最初的理解, <strong>我</strong>只负责接口行为的定义, 我不负责接口行为的调用. 于是有一段时间我经常会遇到这种处境: 在业务的开发中发现一些类型中能抽象出一部分行为封装成接口, 但有可能这些类根本就不是同一个概念下的东西, 或者, 正是由于这种 只考考虑抽离行为 而不考虑接口调用时机和接口持有者的数据组织格式, 导致绝大部分抽离行为封装接口的操作都十分多余.</p><p>接口的行为不止于此 我记得在刚入行的时候, 一个程序员前辈跟我说, 写代码是一个十分繁琐的过程, 但如果你觉得某一部分代码写起来好像不用那么繁琐就能实现你的功能, 那有可能是有人在你不知道的地方帮你做了很多事情. 我上面举的EventSystem就是这样一个例子, UGUI系统通过对外暴露EventHandler接口的方式, 在内部有能够持有接口实例的方法, 你不需要去关心UGUI系统内部是如何持有接口示例的. YooAsset自定义打包Step也是类似的思想, 二者都是通过某种方式持有了外部的对象实例, Unity是通过运行时持有并遍历所有的GameObject, 找到上面的EventHandler来持有它们, 而YooAsset则是在Init时将需要的buildstep实例注册到YooAsset内部去. 两者的思想或许可以表述如下: <strong>外部定义行为, 内部控制流程</strong>.</p><p>最近笔者想要给项目的换皮活动也做一个类似的, 一个活动换皮要有下面几个固定的步骤 导入资源、更新配置表, 定义一个IStep接口, 接口内有一个Action行为, 调用方可以实现多个继承IStep接口的类, 比如导入资源类、更新配置表类, 然后在Action行为中就可以实现是如何导入资源的、如何更新配置表的. 然后将导入资源类和更新配置表类再注册到一个序列化的数据结构或者硬编码的脚本中, 在执行换皮的时候就是从序列化数据或者硬编码脚本中拿到这一套流程信息 传入到 我这套换皮框架中, 外部不用管我内部是如何驱动这套流程信息运转的, 这样的模式和上面举的UGUI、YooAsset的例子大同小异.</p><p>Unity协程、C#的Task也是如此, 只因我被“保护”得太好了, Unity的协程和Task都很好用, 丢进去一个异步的任务, 让他自己在那里执行就好了, 可是异步任务本质上是怎么执行的呢? Unity协程依赖于MonoBehaviour的Update机制, Task依赖于C#内部的线程池. 背后都会有一个间隔一定时间轮询的逻辑, 只是我不需要关心这段逻辑罢了</p><p>我有段时间看了大量讲述C#Task的文章, 现在再去回想其实还是不甚理解, 多去想想</p><p>定义接口的目的, 让一些类型具有某些行为, 并且可以通过声明接口类型, 来持有接口的实例, 一个实例的对象既可以是该实例的class类型, 也可以是其实现的任意一个接口的类型.<br>下面列举了笔者在开发过程中遇到的</p><ol><li><p>C#中的非托管资源在使用的时候可以实现IDisposable接口, 在Dispose接口中, 给了开发者比较统一便捷的方式对不同的非托管资源进行释放的一个点, 另外其中</p></li><li><p>语法糖foreach, 有一个IEnumerable和IEnumerator, 使用IEnumerable标识一个类型的身份,</p></li></ol><p>因此 接口在设计隔离性、统一操作、标识统一身份等场景下能发挥作用.</p><h1>对IMGUI和UGUI实现机制的思考</h1><p>正如上面所说<br>IMGUI既要操心交互逻辑是什么, 还要在OnGUI方法里自己去写UI组件触发的检测逻辑.</p><p>UGUI则只需要操心交互的逻辑是什么, 不需要操心如何做检测的.</p><p>但是从实现方案上看, IMGUI这套完全可以用UGUI那一套的思想, UGUI用了一套EventSystem作为 触发交互的检测逻辑放在同一个地方集中处理. UGUI使用的输入的封装是<code>Input</code>, 将Input中得到的屏幕输入信息传递给<code>EventSystem</code>, 通过Raycaster模块得到 Input中的屏幕输入位置得到射线触碰到了哪个物体<code>GameObject</code>, 然后去获取到这个物体上面所有UGUI体系中的EventHandler, 根据Input中传来的触碰信息(按下、拖拽等)去触发相关的Handler, 如果这个GameObject上有相关的组件的话.</p><p>IMGUI这一套的UI组件不是以组件的方式组织的, 是以<code>Rect</code>为结构组织的, IMGUI使用的输入的封装是<code>Event</code>, IMGUI这一套, 不是通过什么按钮组件之类的去判断的, 所有的组件都是一个Rect, 对外暴露方法, 比如Button或者Toggle, 然后在OnGUI中 就相当于Update方法, 去查询所有的Rect区域, 首先判断一下鼠标在不在这个区域里面, 如果这个区域你是作为按钮去使用的, 那么继续去看<code>Event</code>中<code>EventType</code>字段表示鼠标是不是按下了, 如果按下了, 则返回True, 那么在OnGUI的逻辑里面就拿到了返回值是true, 代表这个按钮被按下了, 就可以去执行按钮点击的逻辑了. 去判断当前鼠标的位置, 以及鼠标的状态 比如是点击、持续点击、拖拽等等, 然后直接在这个方法内, 根据数据的数据做对应的逻辑和表现.</p><p>UGUI机制剖析</p>]]></content>
     
     
       
@@ -384,51 +418,6 @@ GrapihcRaycaster组件不是必须的, 删除掉之后这个Canvas就不能响�
 &lt;p&gt;看不懂的代码, 画UML图, 画着画着, 就清楚了,&lt;/p&gt;
 &lt;h1&gt;学吉他&lt;/h1&gt;
 &lt;p&gt;缺少耐心了&lt;/</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>UnityUGUI解构(一)——RectTransform</title>
-    <link href="https://soincredible.github.io/posts/67d7d086/"/>
-    <id>https://soincredible.github.io/posts/67d7d086/</id>
-    <published>2025-07-15T13:56:01.000Z</published>
-    <updated>2025-08-25T02:03:40.795Z</updated>
-    
-    <content type="html"><![CDATA[<p>RectTransform继承自Transform, 并没有包含在UGUI体系里面, 但是RectTransform的字段绝大多数情况下只在UGUI体系中才有意义.  因此我们可以将RectTransform看作是Unity UGUI的一部分, 并且将其作为UGUI系列中首个分析的对象.</p><h1>锚点(Anchor)与中心点(Pivot)</h1><h2 id="锚点Anchor">锚点Anchor</h2><p>这个Anchor并不是直接参与位置信息运算的数据, Unity会先根据这个信息计算出一个anchorReferencePosition, 再用这个值进行其他的运算.<br>在Unity中 锚点是可以至多被分成四个角的, 并不是一个点. 而在计算一个RectTransform中的一些属性时需要把锚点作为一个&quot;点&quot; 参与运算, 作为四个角不重合的情况, 需要有一个Anchor Reference Position来作为锚点,<br>Anchor Reference Position的计算公式如下:<br>$$ AnchorReferencePosition_x = (1 - pivot_x) \times x_0 + pivot_x \times x_1 $$<br>$$ AnchorReferencePosition_y = (1 - pivot_y) \times y_0 + pivot_y \times y_1 $$<br>其中 (x0, y0)代表的是AnchorMin在该RectTransform的父节点中的位置, (x1, y1)代表的是AnchorMax在该RectTransform的父节点中的位置, (pivotx, pivoty)指的是中心点的归一化位置坐标</p><p>有一个概念叫AnchoredPosition, 这个值的含义是Pivot点相对于<code>Anchor Reference Position</code>的距离, 当锚点的四个角没有重合在一点时, 我们可能会以为Anchor Reference Position</p><p>AnchoredPosition和Local Position的区别是什么?<br>在Transform(非RectTransform)体系中, 子物体的localPosition只能通过调整其和父物体的相对位置来实现变化, 在RectTransform体系下, 子物体的localPosition除了受相对位置的影响, 还与父物体的width、子物体本身的pivot有关</p><h1>RectTransform中的字段</h1><blockquote><p>💡本文我们只讨论RectTransform中有而Transform中没有的字段</p></blockquote><ul><li>rect Rect 注意RectTransform中的rect成员不支持直接修改注意以上字段都是不可以通过RectTransform操作其值的., 因为没有set属性, 外部没有对它的访问权限<ul><li>xMin, 代表的是rect围成矩形区域的左下角的横坐标值, 坐标系原点是这个rect围成的矩形区域的中心点,</li><li>yMin, 代表的是rect围成矩形区域的左下角的纵坐标值, 坐标系原点是这个rect围成的矩形区域的中心点,</li><li>mHeight, 这个rect围成矩形的高</li><li>mWidth, 这个rect围成矩形的宽</li></ul></li><li>anchorMin Vector2 以当前RectTransform的父节点的rect的左下角为坐标原点, 锚点左下角的归一化位置坐标</li><li>anchorMax Vector2 以当前RectTransform的父节点的rect的左下角为坐标原点, 锚点右上角的归一化位置坐标</li><li>sizeDelta Vector2 当锚点四角重合时, sizeDelta.x=rect.width=(offsetMax-offsetMin).x, sizeDelta.y=rect.height=(offsetMax-offsetMin).y 当不重合时 sizeDelta.x=(offsetMax-offsetMin).x, sizeDelta.y=(offsetMax-offsetMin).y</li><li>offsetMin Vector2 指锚点左下角与rect的左下角的偏移值 以当前RectTransform的父节点的rect的左下角为坐标原点</li><li>offsetMax Vector2  指锚点右上角与rect的右上角的偏移值 以当前RectTransform的父节点的rect的左下角为坐标原点</li><li>anchoredPosition Vector2</li><li>anchoredPosition3D Vector3 包含anchoredPosition的xy分量, 增加了z分量 一般用不到<br>localPosition的含义是当前RectTransform的pivot相对于该RectTransform的父节点rect的中心点的位置, 由于可以调整父节点的rect, 所以可以间接影响子物体的localPosition属性, 而我也可以让rect的绝对位置不变 通过改变pivot的位置来影响localPosition的值, 这在Transform(非RectTransform)体系下是不太可能做到的,</li></ul><p>锚点(Anchor)描述的是当前UI节点和其父节点的位置关系, 锚点虽然叫点, 但是会存在锚点的四个角没有重合的情况. 只不过锚点的四角重合时anchor reference position和该点重合了而已 unity会计算出一个anchor reference point, 和pivot做运算得到anchored position<br>中心点(Pivot)描述的是当前UI节点的轴心位置 与父节点无关</p><h1>IDragHandler</h1><p>在此猜测 , IDragHandler的生效逻辑是什么</p><p>每一帧 Unity都会从摄像机出发生成一个射线 由你的pointer投射到场景中的gameObject上, 每一帧你都会拿到这些信息 拿到这些物体, 查看这些物体上挂载的组件有没有实现IDragHandler接口, 如果有, 出发这个IDragHnader的fafa</p><p>在Unity源码中 搜 localIdentifierInFile</p><p>BuildSerialization.cpp</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">ConvertSceneObjectsToInstanceIDBuildRemap</span><span class="params">(<span class="type">const</span> core::string&amp; path, <span class="type">const</span> WriteDataArray&amp; sceneObjects, InstanceIDBuildRemap&amp; output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> pathIndex = <span class="built_in">GetPersistentManager</span>().<span class="built_in">GetSerializedFileIndexFromPath</span>(path);</span><br><span class="line"></span><br><span class="line">    output.<span class="built_in">reserve</span>(output.<span class="built_in">size</span>() + sceneObjects.<span class="built_in">size</span>());</span><br><span class="line">    <span class="keyword">for</span> (WriteDataArray::const_iterator i = sceneObjects.<span class="built_in">begin</span>(); i != sceneObjects.<span class="built_in">end</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Assert</span>(i-&gt;localIdentifierInFile != <span class="number">0</span>);</span><br><span class="line">        output.<span class="built_in">push_unsorted</span>(i-&gt;instanceID, <span class="built_in">SerializedObjectIdentifier</span>(pathIndex, i-&gt;localIdentifierInFile));</span><br><span class="line">    &#125;</span><br><span class="line">    output.<span class="built_in">sort</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>ResourceManager.cpp中的void BuiltinResourceManager::InitializeResources()方法</p><p>下面这段代码, 推测应该是Unity给资产生成FileId的逻辑<br>明天验证一下 对于大部分的FBX中的mesh资源, 他们应该都是叫同样的名字, 又因为他们都是mesh, 所以传入的参数一样, 所以在meta文件中, 你可以看到, 即便是引用了不同的fbx的mesh, 变的只有guid, fileid都是一样了<br>明天验证一下, 两个mesh名不一样的fbx, 应该fileId就会不一样, 而且改了mesh的名字, fileId的名字也就会跟着变</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;RectTransform继承自Transform, 并没有包含在UGUI体系里面, 但是RectTransform的字段绝大多数情况下只在UGUI体系中才有意义.  因此我们可以将RectTransform看作是Unity UGUI的一部分, 并且将其作为UGUI系列中首</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CSharp合集</title>
-    <link href="https://soincredible.github.io/posts/d97e22f1/"/>
-    <id>https://soincredible.github.io/posts/d97e22f1/</id>
-    <published>2025-07-15T13:43:56.000Z</published>
-    <updated>2025-07-15T13:47:59.495Z</updated>
-    
-    <content type="html"><![CDATA[<p>CSharp问题杂记<br><a href="20505312">CSharp前传</a><br>CSharp中的委托<br>CSharp中的CancellationToken<br>CSharp中的Task<br>Dissecting-the-async-methods-in-CSharp<br>Extending-the-asynce-methods-in-CSharp-译</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;CSharp问题杂记&lt;br&gt;
-&lt;a href=&quot;20505312&quot;&gt;CSharp前传&lt;/a&gt;&lt;br&gt;
-CSharp中的委托&lt;br&gt;
-CSharp中的CancellationToken&lt;br&gt;
-CSharp中的Task&lt;br&gt;
-Dissecting-the-async-met</summary>
       
     
     
