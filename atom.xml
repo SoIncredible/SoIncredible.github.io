@@ -6,7 +6,7 @@
   <link href="https://soincredible.github.io/atom.xml" rel="self"/>
   
   <link href="https://soincredible.github.io/"/>
-  <updated>2025-09-09T10:30:20.761Z</updated>
+  <updated>2025-09-10T02:12:15.890Z</updated>
   <id>https://soincredible.github.io/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C#中的序列化</title>
+    <link href="https://soincredible.github.io/posts/57ac4e9b/"/>
+    <id>https://soincredible.github.io/posts/57ac4e9b/</id>
+    <published>2025-09-10T02:09:10.000Z</published>
+    <updated>2025-09-10T02:12:15.890Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>作家们</title>
+    <link href="https://soincredible.github.io/posts/2375413b/"/>
+    <id>https://soincredible.github.io/posts/2375413b/</id>
+    <published>2025-09-10T00:25:23.000Z</published>
+    <updated>2025-09-10T01:37:06.689Z</updated>
+    
+    <content type="html"><![CDATA[<p>阿瑟克拉克 《与罗摩相会》</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;阿瑟克拉克 《与罗摩相会》&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>迷思——关于拖延与生活的充实感</title>
+    <link href="https://soincredible.github.io/posts/360942ff/"/>
+    <id>https://soincredible.github.io/posts/360942ff/</id>
+    <published>2025-09-10T00:21:49.000Z</published>
+    <updated>2025-09-10T01:37:06.690Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>迷思——是要过程还是要结果</title>
@@ -57,18 +104,18 @@
     <link href="https://soincredible.github.io/posts/7f55a4b3/"/>
     <id>https://soincredible.github.io/posts/7f55a4b3/</id>
     <published>2025-09-09T01:05:37.000Z</published>
-    <updated>2025-09-09T10:30:20.758Z</updated>
+    <updated>2025-09-10T06:40:29.370Z</updated>
     
-    <content type="html"><![CDATA[<h1>何为IMGUI</h1><p>IMGUI即Immediate Mode GUI</p><h1>一些疑问</h1><h1>1. Editor GUI（OnGUI）模式</h1><p>Unity 的 Editor 扩展（EditorWindow、Editor、CustomInspector 等）使用的是<strong>Immediate Mode GUI</strong>，即 IMGUI。</p><ul><li>在 IMGUI（OnGUI）里，每次要显示控件都必须重新绘制一遍，所以 _textArea = GUILayout.TextArea(_textArea); 这种写法是<strong>必要的</strong>，也是推荐的。</li><li>只要你需要文本输入框能保存、显示、修改文本，就必须把每帧 OnGUI 返回的最新字符串赋值回来，否者控件无法响应用户输入。</li><li>OnGUI 并不是像 Update 那样只做逻辑运算，它是“每帧重画+同步最新值”的机制。</li></ul><p><strong>这个流程虽然“每帧赋值”，但实际上是：</strong></p><ul><li>用户输入 → 控件更新，控件的内容通过 TextArea 的返回值传递出来。</li><li>你用一个变量保存起来，下次再传进去，循环往复。</li></ul><p>实际上，这样的“赋值”并不是真正“每帧都做了无用功”，它不涉及复杂逻辑，只是保证数据同步，很轻量。</p><hr><h1>2. UGUI（UnityEngine.UI）模式</h1><p>UGUI 使用的是<strong>Retained Mode GUI</strong>，即“保持式 GUI”。</p><ul><li>UGUI（比如 InputField）是 GameObject，上面挂着脚本组件（InputField、Text 等），值都是挂在对象内部，“实时绑定、事件驱动”，只有当用户输入发生变化时才会更新内部值。</li><li>你<strong>不需要每帧赋值 InputField.text</strong>，通常只在初始化或特定逻辑中赋值，或者通过事件（onValueChanged）处理输入变化。</li></ul><p>例如：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> InputField input;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    input.onValueChanged.AddListener(OnInputChanged);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnInputChanged</span>(<span class="params"><span class="built_in">string</span> newText</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里只在用户输入改变时触发一次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>每帧 Update 时 <strong>并不需要 assign</strong>。</p><hr><h2 id="3-为什么-Editor-要这样写？">3. 为什么 Editor 要这样写？</h2><p>因为 IMGUI 的机制只能你自己手动接管“可视控件内容”和“你的变量”，<br>每帧同步其实只是“状态同步”，并不是做大量冗余逻辑。所以<strong>IMGUI风格就该每帧赋值；UGUI则用事件驱动。</strong></p><hr><h2 id="4-有没有“更优雅”的写法？">4. 有没有“更优雅”的写法？</h2><ul><li>在 Editor .OnGUI，没有更优雅的方案，这就是官方推荐用法（<strong>赋值其实就1条指令，性能压力很小</strong>）。</li><li>如果你只想提高代码“观感”，可以包装一层函数，但底层逻辑还是要你管数据同步。</li><li>UGUI、EditorGUILayout、Runtime GUI，没有更优雅方案，因为机制不同。</li></ul><hr><h2 id="结论">结论</h2><ul><li><strong>Editor IMGUI 就要每帧赋值，这是机制要求。</strong></li><li><strong>UGUI/InputField等只在需要时赋值，不必每帧。</strong></li><li><strong>赋值本身只是同步文本状态，不是无用功，也不影响性能。</strong></li></ul><hr><h3 id="延伸阅读">延伸阅读</h3><p>官方说明：<br><a href="https://docs.unity3d.com/Manual/UI-system-compare.html">IMGUI Vs Retained Mode</a><br><a href="https://docs.unity3d.com/ScriptReference/GUILayout.TextArea.html">Editor scripting: Immediate/Retained GUI</a></p><hr><p><strong>简明一句话：IMGUI 每帧赋值是必要的，就是它的机制设计；UGUI只在需要转移数据时才赋值，不是每帧。</strong></p><h1>GUI都有哪些控件</h1><ul><li>Button 在用户点击按钮**（按下并抬起）**时，GUILayout.Button 返回 true</li><li>RepeatButton 在用户按住按钮时，GUILayout.RepeatButton 每帧都返回 true。</li><li>Label</li><li>TextArea</li><li>Toggle</li><li>Box</li></ul><h1>GUIStyleState</h1><h1>GUIContent</h1><p>看一下源码就可以发现, 当我们调用<code>GUI.Label(&quot;Hello&quot;)</code>这样的接口时, GUI内部都是将传入的字符串专成一个GUIContent. 这是一种便捷的写法</p><p>GUIContent决定渲染什么<br>GUIStyle决定如何渲染</p><h1>GUIStyle</h1><p>Style</p><p>有一些代表状态的字段 这些状态是给固定的控件使用的.</p><ul><li>active Button</li><li>onHover</li></ul><p>GUIStyle像是一个上下文, 或者状态机里面的Blackboard, 所有的UI控件, 能够呈现的样式, GUIStyle中的字段全部包含, 一个UI控件能表现的效果所需要的字段, 只是GUIStyle的子集.</p><p>比如GUI.Label</p><h1>布局对齐有两种范畴</h1><p>第一是一个组件内 比如Box组件内部的Text和Icon 使用GUIStyle的alignment来对齐, 第二是整个Box组件在窗口中的对齐方式, 使用GUILayout.FlexibleSpace() + GUILayout.BeginHorizontal()来实现布局</p><h1>GUI、EditorGUI、GUILayout、EditorGUILayout、EditorGUIUtility、GUIUtility</h1><p>GUI附带的还有GUIGroup、GUIStyle等 EditorGUI好像没有?<br>在UnityEditor开发中下面这些类型都是可以用的<br><a href="https://docs.unity3d.com/ScriptReference/GUI.html">https://docs.unity3d.com/ScriptReference/GUI.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUIContent.html">https://docs.unity3d.com/ScriptReference/GUIContent.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUISkin.html">https://docs.unity3d.com/ScriptReference/GUISkin.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUIStyle.html">https://docs.unity3d.com/ScriptReference/GUIStyle.html</a><br><a href="https://docs.unity3d.com/ScriptReference/EditorGUI.html">https://docs.unity3d.com/ScriptReference/EditorGUI.html</a><br><a href="https://docs.unity3d.com/ScriptReference/EditorStyles.html">https://docs.unity3d.com/ScriptReference/EditorStyles.html</a></p><h1>EditorToolBar</h1>]]></content>
+    <content type="html"><![CDATA[<h1>何为IMGUI</h1><p>IMGUI即Immediate Mode GUI 随着Unity的版本更新, Unity官方逐渐抛弃IMGUI, 转用UITookit</p><h1>一些疑问</h1><h1>1. Editor GUI（OnGUI）模式</h1><p>Unity 的 Editor 扩展（EditorWindow、Editor、CustomInspector 等）使用的是<strong>Immediate Mode GUI</strong>，即 IMGUI。</p><ul><li>在 IMGUI（OnGUI）里，每次要显示控件都必须重新绘制一遍，所以 _textArea = GUILayout.TextArea(_textArea); 这种写法是<strong>必要的</strong>，也是推荐的。</li><li>只要你需要文本输入框能保存、显示、修改文本，就必须把每帧 OnGUI 返回的最新字符串赋值回来，否者控件无法响应用户输入。</li><li>OnGUI 并不是像 Update 那样只做逻辑运算，它是“每帧重画+同步最新值”的机制。</li></ul><p><strong>这个流程虽然“每帧赋值”，但实际上是：</strong></p><ul><li>用户输入 → 控件更新，控件的内容通过 TextArea 的返回值传递出来。</li><li>你用一个变量保存起来，下次再传进去，循环往复。</li></ul><p>实际上，这样的“赋值”并不是真正“每帧都做了无用功”，它不涉及复杂逻辑，只是保证数据同步，很轻量。</p><hr><h1>2. UGUI（UnityEngine.UI）模式</h1><p>UGUI 使用的是<strong>Retained Mode GUI</strong>，即“保持式 GUI”。</p><ul><li>UGUI（比如 InputField）是 GameObject，上面挂着脚本组件（InputField、Text 等），值都是挂在对象内部，“实时绑定、事件驱动”，只有当用户输入发生变化时才会更新内部值。</li><li>你<strong>不需要每帧赋值 InputField.text</strong>，通常只在初始化或特定逻辑中赋值，或者通过事件（onValueChanged）处理输入变化。</li></ul><p>例如：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> InputField input;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    input.onValueChanged.AddListener(OnInputChanged);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnInputChanged</span>(<span class="params"><span class="built_in">string</span> newText</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 这里只在用户输入改变时触发一次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>每帧 Update 时 <strong>并不需要 assign</strong>。</p><hr><h2 id="3-为什么-Editor-要这样写？">3. 为什么 Editor 要这样写？</h2><p>因为 IMGUI 的机制只能你自己手动接管“可视控件内容”和“你的变量”，<br>每帧同步其实只是“状态同步”，并不是做大量冗余逻辑。所以<strong>IMGUI风格就该每帧赋值；UGUI则用事件驱动。</strong></p><hr><h2 id="4-有没有“更优雅”的写法？">4. 有没有“更优雅”的写法？</h2><ul><li>在 Editor .OnGUI，没有更优雅的方案，这就是官方推荐用法（<strong>赋值其实就1条指令，性能压力很小</strong>）。</li><li>如果你只想提高代码“观感”，可以包装一层函数，但底层逻辑还是要你管数据同步。</li><li>UGUI、EditorGUILayout、Runtime GUI，没有更优雅方案，因为机制不同。</li></ul><hr><h2 id="结论">结论</h2><ul><li><strong>Editor IMGUI 就要每帧赋值，这是机制要求。</strong></li><li><strong>UGUI/InputField等只在需要时赋值，不必每帧。</strong></li><li><strong>赋值本身只是同步文本状态，不是无用功，也不影响性能。</strong></li></ul><hr><h3 id="延伸阅读">延伸阅读</h3><p>官方说明：<br><a href="https://docs.unity3d.com/Manual/UI-system-compare.html">IMGUI Vs Retained Mode</a><br><a href="https://docs.unity3d.com/ScriptReference/GUILayout.TextArea.html">Editor scripting: Immediate/Retained GUI</a></p><hr><p><strong>简明一句话：IMGUI 每帧赋值是必要的，就是它的机制设计；UGUI只在需要转移数据时才赋值，不是每帧。</strong></p><h1>GUI都有哪些控件</h1><ul><li>Button 在用户点击按钮**（按下并抬起）**时，GUILayout.Button 返回 true</li><li>RepeatButton 在用户按住按钮时，GUILayout.RepeatButton 每帧都返回 true。</li><li>Label</li><li>TextArea</li><li>Toggle</li><li>Box</li></ul><h1>GUIStyleState</h1><h1>GUIContent</h1><p>看一下源码就可以发现, 当我们调用<code>GUI.Label(&quot;Hello&quot;)</code>这样的接口时, GUI内部都是将传入的字符串专成一个GUIContent. 这是一种便捷的写法</p><p>GUIContent决定渲染什么<br>GUIStyle决定如何渲染</p><h1>GUIStyle</h1><p>Style</p><p>有一些代表状态的字段 这些状态是给固定的控件使用的.</p><ul><li>active Button</li><li>onHover</li></ul><p>GUIStyle像是一个上下文, 或者状态机里面的Blackboard, 所有的UI控件, 能够呈现的样式, GUIStyle中的字段全部包含, 一个UI控件能表现的效果所需要的字段, 只是GUIStyle的子集.</p><p>比如GUI.Label</p><h1>布局对齐有两种范畴</h1><p>第一是一个组件内 比如Box组件内部的Text和Icon 使用GUIStyle的alignment来对齐, 第二是整个Box组件在窗口中的对齐方式, 使用GUILayout.FlexibleSpace() + GUILayout.BeginHorizontal()来实现布局</p><h1>GUI、EditorGUI、GUILayout、EditorGUILayout、EditorGUIUtility、GUIUtility</h1><p>GUI附带的还有GUIGroup、GUIStyle等 EditorGUI好像没有?<br>在UnityEditor开发中下面这些类型都是可以用的<br><a href="https://docs.unity3d.com/ScriptReference/GUI.html">https://docs.unity3d.com/ScriptReference/GUI.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUIContent.html">https://docs.unity3d.com/ScriptReference/GUIContent.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUISkin.html">https://docs.unity3d.com/ScriptReference/GUISkin.html</a><br><a href="https://docs.unity3d.com/ScriptReference/GUIStyle.html">https://docs.unity3d.com/ScriptReference/GUIStyle.html</a><br><a href="https://docs.unity3d.com/ScriptReference/EditorGUI.html">https://docs.unity3d.com/ScriptReference/EditorGUI.html</a><br><a href="https://docs.unity3d.com/ScriptReference/EditorStyles.html">https://docs.unity3d.com/ScriptReference/EditorStyles.html</a></p><h1>EditorToolBar</h1>]]></content>
     
     
       
       
     <summary type="html">&lt;h1&gt;何为IMGUI&lt;/h1&gt;
-&lt;p&gt;IMGUI即Immediate Mode GUI&lt;/p&gt;
+&lt;p&gt;IMGUI即Immediate Mode GUI 随着Unity的版本更新, Unity官方逐渐抛弃IMGUI, 转用UITookit&lt;/p&gt;
 &lt;h1&gt;一些疑问&lt;/h1&gt;
 &lt;h1&gt;1. Editor GUI（OnGUI）模式&lt;/h1&gt;
-&lt;p&gt;Unity 的 Editor 扩展（EditorWindow、Editor、Cust</summary>
+&lt;p</summary>
       
     
     
@@ -83,15 +130,15 @@
     <link href="https://soincredible.github.io/posts/1302a241/"/>
     <id>https://soincredible.github.io/posts/1302a241/</id>
     <published>2025-09-09T00:27:17.000Z</published>
-    <updated>2025-09-09T10:30:20.760Z</updated>
+    <updated>2025-09-10T02:16:24.516Z</updated>
     
-    <content type="html"><![CDATA[<p>参考框架: FigmaConvertToUnity、FindReference2</p>]]></content>
+    <content type="html"><![CDATA[<p>参考框架: FigmaConvertToUnity、FindReference2、I2</p><p>Editor模式下没办法使用MonoBehaviour那套协程来实现异步, I2用了点奇技淫巧, 在需要执行异步的时候, 在场景上挂载一个Mono的脚本, 用这个Mono脚本驱动协程的执行</p><h1>FR2</h1><p>使用的是伪异步, 在EditorUpdate里面做</p><h1>Figma插件</h1><p>这个用到的是C#的Task, 因为它里面的一些异步操作都是向网络请求, 下载数据, 不是操作Unity里面的一些东西, 所以可以放心放到别的线程里面去做.</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;参考框架: FigmaConvertToUnity、FindReference2&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;参考框架: FigmaConvertToUnity、FindReference2、I2&lt;/p&gt;
+&lt;p&gt;Editor模式下没办法使用MonoBehaviour那套协程来实现异步, I2用了点奇技淫巧, 在需要执行异步的时候, 在场景上挂载一个Mono的脚本, 用这个Mono脚</summary>
       
     
     
@@ -106,7 +153,7 @@
     <link href="https://soincredible.github.io/posts/3248703d/"/>
     <id>https://soincredible.github.io/posts/3248703d/</id>
     <published>2025-09-05T01:12:08.000Z</published>
-    <updated>2025-09-05T01:49:03.509Z</updated>
+    <updated>2025-09-10T01:48:58.098Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://assetstore.unity.com/packages/tools/utilities/vfolders-2-255470">vFolders 2</a></p>]]></content>
     
@@ -242,23 +289,22 @@
   </entry>
   
   <entry>
-    <title>资产清理工作流</title>
+    <title>Unity资产清理工作流</title>
     <link href="https://soincredible.github.io/posts/bab9e6d9/"/>
     <id>https://soincredible.github.io/posts/bab9e6d9/</id>
     <published>2025-08-26T03:59:47.000Z</published>
-    <updated>2025-08-28T12:10:56.096Z</updated>
+    <updated>2025-09-10T03:23:11.158Z</updated>
     
-    <content type="html"><![CDATA[<p>依赖YooAsset的BuildReport 查看那些资源被误打进了包内, 尝试将这些资源剔除掉<br>配合FR2插件</p><ol><li>清理底包资源(被标记为MainTag的资源)</li><li>清理包外资源, 加快Bundle构建流程</li></ol>]]></content>
+    <content type="html"><![CDATA[<p>需要写一个版本资源检查的工具 检查一个版本删除了多少资源、增加了多少资源.</p><p>底包资源增加了多少, 增加了什么东西<br>热更包资源增加了多少, 增加了什么东西</p><h1>资产清理的目标是什么</h1><p>减少资源冗余、减少最终Bunld体积、提高构建速度、让资源打包更合理、让运行时加载Bundle更合理, 所以资产清理不是简单的删资源, 还有运行时的加载优化.</p><h1>资产清理的手段有哪些?</h1><ol><li>从业务功能出发 和功能的负责人对接了解功能还用不用</li><li>依赖FR2插件、看代码里面的动态加载逻辑.</li><li>从最终BuildBundle的结果出发, YooAsset、AssetRipper</li><li>从资源的组织形式上看合不合理, 比如一个图集打的合理不合理, 一个Bundle打得合不合理, 比如一个公共的频繁使用的资源,却被放在了一个有很多不是公共资源的bundle里面.</li></ol><h1>资产清理过程中往往伴随 代码逻辑的删除</h1><p>如何保证代码逻辑能不能删, 或者 要不要删, 不删那就是屎山, 对于屎山的态度是怎样的? 提高敏感性</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;依赖YooAsset的BuildReport 查看那些资源被误打进了包内, 尝试将这些资源剔除掉&lt;br&gt;
-配合FR2插件&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;清理底包资源(被标记为MainTag的资源)&lt;/li&gt;
-&lt;li&gt;清理包外资源, 加快Bundle构建流程&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;p&gt;需要写一个版本资源检查的工具 检查一个版本删除了多少资源、增加了多少资源.&lt;/p&gt;
+&lt;p&gt;底包资源增加了多少, 增加了什么东西&lt;br&gt;
+热更包资源增加了多少, 增加了什么东西&lt;/p&gt;
+&lt;h1&gt;资产清理的目标是什么&lt;/h1&gt;
+&lt;p&gt;减少资源冗余、减少最终Bunld体积、提高构</summary>
       
     
     
@@ -362,78 +408,16 @@
     <link href="https://soincredible.github.io/posts/e255a10a/"/>
     <id>https://soincredible.github.io/posts/e255a10a/</id>
     <published>2025-08-20T16:42:31.000Z</published>
-    <updated>2025-09-09T10:29:54.855Z</updated>
+    <updated>2025-09-10T01:49:46.694Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102">Skynet入门</a></p><h1>路由器的概念</h1><h1>端口</h1><h1>IP地址</h1><h1>C# Socket编程</h1><h1>什么是Socket</h1><p>一个Socket连接的流程<br>客户端发起</p><p>需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险</p><h2 id="Socket分为两种">Socket分为两种</h2><p>第一种是监听Socket</p><p>第二种是会话Socket</p><p>你的理解很准确，确实<strong>服务端会有两个不同用途的Socket对象</strong>：</p><ol><li><p><strong>监听 Socket</strong>（称为 <code>listenSocket</code>），职责是：</p><ul><li>绑定端口，用于侦听新的连接请求（<code>Bind</code> + <code>Listen</code>）。</li></ul></li><li><p><strong>会话 Socket</strong>（每连一个客户端，对应一个），职责是：</p><ul><li>和某个客户端具体收发数据（<code>Accept</code> 的返回值）。</li></ul></li></ol><hr><h2 id="为什么要这样分开？为什么不能直接用监听socket和客户端通信？">为什么要这样分开？为什么不能直接用监听socket和客户端通信？</h2><h3 id="一、协议-设计层面的原因">一、协议/设计层面的原因</h3><ol><li><p><strong>监听Socket只负责接收连接请求</strong></p><ul><li>监听socket在TCP层维护了一个“正在监听端口、等待连接”的队列（backlog）。</li><li>它不能用来真正收发数据，只能等待新连接，然后通过<code>Accept</code>产生一个新的会话socket。</li><li>TCP协议里，监听socket和会话socket拥有不同的状态。</li></ul></li><li><p><strong>每个客户端要有独立的socket对象</strong></p><ul><li>这样服务端才能同时和多个客户端通信（每个连接一个独立文件描述符），互不干扰。</li><li>如果直接用监听socket收发数据，就无法区分哪个客户端发来的数据，也无法并发处理，直接崩溃！</li><li><code>Accept</code> 会为每个客户端分配一个新的 socket，底层内核分配新的资源、端点，服务端逻辑才能独立管理。</li></ul></li><li><p><strong>多路复用、并发模型需要会话socket</strong></p><ul><li>服务端通常有几十万个连接，如果全部抢占同一个监听socket，相互干扰，严重影响并发性能。</li><li>新的socket会与客户端唯一绑定，方便后续select/epoll/IOCP或线程池单独处理。</li></ul></li><li><p><strong>监听socket和会话socket的状态不一样</strong></p><ul><li>监听socket是“LISTEN”状态，只能等待连接。</li><li>接受后的会话socket进入“ESTABLISHED”状态，才能双向收发数据。</li></ul></li></ol><h3 id="二、操作系统实现原因">二、操作系统实现原因</h3><ul><li><p><strong>Linux/Windows的内核管理：</strong></p><ul><li>监听socket分配backlog（等待区），只用于管理连接请求队列；</li><li>收到客户端请求，内核分配一个新socket fd（会话socket），维护与对方的TCP会话状态。</li><li>只有这个fd才能安全读写数据，监听socket的fd不能用来读写，只能accept。</li></ul></li><li><p><strong>安全/隔离：</strong></p><ul><li>监听socket本身不能被污染——收发数据万一断了会影响整个服务器socket监听。</li><li>每个连接单独分配资源，有问题只会影响单个连接，容易控制和管理。</li></ul></li></ul><hr><h3 id="图示理解（伪代码）：">图示理解（伪代码）：</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Server Socket Life Cycle</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建监听Socket</span></span><br><span class="line">Socket listenSocket = <span class="keyword">new</span> Socket(...);</span><br><span class="line"><span class="comment">// 2. 绑定端口</span></span><br><span class="line">listenSocket.Bind(...);</span><br><span class="line"><span class="comment">// 3. 进入监听</span></span><br><span class="line">listenSocket.Listen(...);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// 4. 每有一个新连接, Accept会分配一个新的会话Socket</span></span><br><span class="line">    Socket conn = listenSocket.Accept();</span><br><span class="line">    <span class="comment">// 5. 后续和客户端的所有收发数据，都用conn这个socket</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><code>listenSocket</code> 只负责新增连接。</li><li><code>conn</code> 负责和某个客户端通信。</li><li>有n个客户端，就有n个会话Socket，<strong>只有一个监听Socket</strong>。</li></ul><hr><h2 id="举个实际例子">举个实际例子</h2><ul><li><strong>Web服务器（比如IIS/Apache/nginx）</strong><ul><li>监听端口80，只用监听socket握手接收新用户连接请求。</li><li>每有新请求，生成一个会话socket，和该连接通信，互不干扰。</li><li>如果用同一个监听socket收发数据，所有人混流，无法区别谁是谁。</li></ul></li></ul><hr><h2 id="小结">小结</h2><ul><li><strong>监听socket</strong>：只负责侦听和接受新连接，不能收发数据。</li><li><strong>会话socket（Accept出来的）</strong>：和某个客户端具体通信，收发数据。</li><li>这样设计是操作系统/协议规定的，<strong>能确保高效并发、安全隔离和稳定运行</strong>。</li></ul><hr><blockquote><p><strong>“监听socket是连接的大门，只用来看谁想进来；会话socket是进入之后，与某个人的密室专线，对每个身份都有独立沟通渠道。只有分开，管理和性能才能做好。”</strong></p></blockquote><hr><p>如需更底层协议细节，可以补充TCP状态转移图/源码！</p><p>你的两个问题很专业，下面逐条详细说明：</p><hr><h2 id="1-创建监听-Socket-和会话-Socket-的流程一样吗？">1. 创建监听 Socket 和会话 Socket 的流程一样吗？</h2><h3 id="在-Socket-编程（比如-C-）里：">在 Socket 编程（比如 C#）里：</h3><ul><li><strong>监听 Socket</strong> (<code>listenSocket</code>)<ul><li>你得主动创建：<code>new Socket(...)</code></li><li>然后 Bind 到某端口：<code>.Bind(...)</code></li><li>然后开启侦听：<code>.Listen(backlog)</code></li></ul></li><li><strong>会话 Socket</strong> (<code>connSocket</code>)<ul><li><strong>不是你主动创建的</strong>。它是 listener 调用 <code>.Accept()</code> 时由系统自动生成、返回的对象。</li><li>你不用再手动 Bind/Listen，它一出生就“已连上”，通信双方已确定（对端IP:Port 本地IP:Port等）。</li></ul></li></ul><h3 id="流程总结">流程总结</h3><ul><li>监听 Socket 需要 显式 创建-绑定-监听</li><li>会话 Socket 是通过监听 Socket 的 <code>.Accept()</code> 生成</li><li>你不需要对会话 Socket 进行 Bind/Listen（如果你再次Bind会报错）</li></ul><blockquote><p><strong>流程不一样：监听Socket手动创建配置，连接Socket自动生成，只要收数据即可。</strong></p></blockquote><hr><h2 id="2-两者的数据内容构成上有什么区别？">2. 两者的数据内容构成上有什么区别？</h2><h3 id="监听-Socket">监听 Socket</h3><ul><li>包含内容：<ul><li>本地端口/IP（Bind 过的地址，如 0.0.0.0:8000）</li><li>一个监听队列（backlog）——new连接排队用</li><li>Socket类型(TCP/UDP)，协议族等</li></ul></li><li><strong>没有“远端”信息，也没有TCP序列号等通信状态</strong></li><li>不能直接收发应用数据，只能收到新连接请求。</li></ul><h3 id="会话-Socket">会话 Socket</h3><ul><li>包含内容：<ul><li>本地端口/IP（一般是监听Socket的端口）</li><li><strong>远端客户端IP/端口</strong></li><li>当前TCP连接状态、序列号、缓冲区等</li><li>发送和接收缓冲区</li><li>TCP协议维护的连接控制块（TCP state machine、TCP窗口、拥塞控制等）</li></ul></li><li>可以直接收发数据</li><li>维护与唯一远端的连接状态、收发缓冲、数据包</li></ul><h4 id="举个例子：">举个例子：</h4><p>监听Socket的数据结构只包含“我负责管理这个端口和连接队列”；<br>会话Socket的数据结构包含“我和这个客户端的连线状态、数据缓冲、包顺序等详细内容”。</p><h3 id="表格对比">表格对比</h3><table><thead><tr><th>项目</th><th>监听Socket</th><th>会话Socket</th></tr></thead><tbody><tr><td>本地地址/端口</td><td>有</td><td>有</td></tr><tr><td>远端地址/端口</td><td>无</td><td>有</td></tr><tr><td>TCP连接状态</td><td>LISTEN</td><td>ESTABLISHED</td></tr><tr><td>连接队列</td><td>backlog连接请求队列</td><td>无</td></tr><tr><td>应用层数据通信</td><td>不行</td><td>可以</td></tr><tr><td>缓冲区</td><td>没有数据缓冲</td><td>有发送/接收缓冲区</td></tr><tr><td>唯一性</td><td>只一个（主动建）</td><td>客户端连接一个生成一个</td></tr></tbody></table><hr><h2 id="结论">结论</h2><p><strong>创建流程：</strong></p><ul><li>监听Socket要先创建、bind、listen，主动准备好；会话Socket通过accept由内核自动生成（你调accept方法就有了）。</li></ul><p><strong>内容区别：</strong></p><ul><li>监听Socket缺失“远端”数据，只管新连接请求；会话Socket则包含详细通信双方信息和全部TCP连接细节及缓冲区、序列号等。</li></ul><blockquote><p><strong>监听Socket专注于“新连接排队、接收”，会话Socket专注于“具体数据传输”——角色完全不同。</strong></p></blockquote><hr><p>如果想看更底层源码（比如Linux内核的<code>struct sock</code>、<code>struct tcp_sock</code>），可以补充！</p><h1>Socket中如何判断一个连接断开?</h1><h1>一定要注意 Socket的执行不一定在主线程上, 可千万不要在非主线程上操作MonoBehaviour中的数据, 比如UI</h1><h2 id="客户端">客户端</h2><p>Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据</p><h2 id="服务端">服务端</h2><p>Accept是建立连接用<br>Receive是接受消息用</p><p>Accept -&gt; Receive</p><p>结合GPT 使用C#使用一个Actor模型</p><p>非常好的问题！<br>我们来详细分析下：</p><hr><h2 id="问题重述">问题重述</h2><p>假设你有<strong>一批 Socket</strong>（比如100个连接），你要定期检测哪些“可读”，方式有两种：</p><ol><li>用 <code>foreach</code>，对每个 socket 调用 <code>.Poll(...)</code>。</li><li>用 <code>Socket.Select(...)</code>，一次性把所有 socket 放进列表，检查谁可读。</li></ol><p><strong>哪种开销大？为什么？性能代价在哪里？</strong></p><hr><h2 id="1-分析-Poll（对每个Socket单独轮询）">1. 分析 Poll（对每个Socket单独轮询）</h2><ul><li>你对每个 Socket 都调用一次 Poll。</li><li>Poll 的本质：.NET 框架会为每个 socket 调用一次底层API（可能是 poll/select/epoll/kqueue，视平台而定），每个 socket 都要进入内核态、做一次查询，并等待指定超时时间。</li><li>100个Socket你就要进入内核态100次。</li><li>用户态和内核态的切换非常昂贵，尤其你每次只查单个Socket，无法利用系统批量检测优化。</li><li>结果，你的检测总时间 ≈ 100 次 Poll 耗时总和。大量重复系统调用，<strong>内核态资源消耗大，性能低</strong>。</li></ul><hr><h2 id="2-分析-Select（一次性批量查询）">2. 分析 Select（一次性批量查询）</h2><ul><li>你把所有Socket批量传给一次Select调用。</li><li>内部只进入内核态<strong>一次</strong>，内核态代码在本地 for（或者epoll也许是红黑树遍历等）判断这一批socket的状态，把可读/socket事件状况都批量告诉你的应用。</li><li>这样<strong>调用一次系统接口</strong>，拿回所有结果。</li><li>和Poll做100次系统调用比，Select只做一次系统调用+本地循环。</li></ul><hr><h2 id="3-结果对比">3. 结果对比</h2><table><thead><tr><th>方案</th><th>内核切换次数</th><th>系统调用次数</th><th>主要瓶颈</th></tr></thead><tbody><tr><td>多次Poll</td><td>N(100次)</td><td>N(100次)</td><td>用户态&lt;-&gt;内核态,多余切换</td></tr><tr><td>一次Select</td><td>1</td><td>1</td><td>内核批量查找更高效</td></tr></tbody></table><ul><li><strong>开销主要在“内核切换+系统调用次数”！</strong><ul><li>多次 Poll 开销主要是：大量的系统调用 &amp; 频繁的用户态/内核态切换。</li><li>Select 只需一次调用，数据结构拷贝也一次，不会反复切换内核，而且能一次性处理所有。</li></ul></li><li>另外，Poll 如果你用长超时或阻塞方式，遍历所有socket总耗时会变得很长（等待多个socket轮流各自超时）。</li></ul><hr><h2 id="4-结论">4. 结论</h2><ul><li><strong>Select 明显效率更高，开销更低。</strong></li><li>Poll 在N多socket时几乎不可接受，只有少数socket（比如客户端）才推荐这么写。</li><li>在高并发服务器场景，多路复用总是推荐批量Select（或更优的epoll/IOCP/SocketAsyncEventArgs）。</li></ul><hr><h2 id="总结（标准面试答案）">总结（标准面试答案）</h2><blockquote><p><em>“遍历多个socket分别Poll，相比一次Select批量检测，最大的额外开销在于多次进行系统调用和用户/内核态切换。在socket数量增多时，这种切换会极大增加CPU和内核资源消耗。而Select可以一次性批量检测所有socket状态，大幅减少系统调用次数和切换负载，因此效率远高于多次Poll。”</em></p></blockquote><hr><p><strong>结论：有多个socket（&gt;10），推荐用<code>Select</code>。<br>只用单个socket/客户端可偶尔用<code>Poll</code>。</strong></p><h1>什么是粘包分包 为什么会有线程冲突的问题</h1><p><strong>是的，你遇到的正是“粘包”问题！</strong></p><hr><h3 id="原因简述">原因简述</h3><p>在TCP编程中，<strong>粘包</strong>和<strong>拆包</strong>问题很常见，因为TCP是面向字节流的，没有消息边界。<br>你可能一次Send两条消息，服务器一次Receive就粘到一起收了（粘包）；<br>也可能一条消息分两次才收完（拆包/半包）。</p><hr><h3 id="在你的场景下">在你的场景下</h3><p>你的客户端连续Send（比如<code>Enter|...</code>和<code>List|</code>），<br>服务端的Receive有时会一次性收到<code>Enter|...List|</code><br>或其他没对齐的内容，这就是粘包！</p><hr><h3 id="解决方案">解决方案</h3><p>你需要<strong>实现协议分包逻辑</strong>，典型做法是：</p><ul><li>每个消息后面加分隔符（常用<code>\n</code>或特殊字符，如<code>&quot;|&quot;</code>或<code>&quot;\r\n&quot;</code>），</li><li>服务端维护一个消息缓存字符串，循环切分出完整消息进行解析。</li></ul><hr><h3 id="总结">总结</h3><blockquote><p><strong>你遇到的问题就是“TCP粘包”问题。必须自己在应用层解决，通过协议分隔符（如<code>\n</code>）、长度头等方式保正服务器能正确切分每条消息。</strong></p></blockquote><p>如需具体怎么写切分消息的代码，随时问我！</p>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://www.bilibil~i.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102">Skynet入门</a></p><h1>路由器的概念</h1><h1>端口</h1><h1>IP地址</h1><h1>C# Socket编程</h1><h1>什么是Socket</h1><p>一个Socket连接的流程<br>客户端发起</p><p>需要注意的是, 可以多次发起连接请求, 这样就会建立多个Socket, 存在风险</p><h2 id="Socket分为两种">Socket分为两种</h2><p>第一种是监听Socket</p><p>第二种是会话Socket</p><p>你的理解很准确，确实<strong>服务端会有两个不同用途的Socket对象</strong>：</p><ol><li><p><strong>监听 Socket</strong>（称为 <code>listenSocket</code>），职责是：</p><ul><li>绑定端口，用于侦听新的连接请求（<code>Bind</code> + <code>Listen</code>）。</li></ul></li><li><p><strong>会话 Socket</strong>（每连一个客户端，对应一个），职责是：</p><ul><li>和某个客户端具体收发数据（<code>Accept</code> 的返回值）。</li></ul></li></ol><hr><h2 id="为什么要这样分开？为什么不能直接用监听socket和客户端通信？">为什么要这样分开？为什么不能直接用监听socket和客户端通信？</h2><h3 id="一、协议-设计层面的原因">一、协议/设计层面的原因</h3><ol><li><p><strong>监听Socket只负责接收连接请求</strong></p><ul><li>监听socket在TCP层维护了一个“正在监听端口、等待连接”的队列（backlog）。</li><li>它不能用来真正收发数据，只能等待新连接，然后通过<code>Accept</code>产生一个新的会话socket。</li><li>TCP协议里，监听socket和会话socket拥有不同的状态。</li></ul></li><li><p><strong>每个客户端要有独立的socket对象</strong></p><ul><li>这样服务端才能同时和多个客户端通信（每个连接一个独立文件描述符），互不干扰。</li><li>如果直接用监听socket收发数据，就无法区分哪个客户端发来的数据，也无法并发处理，直接崩溃！</li><li><code>Accept</code> 会为每个客户端分配一个新的 socket，底层内核分配新的资源、端点，服务端逻辑才能独立管理。</li></ul></li><li><p><strong>多路复用、并发模型需要会话socket</strong></p><ul><li>服务端通常有几十万个连接，如果全部抢占同一个监听socket，相互干扰，严重影响并发性能。</li><li>新的socket会与客户端唯一绑定，方便后续select/epoll/IOCP或线程池单独处理。</li></ul></li><li><p><strong>监听socket和会话socket的状态不一样</strong></p><ul><li>监听socket是“LISTEN”状态，只能等待连接。</li><li>接受后的会话socket进入“ESTABLISHED”状态，才能双向收发数据。</li></ul></li></ol><h3 id="二、操作系统实现原因">二、操作系统实现原因</h3><ul><li><p><strong>Linux/Windows的内核管理：</strong></p><ul><li>监听socket分配backlog（等待区），只用于管理连接请求队列；</li><li>收到客户端请求，内核分配一个新socket fd（会话socket），维护与对方的TCP会话状态。</li><li>只有这个fd才能安全读写数据，监听socket的fd不能用来读写，只能accept。</li></ul></li><li><p><strong>安全/隔离：</strong></p><ul><li>监听socket本身不能被污染——收发数据万一断了会影响整个服务器socket监听。</li><li>每个连接单独分配资源，有问题只会影响单个连接，容易控制和管理。</li></ul></li></ul><hr><h3 id="图示理解（伪代码）：">图示理解（伪代码）：</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Server Socket Life Cycle</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建监听Socket</span></span><br><span class="line">Socket listenSocket = <span class="keyword">new</span> Socket(...);</span><br><span class="line"><span class="comment">// 2. 绑定端口</span></span><br><span class="line">listenSocket.Bind(...);</span><br><span class="line"><span class="comment">// 3. 进入监听</span></span><br><span class="line">listenSocket.Listen(...);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// 4. 每有一个新连接, Accept会分配一个新的会话Socket</span></span><br><span class="line">    Socket conn = listenSocket.Accept();</span><br><span class="line">    <span class="comment">// 5. 后续和客户端的所有收发数据，都用conn这个socket</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><code>listenSocket</code> 只负责新增连接。</li><li><code>conn</code> 负责和某个客户端通信。</li><li>有n个客户端，就有n个会话Socket，<strong>只有一个监听Socket</strong>。</li></ul><hr><h2 id="举个实际例子">举个实际例子</h2><ul><li><strong>Web服务器（比如IIS/Apache/nginx）</strong><ul><li>监听端口80，只用监听socket握手接收新用户连接请求。</li><li>每有新请求，生成一个会话socket，和该连接通信，互不干扰。</li><li>如果用同一个监听socket收发数据，所有人混流，无法区别谁是谁。</li></ul></li></ul><hr><h2 id="小结">小结</h2><ul><li><strong>监听socket</strong>：只负责侦听和接受新连接，不能收发数据。</li><li><strong>会话socket（Accept出来的）</strong>：和某个客户端具体通信，收发数据。</li><li>这样设计是操作系统/协议规定的，<strong>能确保高效并发、安全隔离和稳定运行</strong>。</li></ul><hr><blockquote><p><strong>“监听socket是连接的大门，只用来看谁想进来；会话socket是进入之后，与某个人的密室专线，对每个身份都有独立沟通渠道。只有分开，管理和性能才能做好。”</strong></p></blockquote><hr><p>如需更底层协议细节，可以补充TCP状态转移图/源码！</p><p>你的两个问题很专业，下面逐条详细说明：</p><hr><h2 id="1-创建监听-Socket-和会话-Socket-的流程一样吗？">1. 创建监听 Socket 和会话 Socket 的流程一样吗？</h2><h3 id="在-Socket-编程（比如-C-）里：">在 Socket 编程（比如 C#）里：</h3><ul><li><strong>监听 Socket</strong> (<code>listenSocket</code>)<ul><li>你得主动创建：<code>new Socket(...)</code></li><li>然后 Bind 到某端口：<code>.Bind(...)</code></li><li>然后开启侦听：<code>.Listen(backlog)</code></li></ul></li><li><strong>会话 Socket</strong> (<code>connSocket</code>)<ul><li><strong>不是你主动创建的</strong>。它是 listener 调用 <code>.Accept()</code> 时由系统自动生成、返回的对象。</li><li>你不用再手动 Bind/Listen，它一出生就“已连上”，通信双方已确定（对端IP:Port 本地IP:Port等）。</li></ul></li></ul><h3 id="流程总结">流程总结</h3><ul><li>监听 Socket 需要 显式 创建-绑定-监听</li><li>会话 Socket 是通过监听 Socket 的 <code>.Accept()</code> 生成</li><li>你不需要对会话 Socket 进行 Bind/Listen（如果你再次Bind会报错）</li></ul><blockquote><p><strong>流程不一样：监听Socket手动创建配置，连接Socket自动生成，只要收数据即可。</strong></p></blockquote><hr><h2 id="2-两者的数据内容构成上有什么区别？">2. 两者的数据内容构成上有什么区别？</h2><h3 id="监听-Socket">监听 Socket</h3><ul><li>包含内容：<ul><li>本地端口/IP（Bind 过的地址，如 0.0.0.0:8000）</li><li>一个监听队列（backlog）——new连接排队用</li><li>Socket类型(TCP/UDP)，协议族等</li></ul></li><li><strong>没有“远端”信息，也没有TCP序列号等通信状态</strong></li><li>不能直接收发应用数据，只能收到新连接请求。</li></ul><h3 id="会话-Socket">会话 Socket</h3><ul><li>包含内容：<ul><li>本地端口/IP（一般是监听Socket的端口）</li><li><strong>远端客户端IP/端口</strong></li><li>当前TCP连接状态、序列号、缓冲区等</li><li>发送和接收缓冲区</li><li>TCP协议维护的连接控制块（TCP state machine、TCP窗口、拥塞控制等）</li></ul></li><li>可以直接收发数据</li><li>维护与唯一远端的连接状态、收发缓冲、数据包</li></ul><h4 id="举个例子：">举个例子：</h4><p>监听Socket的数据结构只包含“我负责管理这个端口和连接队列”；<br>会话Socket的数据结构包含“我和这个客户端的连线状态、数据缓冲、包顺序等详细内容”。</p><h3 id="表格对比">表格对比</h3><table><thead><tr><th>项目</th><th>监听Socket</th><th>会话Socket</th></tr></thead><tbody><tr><td>本地地址/端口</td><td>有</td><td>有</td></tr><tr><td>远端地址/端口</td><td>无</td><td>有</td></tr><tr><td>TCP连接状态</td><td>LISTEN</td><td>ESTABLISHED</td></tr><tr><td>连接队列</td><td>backlog连接请求队列</td><td>无</td></tr><tr><td>应用层数据通信</td><td>不行</td><td>可以</td></tr><tr><td>缓冲区</td><td>没有数据缓冲</td><td>有发送/接收缓冲区</td></tr><tr><td>唯一性</td><td>只一个（主动建）</td><td>客户端连接一个生成一个</td></tr></tbody></table><hr><h2 id="结论">结论</h2><p><strong>创建流程：</strong></p><ul><li>监听Socket要先创建、bind、listen，主动准备好；会话Socket通过accept由内核自动生成（你调accept方法就有了）。</li></ul><p><strong>内容区别：</strong></p><ul><li>监听Socket缺失“远端”数据，只管新连接请求；会话Socket则包含详细通信双方信息和全部TCP连接细节及缓冲区、序列号等。</li></ul><blockquote><p><strong>监听Socket专注于“新连接排队、接收”，会话Socket专注于“具体数据传输”——角色完全不同。</strong></p></blockquote><hr><p>如果想看更底层源码（比如Linux内核的<code>struct sock</code>、<code>struct tcp_sock</code>），可以补充！</p><h1>Socket中如何判断一个连接断开?</h1><h1>一定要注意 Socket的执行不一定在主线程上, 可千万不要在非主线程上操作MonoBehaviour中的数据, 比如UI</h1><h2 id="客户端">客户端</h2><p>Send方法返回只代表成功将数据放到发送缓存区中, 对方可能还没收到数据</p><h2 id="服务端">服务端</h2><p>Accept是建立连接用<br>Receive是接受消息用</p><p>Accept -&gt; Receive</p><p>结合GPT 使用C#使用一个Actor模型</p><p>非常好的问题！<br>我们来详细分析下：</p><hr><h2 id="问题重述">问题重述</h2><p>假设你有<strong>一批 Socket</strong>（比如100个连接），你要定期检测哪些“可读”，方式有两种：</p><ol><li>用 <code>foreach</code>，对每个 socket 调用 <code>.Poll(...)</code>。</li><li>用 <code>Socket.Select(...)</code>，一次性把所有 socket 放进列表，检查谁可读。</li></ol><p><strong>哪种开销大？为什么？性能代价在哪里？</strong></p><hr><h2 id="1-分析-Poll（对每个Socket单独轮询）">1. 分析 Poll（对每个Socket单独轮询）</h2><ul><li>你对每个 Socket 都调用一次 Poll。</li><li>Poll 的本质：.NET 框架会为每个 socket 调用一次底层API（可能是 poll/select/epoll/kqueue，视平台而定），每个 socket 都要进入内核态、做一次查询，并等待指定超时时间。</li><li>100个Socket你就要进入内核态100次。</li><li>用户态和内核态的切换非常昂贵，尤其你每次只查单个Socket，无法利用系统批量检测优化。</li><li>结果，你的检测总时间 ≈ 100 次 Poll 耗时总和。大量重复系统调用，<strong>内核态资源消耗大，性能低</strong>。</li></ul><hr><h2 id="2-分析-Select（一次性批量查询）">2. 分析 Select（一次性批量查询）</h2><ul><li>你把所有Socket批量传给一次Select调用。</li><li>内部只进入内核态<strong>一次</strong>，内核态代码在本地 for（或者epoll也许是红黑树遍历等）判断这一批socket的状态，把可读/socket事件状况都批量告诉你的应用。</li><li>这样<strong>调用一次系统接口</strong>，拿回所有结果。</li><li>和Poll做100次系统调用比，Select只做一次系统调用+本地循环。</li></ul><hr><h2 id="3-结果对比">3. 结果对比</h2><table><thead><tr><th>方案</th><th>内核切换次数</th><th>系统调用次数</th><th>主要瓶颈</th></tr></thead><tbody><tr><td>多次Poll</td><td>N(100次)</td><td>N(100次)</td><td>用户态&lt;-&gt;内核态,多余切换</td></tr><tr><td>一次Select</td><td>1</td><td>1</td><td>内核批量查找更高效</td></tr></tbody></table><ul><li><strong>开销主要在“内核切换+系统调用次数”！</strong><ul><li>多次 Poll 开销主要是：大量的系统调用 &amp; 频繁的用户态/内核态切换。</li><li>Select 只需一次调用，数据结构拷贝也一次，不会反复切换内核，而且能一次性处理所有。</li></ul></li><li>另外，Poll 如果你用长超时或阻塞方式，遍历所有socket总耗时会变得很长（等待多个socket轮流各自超时）。</li></ul><hr><h2 id="4-结论">4. 结论</h2><ul><li><strong>Select 明显效率更高，开销更低。</strong></li><li>Poll 在N多socket时几乎不可接受，只有少数socket（比如客户端）才推荐这么写。</li><li>在高并发服务器场景，多路复用总是推荐批量Select（或更优的epoll/IOCP/SocketAsyncEventArgs）。</li></ul><hr><h2 id="总结（标准面试答案）">总结（标准面试答案）</h2><blockquote><p><em>“遍历多个socket分别Poll，相比一次Select批量检测，最大的额外开销在于多次进行系统调用和用户/内核态切换。在socket数量增多时，这种切换会极大增加CPU和内核资源消耗。而Select可以一次性批量检测所有socket状态，大幅减少系统调用次数和切换负载，因此效率远高于多次Poll。”</em></p></blockquote><hr><p><strong>结论：有多个socket（&gt;10），推荐用<code>Select</code>。<br>只用单个socket/客户端可偶尔用<code>Poll</code>。</strong></p><h1>什么是粘包分包 为什么会有线程冲突的问题</h1><p><strong>是的，你遇到的正是“粘包”问题！</strong></p><hr><h3 id="原因简述">原因简述</h3><p>在TCP编程中，<strong>粘包</strong>和<strong>拆包</strong>问题很常见，因为TCP是面向字节流的，没有消息边界。<br>你可能一次Send两条消息，服务器一次Receive就粘到一起收了（粘包）；<br>也可能一条消息分两次才收完（拆包/半包）。</p><hr><h3 id="在你的场景下">在你的场景下</h3><p>你的客户端连续Send（比如<code>Enter|...</code>和<code>List|</code>），<br>服务端的Receive有时会一次性收到<code>Enter|...List|</code><br>或其他没对齐的内容，这就是粘包！</p><hr><h3 id="解决方案">解决方案</h3><p>你需要<strong>实现协议分包逻辑</strong>，典型做法是：</p><ul><li>每个消息后面加分隔符（常用<code>\n</code>或特殊字符，如<code>&quot;|&quot;</code>或<code>&quot;\r\n&quot;</code>），</li><li>服务端维护一个消息缓存字符串，循环切分出完整消息进行解析。</li></ul><hr><h3 id="总结">总结</h3><blockquote><p><strong>你遇到的问题就是“TCP粘包”问题。必须自己在应用层解决，通过协议分隔符（如<code>\n</code>）、长度头等方式保正服务器能正确切分每条消息。</strong></p></blockquote><p>如需具体怎么写切分消息的代码，随时问我！</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102&quot;&gt;Skynet入门&lt;/a&gt;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.bilibil~i.com/video/BV19d4y1678X/?vd_source=83f4165825ce9df46cf4fd576ccb1102&quot;&gt;Skynet入门&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;路由器的概念&lt;/h1&gt;
-&lt;h1&gt;端口</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>UnrealEngine源码</title>
-    <link href="https://soincredible.github.io/posts/43a309b5/"/>
-    <id>https://soincredible.github.io/posts/43a309b5/</id>
-    <published>2025-08-16T09:39:38.000Z</published>
-    <updated>2025-08-27T02:33:09.827Z</updated>
-    
-    <content type="html"><![CDATA[<p>虚幻引擎的代码使用的是古早版本的C++, 跟现代的C++有些脱节了, 所以可以把虚幻引擎的源代码理解为是C++的一个变种</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;虚幻引擎的代码使用的是古早版本的C++, 跟现代的C++有些脱节了, 所以可以把虚幻引擎的源代码理解为是C++的一个变种&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>在Unity中实现拖拽物体的功能</title>
-    <link href="https://soincredible.github.io/posts/aa328bbc/"/>
-    <id>https://soincredible.github.io/posts/aa328bbc/</id>
-    <published>2025-08-10T08:33:19.000Z</published>
-    <updated>2025-08-11T03:35:33.789Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.EventSystems;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MB</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DraggableObj</span> : <span class="title">MonoBehaviour</span>, </span><br><span class="line">        <span class="title">IDragHandler</span>, <span class="title">IBeginDragHandler</span>, <span class="title">IEndDragHandler</span></span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">enum</span> DragState</span><br><span class="line">        &#123;</span><br><span class="line">            None,</span><br><span class="line">            Idle,</span><br><span class="line">            Dragging,</span><br><span class="line">        &#125;    </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">private</span> DragState dragState = DragState.None;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnDrag</span>(<span class="params">PointerEventData eventData</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(<span class="string">&quot;拖拽中...&quot;</span>);</span><br><span class="line">            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.transform <span class="keyword">as</span> RectTransform, eventData.position, Camera.main, <span class="keyword">out</span> Vector2 point);</span><br><span class="line">            transform.localPosition = point;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnBeginDrag</span>(<span class="params">PointerEventData eventData</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(<span class="string">&quot;开始拖拽&quot;</span>);</span><br><span class="line">            transform.localScale = Vector3.one * <span class="number">1.5f</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnEndDrag</span>(<span class="params">PointerEventData eventData</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(<span class="string">&quot;拖拽结束...&quot;</span>);</span><br><span class="line">            transform.localScale = Vector3.one;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以将上面的逻辑进一步抽象一下, 把每个接口内的行为抽离出来, 作为一个action, 在合适的时机传进去.</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight c#&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>FigmaAPI阅读</title>
-    <link href="https://soincredible.github.io/posts/8d32db40/"/>
-    <id>https://soincredible.github.io/posts/8d32db40/</id>
-    <published>2025-08-10T08:29:45.000Z</published>
-    <updated>2025-08-11T03:35:33.787Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.figma.com/developers/api#intro">https://www.figma.com/developers/api#intro</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.figma.com/developers/api#intro&quot;&gt;https://www.figma.com/developers/api#intro&lt;/a&gt;&lt;/p&gt;
-</summary>
+&lt;h1&gt;端</summary>
       
     
     
